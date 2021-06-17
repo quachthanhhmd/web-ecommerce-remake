@@ -1,0 +1,236 @@
+<body class="user-profile section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="sidebar">
+					<!-- User Widget -->
+					<div class="widget user">
+						<!-- User Image -->
+					
+						<div class="image">
+							{{#if image}}
+							<img src="{{image}}"  alt="" class="profile-pic">
+							{{else}}
+							<img src="https://sieupet.com/sites/default/files/pictures/images/1-1473150685951-5.jpg"  alt="" class="profile-pic">
+							{{/if}}
+							
+						</div>
+						<!-- User Name -->
+						<h5 class="text-center">{{name}}</h5>
+					</div>
+					<!-- Dashboard Links -->
+					<div class = "widget dashboard-links">
+						<div class="nav flex-column nav-pills list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+							<ul>
+								<li class = "list-group-item"><a class="nav-link active " id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"  aria-selected="true" >Savings Dashboard</a></li>
+								<li class = "list-group-item"><a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"  >History checkout</a></li>
+								<li class="list-group-item"><a  class="nav-link" id="v-pills-address-tab" data-toggle="pill" href="#v-pills-address" role="tab" >Address</a></li>
+							
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class = "tab-content">
+					<div class="tab-pane show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+						<!-- Edit Profile Welcome Text -->
+						<div class="widget welcome-message">
+							<h2>Edit profile</h2>
+							
+						</div>
+						<!-- Edit Personal Info -->
+						<div class="row">
+							<div class="col-lg-6 col-md-6">
+								<div class="widget personal-info">
+									<h3 class="widget-header user">Edit Personal Information</h3>
+									<form action="/user/account/profile" method = 'POST' enctype="multipart/form-data">
+										<!-- First Name -->
+										<div class="form-group">
+											<label for="first-name">Full Name</label>
+											<input name = 'name' type="text" class="form-control" id="first-name" value= '{{name}}'> 
+										</div>
+										<!-- Last Name -->
+										<div class="form-group">
+											<label for="last-name">email </label>
+											<input name = 'email' type="email" class="form-control" id="last-name"  value = "{{email}}"readonly> 
+										</div>
+										<!-- File chooser -->
+										<div class="form-group choose-file d-inline-flex">
+											<label for="thumbnail">Avatar </label>
+											<div class="upload-button"></div>
+											<input id="thumbnail" class="file-upload" type="file" name="image" />
+										</div>
+										<!-- Comunity Name -->
+										<div class="form-group">
+											<label for="comunity-name">Phone Number</label>
+											<input name = 'phone' type="tel" class="form-control" id="comunity-name" readonly value = '{{phone}}'> 
+										</div>
+										<!-- Checkbox -->
+										
+
+										<div class="form-group"  >
+											<select name = 'sex' class="form-control"  >
+												{{#select sex}}
+												<option value="Male">Male</option>
+												<option value="Female">Female</option>
+												<option value="Other" >Other</option>
+												{{/select}}
+											</select>
+												
+										</div>
+										<!-- Zip Code -->
+										<div class="form-group">
+											<label for="zip-code">Birth day</label>
+											<input type="date" class="form-control" id="zip-code" name = 'birthday' value = '{{birthday}}'>
+										</div>
+										
+										<!-- Submit button -->
+										<button type="submit" class="btn btn-transparent">Save My Changes</button>
+									</form>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<!-- Change Password -->
+							<div class="widget change-password">
+								<h3 class="widget-header user">Edit Password</h3>
+								<form method = "POST" action="/user/account/changePassword">
+									<!-- Current Password -->
+									
+									<div class="form-group">
+										<label for="current-password">Current Password</label>
+										<input name =  "password" type="password" class="form-control" id="current-password">
+									</div>
+
+									<!-- New Password -->
+									<div class="form-group">
+										<label for="new-password">New Password</label>
+										<input name =  "newpass" type="password" class="form-control" id="new-password">
+									</div>
+									<!-- Confirm New Password -->
+									<div class="form-group">
+										<label for="confirm-password">Confirm New Password</label>
+										<input name =  "confirmpass" type="password" class="form-control" id="confirm-password">
+									</div>
+									{{#if error}}
+											<div class="alert alert-warning">{{error}}</div>
+									{{/if}}
+									<!-- Submit Button -->
+									<button type = "submit" class="btn btn-transparent">Change Password</button>
+								</form>
+							</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<!-- Change Email Address -->
+							<div class="widget change-email mb-0">
+								<h3 class="widget-header user">Edit phone number</h3>
+								<form method="POST" action="/user/account/changePhone">
+									<!-- Current Password -->
+									<div class="form-group">
+										<label for="current-email">Current phone number</label>
+										<input name = "curPhone" type="tel" class="form-control" id="current-email">
+									</div>
+									<!-- New email -->
+									<div class="form-group">
+										<label for="new-email">New phone number</label>
+										<input name = "newPhone" type="tel" class="form-control" id="new-email">
+									</div>
+									{{#if errorPhone}}
+											<div class="alert alert-warning">{{errorPhone}}</div>
+									{{/if}}
+									<!-- Submit Button -->
+									<button class="btn btn-transparent">Change phone number</button>
+								</form>
+							</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="tab-pane"  id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+						<!-- Edit Profile Welcome Text -->
+						<div class="widget welcome-message">
+							<h2>Purchase History</h2>
+							
+						</div>
+						
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead class="thead-dark">
+								<tr>
+									<th>No</th>
+									<th>Address</th>
+									<th>Date</th>
+									<th>Cost</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+								</thead>
+								<tbody>
+								{{#each checkout}}
+								<tr>
+									<td> {{incremented @index}}</td>
+									<td>{{address}}</td>
+									<td>{{dateFormat date "dddd, MMMM Do YYYY, h:mm:ss a"}}</td>
+								
+									<td>{{totalCost}}</td>
+									<td>{{status}}</td>
+									<td><button class="btn view-checkout" value="{{_id}}">View</button></td>
+								</tr>
+								</tbody>
+								{{/each}}
+							</table>
+							
+							
+						</div>
+					</div>
+					<div class="tab-pane"  id="v-pills-address" role="tabpanel" aria-labelledby="v-pills-address-tab">
+						<div class="widget welcome-message">
+							<h2>Address</h2>
+							
+						</div>
+						<form method="POST" action="/user/account/changeAddress">
+							<div class = "form-group">
+								<label for="city">Province / City"</label>
+								<input class="form-control" id = 'city' type = "text" name = "newCity" value="{{user.city}}" placeholder= "Province / City">
+							</div>
+							<div class = "form-group">
+								<label for="district">District</label>
+								<input class="form-control" id = "district" type = "text" name = "newDistrict" value="{{user.district}}" placeholder = "District" required> 
+							</div>
+							<div class = "form-group">
+								<label for="address">Address</label>
+								<input class="form-control"   id = "address" type="text" name = "newAddress" value= "{{user.address}}" placeholder="Address" required>
+							</div>
+							<button type="submit" class = "btn btn-transparent">Change Address</button>
+						</form>
+					</div>
+					</div>
+						<button
+								id="show-model"
+								type="button"
+								class="btn btn-primary d-none"
+								data-toggle="modal"
+								data-target="#exampleModalCenter"
+								style="display: none;"
+							>
+								
+							</button>
+							<div
+								class="modal"
+								id="exampleModalCenter"
+								tabindex="-1"
+								role="dialog"
+								aria-labelledby="exampleModalCenterTitle"
+								aria-hidden="true"
+							>
+								<!-- ====================================== -->
+							</div>
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+</div>
+	
+</body>

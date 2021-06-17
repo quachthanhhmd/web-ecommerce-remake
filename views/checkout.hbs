@@ -1,0 +1,154 @@
+
+<section id="cart_items">
+	<div class="container">
+		<div class="breadcrumbs">
+			<ol class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li class="active">Check out</li>
+			</ol>
+		</div><!--/breadcrums-->
+
+		
+		<form method="POST" action="/checkout">
+		<div class="shopper-informations">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="shopper-info">
+						<p>Shopper Information</p>
+						
+							<input type="text"  placeholder="Display Name" value="{{user.name}}" disabled>
+							<input type="text" placeholder="Email" value = "{{user.email}}" disabled>
+							<input type="tel" placeholder="Phone" value = "{{user.phone}}" disabled>
+						
+					
+						
+						
+					</div>
+				</div>
+				<div class="col-sm-5 clearfix">
+					<div class="bill-to">
+						<p>Bill To</p>
+						<div class="form-one">
+								<input type="text" name = "newName" placeholder="Full name" required>
+								<input type="tel" name  = "newPhone" placeholder="Phone"required>
+								
+							
+							
+						</div>
+						<div class="form-two">
+						
+								<input type="text" placeholder="Zip / Postal Code *">
+								
+								<input type = "text" name = "newCity" value="{{user.city}}" placeholder= "Province / City">
+						
+								<input type = "text" name = "newDistrict" value="{{user.district}}" placeholder = "District" required> 
+								<input type="text" name = "newAddress" value= "{{user.address}}" placeholder="Address" required>
+								
+							
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="order-message">
+						<p>Shipping Order</p>
+						<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
+					
+					</div>	
+				</div>					
+			</div>
+		</div>
+		
+		<button type="submit" class="float-right btn btn-primary" >Checkout</button>
+	
+		</form>
+
+		<div class="review-payment">
+			<h2>Review & Payment</h2>
+		</div>
+
+		<div class="table-responsive cart_info">
+			<table class="table table-condensed">
+				<thead>
+					<tr class="cart_menu">
+						<td class="image">Item</td>
+						<td class="description"></td>
+						<td class="price">Price</td>
+						<td class="quantity">Quantity</td>
+						<td class="total">Total</td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each cart.items}}
+					<tr>
+						<td class="cart_product">
+							<a href=""><img src="{{thumbnail}}" alt="" width="90" height="100"></a>
+						</td>
+						<td class="cart_description" width = "300">
+							<h4><a href="/product-details/{{slugname}}">{{name}}</a></h4>
+						</td>
+						<td class="cart_price">
+							<p>{{price}}</p>
+						</td>
+						<td class="cart_quantity">
+							<div class="cart_quantity_button">
+								{{#if checkItem}}
+									<button class="cart_quantity_change btn-plus" href="#" value="1" name = "{{slugName}}" > <i class="fa fa-plus"></i></button>
+									<input class="cart_quantity_input {{itemId}}_price" type="text" name="quantity" value="{{quantity}}" size="2" readonly>
+									<button class="cart_quantity_change {{itemId}}_btn-minus" href="#"  value="-1" name = "{{slugName}}"> <i class="fa fa-minus"></i> </button>
+								{{else}}
+									<button class="cart_quantity_change btn-plus" href="#" value="1" name = "{{slugName}}"> <i class="fa fa-plus"></i></button>
+									<input class="cart_quantity_input {{itemId}}_price" type="text" name="quantity" value="{{quantity}}"  size="2" readonly>
+									<button class="cart_quantity_change {{itemId}}_btn-minus" href="#" value="-1" name = "{{slugName}}" disabled> <i class="fa fa-minus"></i></button>
+								{{/if}}
+							</div>
+						</td>
+						<td class="cart_total">
+							<p class="cart_total_price {{itemId}}">{{total}}</p>
+						</td>
+						<td class="cart_delete">
+							<button class=" cart_quantity_delete cart_quantity_change" name = "{{slugName}}" value = "0"><i class="fa fa-times"></i></button>
+						</td>
+					</tr>
+					{{/each}}
+					<tr>
+						<td colspan="4">&nbsp;</td>
+						<td colspan="2">
+							<table class="table table-condensed total-result">
+								<tr>
+									<td>Cart Sub Total</td>
+									<td><span class = "totalCost">{{cart.totalCost}}</span></td>
+								</tr>
+								<tr>
+									<td>Exo Tax</td>
+									<td>Free</td>
+								</tr>
+								<tr class="shipping-cost">
+									<td>Shipping Cost</td>
+									<td>Free</td>										
+								</tr>
+								<tr>
+									<td>Total</td>
+									<td><span class = "totalCost">{{cart.totalCost}}</span></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="payment-options">
+				<span>
+					<label><input type="checkbox"> Direct Bank Transfer</label>
+				</span>
+				<span>
+					<label><input type="checkbox"> Check Payment</label>
+				</span>
+				<span>
+					<label><input type="checkbox"> Paypal</label>
+				</span>
+			</div>
+	</div>
+</section> <!--/#cart_items-->
+

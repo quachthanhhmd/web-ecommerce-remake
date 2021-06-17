@@ -1,0 +1,88 @@
+
+<section id="cart_items">
+	<div class="container">
+		<div class="breadcrumbs">
+			<ol class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li class="active">Shopping Cart</li>
+			</ol>
+		</div>
+		<div class="table-responsive cart_info">
+			<table class="table table-condensed">
+				<thead>
+					<tr class="cart_menu">
+						<td class="image">Item</td>
+						<td class="description"></td>
+						<td class="price">Price</td>
+						<td class="quantity">Quantity</td>
+						<td class="total">Total</td>
+						<td></td>
+					</tr>
+				</thead>
+				
+				<tbody>
+					{{#each cart.items}}
+					<tr>
+						<td class="cart_product">
+							<a href=""><img src="{{thumbnail}}" alt="" width="90" height="100"></a>
+						</td>
+						<td class="cart_description" width = "300">
+							<h4><a href="/product-details/{{slugname}}">{{name}}</a></h4>
+						</td>
+						<td class="cart_price">
+							<p>{{price}}</p>
+						</td>
+						<td class="cart_quantity">
+							<div class="cart_quantity_button">
+								{{#if checkItem}}
+									<button class="cart_quantity_change btn-plus" href="#" value="1" name = "{{slugName}}" > <i class="fa fa-plus"></i></button>
+									<input class="cart_quantity_input {{itemId}}_price" type="text" name="quantity" value="{{quantity}}" size="2" readonly>
+									<button class="cart_quantity_change {{itemId}}_btn-minus" href="#"  value="-1" name = "{{slugName}}"> <i class="fa fa-minus"></i> </button>
+								{{else}}
+									<button class="cart_quantity_change btn-plus" href="#" value="1" name = "{{slugName}}"> <i class="fa fa-plus"></i></button>
+									<input class="cart_quantity_input {{itemId}}_price" type="text" name="quantity" value="{{quantity}}"  size="2" readonly>
+									<button class="cart_quantity_change {{itemId}}_btn-minus" href="#" value="-1" name = "{{slugName}}" disabled> <i class="fa fa-minus"></i></button>
+								{{/if}}
+							</div>
+						</td>
+						<td class="cart_total">
+							<p class="cart_total_price {{itemId}}">{{total}}</p>
+						</td>
+						<td class="cart_delete">
+							<button class=" cart_quantity_delete cart_quantity_change" name = "{{slugName}}" value = "0"><i class="fa fa-times"></i></button>
+						</td>
+					</tr>
+					{{/each}}
+				
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section> <!--/#cart_items-->
+
+<section id="do_action">
+	<div class="container">
+		<div class="heading">
+			<h3>What would you like to do next?</h3>
+			<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+		</div>
+		<div class="row">
+			
+			<div class="float-right">
+				<div class="total_area">
+					<ul>
+						<li >Cart Sub Total <span class = "totalCost">{{cart.totalCost}}</span></li>
+						<li>Eco Tax <span>Free</span></li>
+						<li>Shipping Cost <span>Free</span></li>
+						<li>Total <span class = "totalCost">{{cart.totalCost}}</span></li>
+					</ul>
+						<div class = "float-right">
+							<a class="btn btn-default check_out " href="/checkout">Check Out</a>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section><!--/#do_action-->
+
