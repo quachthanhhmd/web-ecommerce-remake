@@ -972,6 +972,21 @@ h2.title {
     color: #FE980F;
 }
 
+.product-overlay .detals {
+    background: #fff;
+    border: 0 none;
+    border-radius: 0;
+    color: #FE980F;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+.product-overlay .detals:hover {
+    background: #fff;
+    color: #FE980F;
+}
+
 .product-overlay p {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -980,6 +995,36 @@ h2.title {
 }
 
 .add-to-cart {
+    background: #F5F5ED;
+    border: 0 none;
+    border-radius: 0;
+    color: #696763;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+.detals:hover {
+    background: #FE980F;
+    border: 0 none;
+    border-radius: 0;
+    color: #FFFFFF;
+}
+
+.details {
+    margin-bottom: 10px;
+}
+
+.details i {
+    margin-right: 5px;
+}
+
+.details:hover {
+    background: #FE980F;
+    color: #FFFFFF;
+}
+
+.details {
     background: #F5F5ED;
     border: 0 none;
     border-radius: 0;
@@ -1188,6 +1233,47 @@ h2.title {
 /*************************
 *******Product Details CSS******
 **************************/
+.check-rate{
+    color:orange;
+}
+.commentMain{
+    display: flex;
+    justify-content: left;
+    border-bottom: solid 1px rgb(197, 197, 197);
+    padding: 1rem;
+}
+.imageUserDetail{
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+    border: 1px solid rgb(161, 161, 161);
+    margin-right: 3rem;
+}
+
+
+.commentMain .content-comment .content-name-time{
+    width: 650px;
+    justify-content:space-between;
+    display: flex;
+    margin-bottom: -10px;
+
+}
+.imageUserDetail:hover{
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.hidden-comment-main {
+    text-align: center;
+    font-style: oblique;
+    backdrop-filter: blur(12px);
+    margin-top: -2rem;
+    
+}
+
+.more-comments:hover {
+    
+    color: rgb(255, 124, 37);
+}
 
 .product-details {
     overflow: hidden;
@@ -2783,3 +2869,6 @@ textarea {
 
     background-color: #FE980F;
   }
+
+
+  

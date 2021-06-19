@@ -15,7 +15,7 @@ module.exports.listProdPagination = async(filter, pageNumber, itemPerPage) => {
 
 module.exports.findbySlugname = async(sl) =>{
 
-    return ProdMongoose.findOne({slugName: sl});
+    return  await ProdMongoose.findOne({slugName: sl});
 }
 
 module.exports.countProducts =  async (_id) =>{
@@ -27,4 +27,14 @@ module.exports.countProducts =  async (_id) =>{
 
         product.save();
     })
+}
+
+module.exports.updateComments = async(slugName, comment) =>{
+
+    var product =  await this.findbySlugname(slugName);
+
+    product.comments.unshift(comment);
+    
+    await product.save();
+    return product;
 }

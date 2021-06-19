@@ -6,6 +6,9 @@
 /* md */
 
 @media (min-width: 992px) and (max-width: 1199px) {
+    .commentMain .imageUser{
+        border-radius: 50%;
+    }
     .header-middle .btn-group .btn {
         padding-left: 8px;
         padding-right: 8px;
@@ -115,6 +118,9 @@
 /* xs */
 
 @media (max-width: 767px) {
+    .commentMain .imageUser{
+        border-radius: 50%;
+    }
     #cart_items .cart_info table{
         min-width: 600px;
     }
@@ -289,12 +295,16 @@
     .well {
         display: inline-block;
     }
+    
 }
 
 
 /* XS Portrait */
 
 @media (max-width: 480px) {
+    .imageUser{
+        border-radius: 50%;
+    }
     .bill-to{
         margin-top: 10px;
     }

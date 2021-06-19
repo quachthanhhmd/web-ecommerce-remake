@@ -72,7 +72,7 @@ module.exports.addToCart = async (req, res, next) => {
       }
   
       const product = await productService.findbySlugname(slugName);
-  
+      console.log(product);
       if (!product) 
           throw new Error("Product not found!");
 

@@ -147,7 +147,7 @@
 				
 					<div class="col-sm-5">
 						<div class="view-product">
-							<img src={{pathImages.[0]}} alt="" >
+							<img src={{product.images.[0]}} alt="" >
 							<h3>ZOOM</h3>
 						</div>
 						<div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -155,17 +155,17 @@
 							  <!-- Wrapper for slides -->
 								<div class="carousel-inner">
 									<div class="item active">
-										{{#each pathImages}}
+										{{#each product.images}}
 									  	<a href=""><img src={{this}} alt="" style=" border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 90px;"></a>
 									  	{{/each}}
 									</div>
 									<div class="item">
-									  {{#each pathImages}}
+									  {{#each product.images}}
 									  	<a href=""><img src={{this}} alt="" style=" border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 90px;"></a>
 									  	{{/each}}
 									</div>
 									<div class="item">
-									  {{#each pathImages}}
+									  {{#each product.images}}
 									  	<a href=""><img src={{this}} alt="" style=" border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 90px;"></a>
 									  	{{/each}}
 									</div>
@@ -185,11 +185,11 @@
 					<div class="col-sm-7">
 						<div class="product-information"><!--/product-information-->
 							<img src="/images/product-details/rating.png" class="newarrival" alt="" />
-							<h2>{{title}}</h2>
+							<h2>{{product.name}}</h2>
 							<p>Web ID: 1089772</p>
 							<img src="/images/product-details/rating.png" alt="" />
 							<span>
-								<span>{{price}} VND</span>
+								<span>{{product.price}} VND</span>
 								<label>Quantity:</label>
 								<input type="text" value="3" />
 								<a href = "#" class="btn btn-fefault cart btn add-to-cart">
@@ -371,25 +371,51 @@
 						
 						<div class="tab-pane fade active in" id="reviews" >
 							<div class="col-sm-12">
-								<ul>
-									<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-									<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-									<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
-								</ul>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+								<div class  = "add-comment">
+								{{#each comments}}
+								<div class = "commentMain justify-content">
+									<div class = "imageUser">
+										<img src = "{{imageUser}}" class  = "imageUserDetail">
+									</div>	
+									<div class = "content-comment">
+										<div class = "content-name-time">
+											<div class = "name-comment"> 
+												<p><b>{{username}}</b></p>
+											</div>
+
+											<div class = "time-comment">
+												<p>{{createAt}}</p>
+											</div>
+										</div>
+										<div class = "ratingUser">
+											<span class="fa fa-star checked check-rate"></span>
+											<span class="fa fa-star checked check-rate"></span>
+											<span class="fa fa-star checked check-rate"></span>
+											<span class="fa fa-star checked check-rate"></span>
+											<span class="fa fa-star"></span>
+										</div>
+										<div class = "commentUser">
+											<p>{{comment}}</p>
+										</div>
+									</div>
+								</div>
+								{{/each}}
+								</div>
+								
+								<div class = "hidden-comment-main hidden-comment">
+									<a id = "more-comments" value = "{{product.slugName}}">Xem Thêm</a>
+									<a class="d-none" id = "get-comment" value = "{{start}}"> </a>
+								</div>
 								<p><b>Write Your Review</b></p>
 								
-								<form action="#">
-									<span>
-										<input type="text" placeholder="Your Name"/>
-										<input type="email" placeholder="Email Address"/>
-									</span>
-									<textarea name="" ></textarea>
+								
+									
+									<input name="comment"  id = "comment-box" placeholder="Write your comment"  type="text">
 									<b>Rating: </b> <img src="/images/product-details/rating.png" alt="" />
-									<button type="button" class="btn btn-default pull-right">
+									<button type="button" class="btn btn-default pull-right submit-comment" value = "{{product.slugName}}">
 										Submit
 									</button>
-								</form>
+							
 							</div>
 						</div>
 						

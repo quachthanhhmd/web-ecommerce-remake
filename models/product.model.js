@@ -32,7 +32,7 @@ const productSchema = mongoose.Schema({
     type: String,
     slug: "price",
   },
-  type: {
+  category: {
     // chua co
     type: String,
     default: "",

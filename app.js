@@ -56,6 +56,12 @@ app.use(express.static('public'));
        new RegExp(' value=\"' + selected + '\"'),
        '$& selected="selected"');
  });
+ handlebars.registerHelper('times', function(n, block) {
+  var accum = '';
+  for(var i = 0; i < n; ++i)
+      accum += block.fn(i);
+  return accum;
+});
  handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
 
  handlebars.registerHelper('incremented', function (index) {

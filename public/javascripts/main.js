@@ -224,7 +224,7 @@ $(".upload-button").on("click", function () {
 
 // 
 $('.widget.dashboard-links a').on('click', function(){
-  console.log(123)
+  
   $('.tab-pane[role="tabpanel"]').removeClass('show')
 })
 
@@ -235,7 +235,7 @@ $('.view-checkout').click(function (e) {
 	e.preventDefault();
 
 	const id = $(this).attr('value');
-  console.log(12312);
+
 	$.get(`/user/checkout/${id}`, function (data) {
 		if (data.msg !== 'success') return;
     
@@ -347,4 +347,112 @@ $('#reset-password2').on('click', function (e) {
   if (pass1 !== pass2) return;
   
   $(this).click();
+});
+
+
+$('.hidden-comment').on('click', function(e){
+  
+  e.preventDefault();
+  var numLoop = $("#get-comment").attr("value");
+  
+  if (parseInt(numLoop) === 0){
+    $('.commentMain ').remove();
+  
+  }
+  
+
+
+  const slugName = $("#more-comments").attr("value");
+  
+  $.post('/product-details/comments/?slugName=' + slugName + "&start=" + numLoop.toString())
+  .then(
+    function(data, status) {
+     
+      if (status !== "success"){
+        return
+      }
+     
+      $('#get-comment').attr("value", parseInt(numLoop) + 1);
+
+      var newComment = modelComment(data.data.newComment);
+      
+      $('.add-comment').append(newComment);
+      if (data.data.check){
+        $("#get-comment").attr("value", 0);
+        $('#more-comments').text("See less");
+      }
+    }
+  )
+  .catch(err => {
+    console.log('Error :-S', err)
+  });
+})
+
+
+const modelComment = (data) => {
+  
+  var modal =   data.map((items, index) => {
+		return `<div class = "commentMain justify-content">
+    <div class = "imageUser">
+      <img src = "${items.imageUser}" class  = "imageUserDetail">
+    </div>	
+    <div class = "content-comment">
+      <div class = "content-name-time">
+        <div class = "name-comment"> 
+          <p><b>${items.username}</b></p>
+        </div>
+
+        <div class = "time-comment">
+          <p>${items.createAt}</p>
+        </div>
+      </div>
+      <div class = "ratingUser">
+        <span class="fa fa-star checked check-rate"></span>
+        <span class="fa fa-star checked check-rate"></span>
+        <span class="fa fa-star checked check-rate"></span>
+        <span class="fa fa-star checked check-rate"></span>
+        <span class="fa fa-star"></span>
+      </div>
+      <div class = "commentUser">
+        <p>${items.comment}</p>
+      </div>
+    </div>
+  </div>`
+  });
+
+
+
+  return modal;
+}
+
+
+$(".submit-comment").click((e) =>{
+
+    e.preventDefault();
+    const val = $("#comment-box").val();
+    
+    const key = $("#comment-box").attr('name');
+		const slugName = $(".submit-comment").attr("value");
+    
+		if (!val) return;
+   
+			const url = '/product-details/commentuser/' + slugName;
+			$.post({
+				url,
+				data: JSON.stringify({ [key]: val }),
+				contentType: 'application/json',
+				dataType: 'json',
+				success: function (data) {
+					console.log(data);
+					if (data.msg === 'success') {
+						
+              var commentuser = modelComment([data.data]);
+              console.log(commentuser);
+
+              var start = $("#get-comment").attr("value");
+              $("#get-comment").attr("value", 0);
+              $(".hidden-comment").trigger("click");
+					} 
+				},
+    })
 });
