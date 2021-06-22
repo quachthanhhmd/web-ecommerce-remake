@@ -354,7 +354,7 @@ $('.hidden-comment').on('click', function(e){
   
   e.preventDefault();
   var numLoop = $("#get-comment").attr("value");
-  
+ 
   if (parseInt(numLoop) === 0){
     $('.commentMain ').remove();
   
@@ -375,8 +375,9 @@ $('.hidden-comment').on('click', function(e){
       $('#get-comment').attr("value", parseInt(numLoop) + 1);
 
       var newComment = modelComment(data.data.newComment);
-      
+
       $('.add-comment').append(newComment);
+      
       if (data.data.check){
         $("#get-comment").attr("value", 0);
         $('#more-comments').text("See less");
@@ -389,7 +390,9 @@ $('.hidden-comment').on('click', function(e){
 })
 
 
+
 const modelComment = (data) => {
+  
   
   var modal =   data.map((items, index) => {
 		return `<div class = "commentMain justify-content">
@@ -429,6 +432,8 @@ const modelComment = (data) => {
 $(".submit-comment").click((e) =>{
 
     e.preventDefault();
+    var numReviews =  +$('.num-reviews').text();
+  
     const val = $("#comment-box").val();
     
     const key = $("#comment-box").attr('name');
@@ -447,9 +452,12 @@ $(".submit-comment").click((e) =>{
 					if (data.msg === 'success') {
 						
               var commentuser = modelComment([data.data]);
-              console.log(commentuser);
+             
+              // Emit socket
+			        sendMessage(data);  
 
-              var start = $("#get-comment").attr("value");
+              $("#comment-box").val("");
+              $('.num-reviews').html(numReviews + 1);
               $("#get-comment").attr("value", 0);
               $(".hidden-comment").trigger("click");
 					} 

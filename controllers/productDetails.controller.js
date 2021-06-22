@@ -22,7 +22,7 @@ exports.detail = async(req, res, next) => {
             product: product,
             comments: comments,
             start: 1,
-        
+            NumComments: product.comments.length
         });
         
     }catch(error){
@@ -70,6 +70,16 @@ module.exports.getComments = async (req, res) =>{
 
 }
 
+const getDay = (date) =>{
+
+    var dateFormat = new Date(date);
+  
+    var d = dateFormat.toLocaleDateString();
+    var h = dateFormat.toTimeString();
+    console.log(h + ' ' + d);
+    return h.split(':')[0] + ':' + h.split(':')[1] + ' ' + d;
+  }
+  
 
 module.exports.postComment = async(req, res) => {
 
@@ -91,7 +101,7 @@ module.exports.postComment = async(req, res) => {
             user: user._id,
             imageUser: user.image,
             username: user.name,
-            createAt: new Date(),
+            createAt: getDay(new Date()),
             rate: rate,
         }
         
