@@ -1,7 +1,7 @@
-const cartService = require("../models/cart.service");
-const userSevice = require("../models/user.Service");
-const checkoutService = require("../models/checkout.service");
-const { response } = require("../app");
+const cartService = require("../services/cart.service");
+const userSevice = require("../services/user.Service");
+const checkoutService = require("../services/checkout.service");
+
 
 
 module.exports.getCheckout = async(req, res, next) =>{

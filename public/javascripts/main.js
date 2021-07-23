@@ -464,3 +464,98 @@ $(".submit-comment").click((e) =>{
 				},
     })
 });
+
+
+
+$('.add-to-like').click(function (e) {
+	e.preventDefault();
+
+	// If not sign in
+	if ($('a[href="/buyer/login"]').text() === 'Login') {
+    
+    const re = confirm("Please login to add a favorite product.");
+    if (re == true){
+      window.location.replace("/buyer/login")
+    }
+		return;
+	}
+
+
+	const slugName = $(this).attr('value');
+	const url = `/user/account/like/${slugName}`;
+
+	$.post(url, {}, function (data, status) {
+		if (data.msg === 'success' && status === 'success') {
+			const oldVal = parseInt($('.cart-count-like').html().slice(1));
+			$('.cart-count-like').html(`(${oldVal + 1})`);
+		}
+	});
+
+	setTimeout(1000);
+});
+// Post unlike
+$('.trash-like').click(function (e) {
+	e.preventDefault();
+
+	const value = $(this).attr('value');
+
+	if (parseInt(value) === 0) {
+		const re = confirm(
+			'Are you sure you want to remove items from your wishlist?'
+		);
+		if (re == false) return false;
+		$(this).parent().parent().css("display", "none");
+
+		/* Check empty */
+		$('.table.table-bordered > .align-middle tr').not('tr[style="display: none;"]')
+			.length === 0 && wishlistEmpty();
+	}
+
+	const slugName = $(this).attr('name');
+	const url = `/user/account/unlike/${slugName}`;
+
+	$.post(url, {}, function (data, status) {
+		if (data.msg === 'success' && status === 'success') {
+			$('.cart-count-like').html(`(${data.data.length})`);
+
+		}
+	});
+});
+/* Display wishlist empty */
+const wishlistEmpty = () => {
+	$('.table.table-bordered').html(`
+      <h3>No favorite products!</h3>
+			<h6 class="pt-3">
+				<span
+					><a class="text-success" style = "text-align: center;" href="/"
+						>Continue shopping</a
+					></span
+				>
+      </h6>`);
+  $('.table.table-bordered').addClass("center-table");
+	$('.table.table-bordered').removeClass('table table-bordered');
+};
+
+const CartEmpty = () =>{
+
+  $('.main-cart').html(`
+  <div class = "center-table" style = "text-align: center; margin-bottom: 200px;margin-top: 200px;">
+								<h3>You have not put in your cart any products!</h3>
+										<h6 class="pt-3">
+											<span
+												><a class="text-success" href="/"
+													>Continue shopping</a
+												></span
+											>
+										</h6>
+            </div>`)
+            $('.main-cart').removeClass('main-cart');
+}
+$('#reset-password2').one('click', function (e) {
+  e.preventDefault();
+  const pass1 = $('input[name=password]').val();
+  const pass2 = $('input[name=password2]').val();
+  if (pass1 !== pass2) return;
+  
+  $(this).submit();
+});

@@ -1,5 +1,5 @@
-const Cart = require("./cart.model")
-const ProductSevice =  require("./ProductService");
+const Cart = require("../models/cart.model")
+const ProductSevice =  require("./Product.service");
 
 module.exports.findIdbyStatus = (id, status) =>{
 

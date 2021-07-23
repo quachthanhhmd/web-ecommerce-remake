@@ -19,7 +19,6 @@
 	<!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
-
     <![endif]-->
 	<link rel="shortcut icon" href="/images/ico/favicon.ico">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
@@ -27,9 +26,6 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
 	<link rel="stylesheet" href="/stylesheets/mystyle.css">
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.min.js"></script>
-	<script src = "/javascripts/socket.js"></script>
 </head>
 <!--/head-->
 
@@ -46,17 +42,6 @@
 							<ul class="nav nav-pills">
 								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
 								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="social-icons pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -102,7 +87,15 @@
 
 
 
-								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
+								<li><a href="/user/account/wishlist"><i class="fa fa-star"></i> Wishlist
+									{{#if user}}
+										{{#if user.likes}}
+											<span class="cart-count-like">({{user.likes.length}})</span>
+										{{else}}
+											<span class="cart-count-like">(0)</span>
+										{{/if}}
+									{{/if}}
+								</a></li>
 								<li>
 								
 								 <a href="/cart" class="btn cart ">
@@ -125,7 +118,7 @@
 
 								{{else}}
 
-								<li><a href="/buyer/login"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="/buyer/login"><i class="fa fa-lock"></i>Login</a></li>
 
 								{{/if}}
 							</ul>
@@ -159,16 +152,11 @@
 										<li><a href="/product-details">Product Details</a></li>
 										<li><a href="/checkout">Checkout</a></li>
 										<li><a href="/cart">Cart</a></li>
-										<li><a href="/buyer/login">Login</a></li>
+					
 									</ul>
 								</li>
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-									<ul role="menu" class="sub-menu">
-										<li><a href="/blog">Blog List</a></li>
-										<li><a href="/blog-single">Blog Single</a></li>
-									</ul>
-								</li>
-								<li><a href="/404">404</a></li>
+								
+								
 								<li><a href="/contact-us">Contact</a></li>
 								<li class="dropdown"><a href="#">Category Filter<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">

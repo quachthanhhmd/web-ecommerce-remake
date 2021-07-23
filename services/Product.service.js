@@ -1,5 +1,5 @@
-const { findOneAndDelete } = require("./cart.model");
-const ProdMongoose = require("./product.model");
+const { findOneAndDelete } = require("../models/cart.model");
+const ProdMongoose = require("../models/product.model");
 
 module.exports.listAllProduct = async() => {
     return await ProdMongoose.find({});

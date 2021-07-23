@@ -1,9 +1,9 @@
 const Cart = require("../models/cart.model");
 const Product = require("../models/product.model")
 
-const cartService = require("../models/cart.service");
-const productService = require("../models/ProductService")
-const userSevice = require("../models/user.Service");
+const cartService = require("../services/cart.service");
+const productService = require("../services/Product.service")
+const userSevice = require("../services/user.Service");
 
 
 function parsePrice(strPrice){

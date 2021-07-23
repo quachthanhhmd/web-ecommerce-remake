@@ -2870,5 +2870,16 @@ textarea {
     background-color: #FE980F;
   }
 
+  .wishlist-body{
 
-  
+    width: 1000px !important;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .thead-color{
+      background-color: #FE980F;
+  }
+
+  .center-table {
+    margin: 0px auto;
+  }

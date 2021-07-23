@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt');
 
 const {sendEmail} =  require('../config/nodemailer');
 const cartController = require("../controllers/cart.controller");
-const cartService = require("../models/cart.service")
+const cartService = require("../services/cart.service")
 const jwt =  require('jsonwebtoken');
 const randomstring = require("randomstring");
 

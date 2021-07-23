@@ -1,17 +1,15 @@
-const jwt =  require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const randomstring = require("randomstring");
 const fs = require("fs")
 
 const User = require('../models/user.model');
-const UserSevice = require('../models/user.Service');
-const {sendEmail} =  require('../config/nodemailer');
+
 const upload = require('../config/multer')
 const cloudinary = require('../config/cloudinary');
-const { fields } = require('../config/multer');
-const CheckoutService = require("../models/checkout.service")
 
-
+const CheckoutService = require("../services/checkout.service");
+const ProductService = require("../services/Product.service");
+const UserSevice = require('../services/user.Service');
 
 const tokenLife = process.env.TOKEN_LIFE
 const jwtKey = process.env.JWT_KEY
@@ -295,6 +293,82 @@ module.exports.viewCheckout = async (req, res, next) =>{
         })
     }
 }
+
+//wishlist
+module.exports.getWishlist = async (req, res, next) => {
+    let check = 0;
+    if (req.user.likes.length > 0)
+        check = 1;
+	res.render('wishlist', { user: req.user , check : check});
+};
+
+module.exports.postLike = async (req, res, next) => {
+	const { slugname } = req.params;
+	const { user } = req;
+    
+	try {
+        const product = await ProductService.findbySlugname(slugname);
+       
+		if (!product) {
+			return res.status(200).json({
+				msg: 'ValidatorError',
+				user: 'Product error',
+			});
+		}
+
+		const { name, slugName, price, images } = product;
+
+		const like = {
+			name,
+			slugName,
+			price,
+			images,
+			date: new Date(),
+		};
+        
+        user.likes.push(like);
+        await UserSevice.updateOneUser( user._id, user);
+	
+        
+		res.status(201).json({
+			msg: 'success',
+			user: `Your like has been completed!`,
+			data: like,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(205).json({
+			msg: 'ValidatorError',
+			user: error.message,
+			error,
+		});
+	}
+};
+
+
+module.exports.postUnLike = async (req, res, next) => {
+	const { slugname } = req.params;
+	let { user } = req;
+    
+	try {
+		user.likes = user.likes.filter((ele) => ele.slugName != slugname);
+		await UserSevice.updateOneUser(user._id, user );
+      
+		req.user = user;
+		res.status(201).json({
+			msg: 'success',
+			user: `Your delete has been execute!`,
+			data: user.likes,
+		});
+	} catch (error) {
+		
+		res.status(205).json({
+			msg: 'ValidatorError',
+			user: error.message,
+			error,
+		});
+	}
+};
 
 //log out
 exports.logout = (req, res, next) => {

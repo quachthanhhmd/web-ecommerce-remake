@@ -1,4 +1,4 @@
-const User = require('./user.model');
+const User = require('../models/user.model');
 
 
 module.exports.FindCloudinaryEmail = async(email) =>{
@@ -23,4 +23,13 @@ module.exports.updateAddress = async(email, address, district, city) => {
         user.city = city;
         user.save();
     })
+}
+
+module.exports.updateOneUser = async(_id, user) =>{
+
+    await User.updateOne(
+        {_id: _id},
+        {
+            $set: user
+        })
 }

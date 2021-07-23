@@ -1,4 +1,4 @@
-const Product= require('../models/ProductService');
+const Product= require('../services/Product.service');
 const User = require('../models/user.model');
 exports.detail = async(req, res, next) => {
     // Get books from model

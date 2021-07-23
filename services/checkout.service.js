@@ -1,5 +1,5 @@
 const { checkout } = require("../routes/checkout");
-const Checkout = require("./checkout.model");
+const Checkout = require("../models/checkout.model");
 
 
 

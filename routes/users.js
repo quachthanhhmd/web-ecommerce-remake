@@ -21,7 +21,12 @@ router.post('/account/changePhone', authorize.auth, user.changeTel);
 
 router.get('/checkout/:id',authorize.auth, user.viewCheckout);
 
-router.post('/account/changeAddress',authorize.auth, user.changeAddress)
+router.post('/account/changeAddress',authorize.auth, user.changeAddress);
 
+router.post('/account/unlike/:slugname',authorize.auth, user.postUnLike);
+
+router.post('/account/like/:slugname',authorize.auth, user.postLike);
+
+router.get('/account/wishlist',authorize.auth, user.getWishlist);
 
 module.exports = router;

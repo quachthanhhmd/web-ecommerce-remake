@@ -1,4 +1,4 @@
-const ProductService = require('../models/ProductService.js');
+const ProductService = require('../services/Product.service.js');
 const Product = require("../models/product.model");
 const ITEM_PER_PAGE = 12;
 module.exports.index = async(req, res, next) => {
