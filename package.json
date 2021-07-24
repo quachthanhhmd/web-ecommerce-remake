@@ -21,6 +21,7 @@
     "express-session": "^1.17.1",
     "fs": "0.0.1-security",
     "handlebars-dateformat": "^1.1.1",
+    "handlebars-form-helper": "^1.0.4",
     "handlebars-helpers": "^0.10.0",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",

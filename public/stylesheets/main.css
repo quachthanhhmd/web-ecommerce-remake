@@ -73,6 +73,12 @@ a#scrollUp i {
     background: none repeat scroll 0 0 #F0F0E9;
 }
 
+.top-right{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -0.3rem;
+}
+
 .contactinfo ul li:first-child {
     margin-left: -15px;
 }
@@ -288,19 +294,29 @@ a#scrollUp i {
 }
 
 .search_box input {
+
     background: #F0F0E9;
     border: medium none;
+    border-radius: 1%;
     color: #B2B2B2;
+
     font-family: 'roboto';
-    font-size: 12px;
+    font-size: 1.6rem;
     font-weight: 300;
-    height: 35px;
+
     outline: medium none;
     padding-left: 10px;
-    width: 155px;
+    width: 50rem;
+    height: 4.5rem;
+
+    margin-top: 0.3rem;
+    margin-right: -5rem;
+
+    
     background-image: url(../images/home/searchicon.png);
     background-repeat: no-repeat;
-    background-position: 130px;
+    background-position: 97%;
+    background-size: 1.5rem
 }
 
 

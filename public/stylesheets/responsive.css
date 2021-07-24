@@ -2,10 +2,21 @@
 
 @media (min-width: 1200px) {}
 
-
 /* md */
 
 @media (min-width: 992px) and (max-width: 1199px) {
+    .search_box{
+        
+        width: 35rem !important;
+        margin-left: 18rem;
+        
+    }
+    .search_box input{
+        
+        width: 30rem ;
+  
+        
+    }
     .commentMain .imageUser{
         border-radius: 50%;
     }
@@ -38,6 +49,12 @@
 /* sm */
 
 @media (min-width: 768px) and (max-width: 991px) {
+    .search_box{
+        display: flex;
+        justify-content: center;
+        width: 28rem;
+        margin-right: 4rem;
+    }
     .shop-menu{
         display: block;
         width: 100%;
@@ -118,6 +135,14 @@
 /* xs */
 
 @media (max-width: 767px) {
+    .search_box{
+        display: flex;
+        justify-content: center;
+        width: 20rem;
+        margin-right: 4rem;
+    
+    }
+
     .commentMain .imageUser{
         border-radius: 50%;
     }
