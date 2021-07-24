@@ -134,12 +134,48 @@ a#scrollUp i {
     background: #CE3C2D;
 }
 
+.header-middle .container .row .font-logo{
+    font-size: 2rem;
+    margin-top: 0.5rem;
+}
+
+.header-middle .container .fixed-row-display{
+
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+    transition: all 1s;
+    border-bottom: 1px solid #FE980F !important;
+}
+
+
+.header-middle .fixed {
+   
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-top: 0.01rem;
+    padding-bottom: 0.-1rem; 
+
+    
+    background-color: white;
+    z-index: 20;
+}
+
 .header-middle .container .row {
     border-bottom: 1px solid #f5f5f5;
+    
     margin-left: 0;
     margin-right: 0;
     padding-bottom: 20px;
     padding-top: 20px;
+    
 }
 
 .header-middle .container .row .col-sm-4 {
@@ -2290,7 +2326,8 @@ textarea {
 }
 
 .commnets .pull-left {
-    margin-right: 22px
+    margin-right: 22px;
+    
 }
 
 .commnets p,
@@ -2373,7 +2410,8 @@ textarea {
 }
 
 .response-area .media .pull-left {
-    margin-right: 25px
+    margin-right: 25px;
+    font-size: 2.5rem;
 }
 
 .response-area .second-media {
@@ -2883,3 +2921,4 @@ textarea {
   .center-table {
     margin: 0px auto;
   }
+
