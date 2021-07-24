@@ -17,7 +17,7 @@ exports.detail = async(req, res, next) => {
         //get 5 comments
         var comments = product.comments.slice(0, 4);
        
-        res.render('product-details', {
+        res.render('pages/product-details', {
             
             product: product,
             comments: comments,

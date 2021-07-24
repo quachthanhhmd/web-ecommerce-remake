@@ -10,7 +10,7 @@ exports.index = (req, res, next) => {
     .limit(9)
     .then(product =>{
         
-        res.render('index', {
+        res.render('pages/home', {
             product
         })
     })

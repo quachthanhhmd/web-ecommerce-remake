@@ -1,0 +1,54 @@
+<section>
+  <div class="wishlist-page">
+    <div class="container-fluid">
+      <div class="wishlist-page-inner">
+        <div class="row">
+          <div class="wishlist-body">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="thead-color">
+                  {{#if check}}
+                  <tr>
+                    <th>Index</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Delete</th>
+                  </tr>
+                  {{/if}}
+                </thead>
+                <tbody class="align-middle">
+                  {{#if check}}
+                  {{#each user.likes}}
+                  <tr>
+                    <td> {{incremented @index}}</td>
+                    <td>
+                      <div class="img unlike">
+                        <a href="/products/{{slugName}}"><img src="{{images.[0]}}" alt="Image" /></a>
+                        <p>{{name}}</p>
+                      </div>
+                    </td>
+                    <td>{{price}}</td>
+                    <td class="trash">
+                      <button class="trash-like" value="0" name="{{slugName}}">
+                        <i class="fa fa-times"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  {{/each}}
+                  {{else}}
+                  <h3>No favorite products!</h3>
+                  <h6 class="pt-3">
+                    <span><a class="text-success" href="/">Continue shopping</a></span>
+                  </h6>
+                  {{/if}}
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

@@ -45,7 +45,7 @@ module.exports.getOne = async (req, res) => {
             //checkout
             let checkout = await CheckoutService.find1checkout(user._id);
       
-            res.render('user', {
+            res.render('pages/user', {
                     title: "Profile",
                     name: user.name,
                     email: user.email,
@@ -113,8 +113,7 @@ exports.saveInfor = async (req, res, next) =>{
                 
             }
         }
-       
-        console.log(ret);
+
 
         User.findOne({email: email})
         .then(user => {
@@ -299,7 +298,7 @@ module.exports.getWishlist = async (req, res, next) => {
     let check = 0;
     if (req.user.likes.length > 0)
         check = 1;
-	res.render('wishlist', { user: req.user , check : check});
+	res.render('pages/wishlist', { user: req.user , check : check});
 };
 
 module.exports.postLike = async (req, res, next) => {

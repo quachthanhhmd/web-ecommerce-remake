@@ -1,0 +1,44 @@
+<section id="form">
+	<!--form-->
+	{{#if message2}}
+	<script>
+		var txt;
+		var r = confirm("Sign Up Success. Please confirm your account via gmail");
+		if (r == true) {
+			txt = "You pressed OK!";
+		} else {
+			txt = "You pressed Cancel!";
+		}
+	</script>
+	{{/if}}
+	<div class="container">
+
+		<div class="login-form">
+			<!--login form-->
+
+			<h2>Login to your account</h2>
+			<form method="POST" action="/buyer/login">
+				{{#if message}}
+				<div class="alert alert-warning">
+					{{message}}
+				</div>
+				{{/if}}
+
+				<input name="email" type="email" placeholder="Email Address" />
+				<span class="d-none"></span>
+				<input name="password" type="password" placeholder="Password" />
+				<span class="d-none"></span>
+				<button type="submit" class="btn btn-default login-button">Login</button>
+				<a href="/buyer/forgot">Forgot password?</a>
+				<br>
+				<div>
+					<span>New to TechShop?</span>
+					<a href="/buyer/signup">Sign up</a>
+				</div>
+			</form>
+		</div>
+		<!--/login form-->
+
+	</div>
+</section>
+<!--/form-->

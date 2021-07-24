@@ -19,7 +19,7 @@ module.exports.listProductPagination = async(req, res) => {
         Query.name = Name;
     }
     const pagination = await ProductService.listProdPagination(Query, page, 12);
-    res.render('shop', {
+    res.render('pages/shop', {
         title: 'Shop',
         products: pagination.docs,
         hasNextPage: pagination.hasNextPage,

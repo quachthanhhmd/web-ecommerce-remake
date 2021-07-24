@@ -12,7 +12,7 @@ module.exports.getCheckout = async(req, res, next) =>{
         const userCart = await cartService.findIdbyStatus(user._id, "waiting");
 
 
-        res.render("checkout", {
+        res.render("pages/checkout", {
             title: "Checkout",
             cart: userCart,
             user: user,

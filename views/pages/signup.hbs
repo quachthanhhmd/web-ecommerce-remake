@@ -1,0 +1,36 @@
+<section id="form">
+	<!--form-->
+	<div class="container">
+
+
+
+		<div class="sign-up login-form">
+			<!--sign up form-->
+			<h2>New User Signup!</h2>
+			<form method='POST' action="/buyer/signup">
+				<input name="name" type="text" placeholder="Name" />
+				<span class="d-none"></span>
+				<input name="email" type="email" placeholder="Email Address" />
+				<span class="d-none"></span>
+				<input name="password" type="password" placeholder="Password" />
+				<span class="d-none"></span>
+				<input name="password2" type="password" placeholder="Re-enter password" />
+				<span class="d-none"></span>
+				<input name="phone" type="tel" placeholder="Nhập sdt">
+				<span class="d-none"></span>
+				{{#if respond}}
+				<div style="padding: 0 0 20px 15px">
+					<span class="text-success">{{respond}}</span>
+				</div>
+				{{/if}}
+
+				<button type="submit" id="sign-up" class="btn btn-default login-button">Signup</button>
+			</form>
+
+		</div>
+		<!--/sign up form-->
+
+
+	</div>
+</section>
+<!--/form-->

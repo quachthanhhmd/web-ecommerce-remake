@@ -38,7 +38,7 @@ module.exports.displayCart =  async (req, res, next) =>{
       else
         userCart = req.session.cart;
 
-      return res.render("cart",{
+      return res.render("pages/cart",{
         title: "Cart",
         cart: userCart,
       })

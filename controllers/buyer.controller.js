@@ -15,9 +15,8 @@ exports.getLogin = (req, res, next) =>{
 
     var message2 = req.flash("success")[0];
     
-    console.log(message2);
 
-    res.render("login", {
+    res.render("pages/login", {
         title: "Login",
         message: message,
         message2: message2,
@@ -26,13 +25,14 @@ exports.getLogin = (req, res, next) =>{
 }
 
 exports.getRegister = (req, res, next) =>{
-
-    res.render('signup', {title: "Sign up"});
+    res.render('pages/signup', 
+            {title: "Sign up"});
 }
 
 exports.getForgot = (req, res, next) =>{
 
-    res.render('forgot', {title: "Forgot password"});
+    res.render('pages/forgot', 
+            {title: "Forgot password"});
 }
 
 
@@ -50,7 +50,7 @@ module.exports.getOne = async (req, res) => {
                 msg: 'User not found!'
             })
         }else{
-            res.render('user', {
+            res.render('pages/user', {
                     title: "Profile",
                     name: user.name,
                     email: user.email,

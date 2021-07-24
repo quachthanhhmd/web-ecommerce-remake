@@ -1,0 +1,152 @@
+<header id="header">
+		<!--header-->
+		<div class="header_top">
+			<!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header_top-->
+
+		<div class="header-middle">
+			<!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 clearfix">
+						<div class="logo pull-left">
+							<a href="/">TechShop</a>
+						</div>
+						<div class="btn-group pull-right clearfix">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle usa"
+									data-toggle="dropdown">
+									USA
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a href="">Canada</a></li>
+									<li><a href="">UK</a></li>
+								</ul>
+							</div>
+
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle usa"
+									data-toggle="dropdown">
+									DOLLAR
+									<span class="caret"></span>
+								</button>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 clearfix">
+						<div class="shop-menu clearfix pull-right">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+
+
+
+								<li><a href="/user/account/wishlist"><i class="fa fa-star"></i> Wishlist
+									{{#if user}}
+										{{#if user.likes}}
+											<span class="cart-count-like">({{user.likes.length}})</span>
+										{{else}}
+											<span class="cart-count-like">(0)</span>
+										{{/if}}
+									{{/if}}
+								</a></li>
+								<li>
+								
+								 <a href="/cart" class="btn cart ">
+									<i class="fa fa-shopping-cart"></i>Cart
+									{{#if session.cart.totalQuantity}}
+										<span class="cart-count-add">({{session.cart.totalQuantity}})</span>
+									{{else}}
+										<span class="cart-count-add">(0)</span>
+									{{/if}}
+									</a>
+								</li>
+								{{#if user}}
+								<li class="dropdown-acc"><a href="/user/account/profile"><i class="fa fa-user"></i>
+										{{user.name}}</a></a>
+									<ul role="menu" class="sub-menu-acc">
+										<li><a href="/user/account/profile" class = "text-profile">Information</a></li>
+										<li><a href="/user/account/logout" class = "text-profile" >Log out</a></li>
+									</ul>
+								</li>
+
+								{{else}}
+
+								<li><a href="/buyer/login"><i class="fa fa-lock"></i>Login</a></li>
+
+								{{/if}}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header-middle-->
+
+		<div class="header-bottom">
+			<!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse"
+								data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="/index" class="active">Home</a></li>
+								<li class="dropdown"><a href="/shop">Shop<i class="fa fa-angle-down"></i></a>
+									<ul role="menu" class="sub-menu">
+										<li><a href="/shop">Products</a></li>
+										<li><a href="/product-details">Product Details</a></li>
+										<li><a href="/checkout">Checkout</a></li>
+										<li><a href="/cart">Cart</a></li>
+					
+									</ul>
+								</li>
+								
+								
+								<li><a href="/contact-us">Contact</a></li>
+								<li class="dropdown"><a href="#">Category Filter<i class="fa fa-angle-down"></i></a>
+									<ul role="menu" class="sub-menu">
+										<li><a href="/shop?category=PC">PC</a></li>
+										<li><a href="/shop?category=laptop">Laptop</a></li>
+										<li><a href="/shop?category=mobile">Mobile</a></li>
+										<li><a href="/shop?category=Components">Components</a></li>
+										<li><a href="/shop?category=Network equipment - Security">Network equipment - Security</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<form action="" method="get">
+							<div class="search_box pull-right">
+								<input type="text" name="name" placeholder="Search" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header-bottom-->
+	</header>
+	<!--/header-->

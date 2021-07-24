@@ -23,7 +23,7 @@ const checkoutRouter = require('./routes/checkout');
 const session = require('express-session');
 const flash = require('express-flash');
 
-const hbs = require('hbs');
+const hbs = require('express-handlebars');
 
 const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -33,12 +33,13 @@ const Cart = require('./models/cart.model');
 const User = require('./models/user.model');
 
 const {initCart} = require('./services/cart.service');
-const { handlebars } = require('hbs');
+const handlebars  = require('handlebars');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', "hbs");
+
 
 
 
@@ -51,23 +52,38 @@ app.use(flash());
 
 app.use(cookieParser(seKey));
 app.use(express.static('public'));
- hbs.registerHelper('select', function(selected, options) {
+ 
+
+//handlebars setting
+app.engine('.hbs', hbs({
+  defaultLayout: 'main', 
+  extname: '.hbs',
+  layoutsDir:path.join(__dirname, 'views/pages'),
+  partialsDir:path.join(__dirname, 'views/partials'),
+  handlebars: allowInsecurePrototypeAccess(handlebars)
+}));
+
+app.set('view engine', "hbs");
+
+
+handlebars.registerHelper('select', function(selected, options) {
   return options.fn(this).replace(
        new RegExp(' value=\"' + selected + '\"'),
        '$& selected="selected"');
- });
- handlebars.registerHelper('times', function(n, block) {
+});
+handlebars.registerHelper('times', function(n, block) {
   var accum = '';
   for(var i = 0; i < n; ++i)
       accum += block.fn(i);
   return accum;
 });
- handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
+handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
 
  handlebars.registerHelper('incremented', function (index) {
   index++;
   return index;
 });
+//--------------------------------------
  
 app.use(
     session({
