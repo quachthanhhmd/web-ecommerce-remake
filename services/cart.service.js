@@ -49,6 +49,13 @@ module.exports.countProduct = async (_id) =>{
     })
 }
 
+module.exports.createCartbyId = async ( _id) => {
+
+    return await Cart.create({ 
+        userId: _id 
+    });
+}
+
 module.exports.initCart = {
     userId: null,
     status: "waiting",

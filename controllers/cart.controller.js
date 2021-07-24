@@ -65,14 +65,14 @@ module.exports.addToCart = async (req, res, next) => {
         const userCart = await cartService.findIdbyStatus(user._id, "waiting");
         
         if (!userCart) {
-          cart = await Cart.create({ userId: user._id });
+          cart = await cartService.createCartbyId(user._id);
         } 
         else 
           cart = userCart;
       }
   
       const product = await productService.findbySlugname(slugName);
-      console.log(product);
+      
       if (!product) 
           throw new Error("Product not found!");
 
@@ -82,6 +82,7 @@ module.exports.addToCart = async (req, res, next) => {
         if (cart.items[i].name === name) {
           cart.items[i].quantity++;
           var tmpTotal = parsePrice(cart.items[i].total);
+         
           cart.items[i].total = parseIntToPrice((tmpTotal + parsePrice(price)).toString());
           
           cart.items[i].checkItem = cart.items[i].quantity == 1? 0: 1;
@@ -105,21 +106,23 @@ module.exports.addToCart = async (req, res, next) => {
       cart.totalQuantity++;
       
       var tmp = parseInt(parsePrice(cart.totalCost));
-     
+    
+
       var s = parseIntToPrice((parsePrice(price) + tmp).toString());
 
 
       while(s.charAt(0) === '0'){
           s = s.substr(1);
       }
-
+      
+     
       cart.totalCost  = s;
       
 
       if (user) {
         
         await cartService.updateOne(user._id, cart);
-        console.log(user._id);
+ 
       }
       
   
@@ -156,8 +159,9 @@ module.exports.putUpdate = async (req, res, next) => {
       const userCart = await cartService.findIdbyStatus(user._id, "waiting") 
 
       if (!userCart) {
-        cart = await Cart.create({ userId: user._id });
-      } else cart = userCart;
+        cart = await cartService.createCartbyId(user._id);
+      } 
+      else cart = userCart;
     }
 
     if (!typeChange.includes(bias))
@@ -171,10 +175,12 @@ module.exports.putUpdate = async (req, res, next) => {
           tmp -= parseInt(item.quantity) * parsePrice(item.price);
           
           cart.totalCost = parseIntToPrice(tmp.toString());
-          while(cart.totalCost .charAt(0) === '0'){
+          
+          while(cart.totalCost .charAt(0) === '0' && cart.totalCost.charAt(1) !== 'đ'){
             cart.totalCost = cart.totalCost.substr(1);
           }
           
+
           return null;
         }
    
@@ -190,7 +196,7 @@ module.exports.putUpdate = async (req, res, next) => {
           while(cart.totalCost.charAt(0) === '0'){
             cart.totalCost = cart.totalCost .substr(1);
           }
-          console.log(cart.totalCost);
+ 
           
           item.quantity += bias;
 
@@ -276,7 +282,6 @@ module.exports.mergeCart = async ( userId, sessionCart) => {
       
     } else {
       cart = userCart;
-
       const merCartItem = [...userCart.items, ...sessionCart.items];
       const slugName = Array.from(
         new Set(merCartItem.map((item) => item.slugName))
@@ -297,7 +302,7 @@ module.exports.mergeCart = async ( userId, sessionCart) => {
       });
 
       cart.items = items;
-
+      console.log(cart.totalQuantity, sessionCart.totalQuantity)
       cart.totalQuantity += sessionCart.totalQuantity;
 
 
@@ -306,7 +311,7 @@ module.exports.mergeCart = async ( userId, sessionCart) => {
       var sum = tmp + tmp2;
 
       cart.totalCost = parseIntToPrice(sum.toString());
-      while(cart.totalCost .charAt(0) === '0'){
+      while(cart.totalCost.charAt(0) === '0'){
         cart.totalCost = cart.totalCost.substr(1);
       }
 
