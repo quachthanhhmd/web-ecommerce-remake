@@ -17,7 +17,6 @@ const session = require('express-session');
 const flash = require('express-flash');
 const exphbs = require('express-handlebars');
 const handlebars = require('handlebars');
-const hbsFormHelper = require('handlebars-form-helper');
 
 const MongoDBStore = require('connect-mongodb-session')(session);
 const indexRouter = require('./routes/home');
@@ -33,6 +32,7 @@ const User = require('./models/user.model');
 
 const { initCart } = require('./services/cart.service');
 
+const helper = require('./helpers/hbsHelper');
 
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 var app = express();
@@ -62,22 +62,10 @@ const hbs = exphbs.create({
   partialsDir: `${__dirname}/views/partials/`,
   handlebars: allowInsecurePrototypeAccess(handlebars),
   helpers: {
-    select: function (selected, options) {
-      return options.fn(this).replace(
-        new RegExp(' value=\"' + selected + '\"'),
-        '$& selected="selected"');
-    },
-    times: function (n, block) {
-      var accum = '';
-      for (var i = 0; i < n; ++i)
-        accum += block.fn(i);
-      return accum;
-    },
-    dateFormat: require('handlebars-dateformat'),
-    incremented: function (index) {
-      index++;
-      return index;
-    }
+    select: helper.select,
+    times: helper.times,
+    dateFormat: helper.dateFormat,
+    incremented: helper.incremented
   },
 });
 
