@@ -831,6 +831,13 @@ h2.title:before {
     border-top: 0 none;
 }
 
+.panel-dropdown-heading{
+
+    color: #696763;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+}
 .category-products .badge {
     background: none;
     border-radius: 10px;
@@ -2938,3 +2945,7 @@ textarea {
     margin: 0px auto;
   }
 
+.badge-brand{
+    float: right;
+    margin-right: 2rem;
+}

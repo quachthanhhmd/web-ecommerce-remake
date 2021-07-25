@@ -1,12 +1,36 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const slug = require("mongoose-slug-updater");
- 
+
 const enumType = {
-  values: ["PC", "laptop", "mobile", "Network equipment - Security", "Components"],
-  message: `Product type must be 'PC', 'laptop', 'mobile', 'Network equipment - Security' or 'Components'!`,
+  values: [
+    'Laptop & Macbook',
+    'Linh kiện máy tính',
+    'Màn hình máy tính',
+    'Máy ảnh - Máy quay phim',
+    'PC - Máy tính đồng bộ',
+    'Thiết bị mạng - An ninh',
+    'Thiết bị ngoại vi',
+    'Thiết bị văn phòng',
+    'Thiết bị âm thanh',
+    'Điện máy - Điện gia dụng',
+    'Điện thoại & Thiết bị thông minh'
+  ],
+  message: `Product type not found!`,
 };
- 
+
+const enumTypeSmart = {
+  values: [
+    "Điện thoại",
+    "Máy tính bảng",
+    "Phụ kiện",
+    "Đồng hồ thông minh",
+    "Thiết bị Smart Home"
+  ],
+  message: `Type not found!`,
+}
+
+
 const productSchema = mongoose.Schema({
   name: {
     type: String,
@@ -32,12 +56,17 @@ const productSchema = mongoose.Schema({
     type: String,
     slug: "price",
   },
-  category: {
+  type: {
     // chua co
     type: String,
     default: "",
-    enum: enumType,
+    //enum: enumType,
     required: [true, "Type is required!"],
+  },
+  device: {
+    // chua co
+    type: String,
+    default: ""
   },
   images: {
     type: Array,
@@ -109,20 +138,21 @@ const productSchema = mongoose.Schema({
     },
   },
   isRemove: {
-      type: Boolean,
-      default: 0,
+    type: Boolean,
+    default: 0,
   }
 });
 
+productSchema.index({ name: "text", slugName: 'text' })
 // Add plugins
 productSchema.set("timestamps", true);
 
 mongoose.plugin(slug);
 
 productSchema.plugin(mongoosePaginate);
- 
 
-const productModel = mongoose.model('products', productSchema,'products');
+
+const productModel = mongoose.model('products', productSchema, 'products');
 
 module.exports = productModel;
 
