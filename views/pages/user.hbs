@@ -25,12 +25,13 @@
 							aria-orientation="vertical">
 							<ul>
 								<li class="list-group-item"><a class="nav-link active " id="v-pills-home-tab"
-										data-toggle="pill" href="#v-pills-home" role="tab" aria-selected="true">Savings
-										Dashboard</a></li>
+										data-toggle="pill" href="#v-pills-home" role="tab" aria-selected="true">Thông
+										tin cá nhân</a></li>
 								<li class="list-group-item"><a class="nav-link" id="v-pills-profile-tab"
-										data-toggle="pill" href="#v-pills-profile" role="tab">History checkout</a></li>
+										data-toggle="pill" href="#v-pills-profile" role="tab">Lịch sử mua hàng</a>
+								</li>
 								<li class="list-group-item"><a class="nav-link" id="v-pills-address-tab"
-										data-toggle="pill" href="#v-pills-address" role="tab">Address</a></li>
+										data-toggle="pill" href="#v-pills-address" role="tab">Địa chỉ</a></li>
 
 							</ul>
 						</div>
@@ -43,18 +44,18 @@
 						aria-labelledby="v-pills-home-tab">
 						<!-- Edit Profile Welcome Text -->
 						<div class="widget welcome-message">
-							<h2>Edit profile</h2>
+							<h2>Thay đổi thông tin cá nhân</h2>
 
 						</div>
 						<!-- Edit Personal Info -->
 						<div class="row">
 							<div class="col-lg-6 col-md-6">
 								<div class="widget personal-info">
-									<h3 class="widget-header user">Edit Personal Information</h3>
+									<h3 class="widget-header user">Chỉnh sửa thông tin cá nhân</h3>
 									<form action="/user/account/profile" method='POST' enctype="multipart/form-data">
 										<!-- First Name -->
 										<div class="form-group">
-											<label for="first-name">Full Name</label>
+											<label for="first-name">Họ và tên</label>
 											<input name='name' type="text" class="form-control" id="first-name"
 												value='{{name}}'>
 										</div>
@@ -66,13 +67,13 @@
 										</div>
 										<!-- File chooser -->
 										<div class="form-group choose-file d-inline-flex">
-											<label for="thumbnail">Avatar </label>
+											<label for="thumbnail">Ảnh đại diện </label>
 											<div class="upload-button"></div>
 											<input id="thumbnail" class="file-upload" type="file" name="image" />
 										</div>
 										<!-- Comunity Name -->
 										<div class="form-group">
-											<label for="comunity-name">Phone Number</label>
+											<label for="comunity-name">Số điện thoại</label>
 											<input name='phone' type="tel" class="form-control" id="comunity-name"
 												readonly value='{{phone}}'>
 										</div>
@@ -80,49 +81,50 @@
 
 
 										<div class="form-group">
-											<select name='sex' class="form-control">
+											<label for="sex">Giới tính</label>
+											<select name='sex' class="form-control" id="sex">
 												{{#select sex}}
-												<option value="Male">Male</option>
-												<option value="Female">Female</option>
-												<option value="Other">Other</option>
+												<option value="Male">Nam</option>
+												<option value="Female">Nữ</option>
+												<option value="Other">Khác</option>
 												{{/select}}
 											</select>
 
 										</div>
 										<!-- Zip Code -->
 										<div class="form-group">
-											<label for="zip-code">Birth day</label>
+											<label for="zip-code">Ngày sinh</label>
 											<input type="date" class="form-control" id="zip-code" name='birthday'
 												value='{{birthday}}'>
 										</div>
 
 										<!-- Submit button -->
-										<button type="submit" class="btn btn-transparent">Save My Changes</button>
+										<button type="submit" class="btn btn-transparent">Lưu thay đổi</button>
 									</form>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6">
 								<!-- Change Password -->
 								<div class="widget change-password">
-									<h3 class="widget-header user">Edit Password</h3>
+									<h3 class="widget-header user">Đổi mật khẩu</h3>
 									<form method="POST" action="/user/account/changePassword">
 										<!-- Current Password -->
 
 										<div class="form-group">
-											<label for="current-password">Current Password</label>
+											<label for="current-password">Mật khẩu hiện tại</label>
 											<input name="password" type="password" class="form-control"
 												id="current-password">
 										</div>
 
 										<!-- New Password -->
 										<div class="form-group">
-											<label for="new-password">New Password</label>
+											<label for="new-password">Mật khẩu mới</label>
 											<input name="newpass" type="password" class="form-control"
 												id="new-password">
 										</div>
 										<!-- Confirm New Password -->
 										<div class="form-group">
-											<label for="confirm-password">Confirm New Password</label>
+											<label for="confirm-password">Nhập lại mật khẩu</label>
 											<input name="confirmpass" type="password" class="form-control"
 												id="confirm-password">
 										</div>
@@ -130,30 +132,30 @@
 										<div class="alert alert-warning">{{error}}</div>
 										{{/if}}
 										<!-- Submit Button -->
-										<button type="submit" class="btn btn-transparent">Change Password</button>
+										<button type="submit" class="btn btn-transparent">Thay đổi mật khẩu</button>
 									</form>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6">
 								<!-- Change Email Address -->
 								<div class="widget change-email mb-0">
-									<h3 class="widget-header user">Edit phone number</h3>
+									<h3 class="widget-header user">Thay đổi số điện thoại</h3>
 									<form method="POST" action="/user/account/changePhone">
 										<!-- Current Password -->
 										<div class="form-group">
-											<label for="current-email">Current phone number</label>
+											<label for="current-email">Số điện thoại hiện tại</label>
 											<input name="curPhone" type="tel" class="form-control" id="current-email">
 										</div>
 										<!-- New email -->
 										<div class="form-group">
-											<label for="new-email">New phone number</label>
+											<label for="new-email">Số điện thoại mới</label>
 											<input name="newPhone" type="tel" class="form-control" id="new-email">
 										</div>
 										{{#if errorPhone}}
 										<div class="alert alert-warning">{{errorPhone}}</div>
 										{{/if}}
 										<!-- Submit Button -->
-										<button class="btn btn-transparent">Change phone number</button>
+										<button class="btn btn-transparent">Thay đổi</button>
 									</form>
 								</div>
 							</div>
@@ -163,7 +165,7 @@
 					<div class="tab-pane" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 						<!-- Edit Profile Welcome Text -->
 						<div class="widget welcome-message">
-							<h2>Purchase History</h2>
+							<h2>Lịch sử mua hàng</h2>
 
 						</div>
 
