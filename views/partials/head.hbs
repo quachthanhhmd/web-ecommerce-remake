@@ -60,7 +60,7 @@
 					<div class="shop-menu clearfix pull-right">
 						<ul class="nav navbar-nav collapse navbar-collapse">
 
-							<li><a href="/user/account/wishlist"><i class="fa fa-star"></i>Wishlist
+							<li><a href="/user/account/wishlist"><i class="fa fa-star"></i>Yêu thích
 									{{#if user}}
 									{{#if user.likes}}
 									<span class="cart-count-like">({{user.likes.length}})</span>
@@ -72,7 +72,7 @@
 							<li>
 
 								<a href="/cart" class="btn cart ">
-									<i class="fa fa-shopping-cart"></i>Cart
+									<i class="fa fa-shopping-cart"></i>Giỏ hàng
 									{{#if session.cart.totalQuantity}}
 									<span class="cart-count-add">({{session.cart.totalQuantity}})</span>
 									{{else}}
@@ -84,14 +84,14 @@
 							<li class="dropdown-acc"><a href="/user/account/profile"><i class="fa fa-user"></i>
 									{{user.name}}</a></a>
 								<ul role="menu" class="sub-menu-acc">
-									<li><a href="/user/account/profile" class="text-profile">Information</a></li>
-									<li><a href="/user/account/logout" class="text-profile">Log out</a></li>
+									<li><a href="/user/account/profile" class="text-profile">Thông tin</a></li>
+									<li><a href="/user/account/logout" class="text-profile">Đăng xuất</a></li>
 								</ul>
 							</li>
 
 							{{else}}
 
-							<li><a href="/buyer/login"><i class="fa fa-lock"></i>Login</a></li>
+							<li><a href="/buyer/login"><i class="fa fa-lock"></i>Đăng nhập</a></li>
 
 							{{/if}}
 						</ul>
