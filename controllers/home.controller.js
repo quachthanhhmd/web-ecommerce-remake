@@ -22,41 +22,7 @@ exports.index = async (req, res, next) => {
 
 
 
-    const products = await Product.find()
-        .distinct("type");
-    var id = 0;
-    const allType = await Promise.all(products.map(async (type) => {
 
-        const smart = await Product.find({
-            type: type
-        }).distinct('device');
-
-        const device = await Promise.all(smart.map(async (device) => {
-
-
-            let tmp = {
-
-                "name": "",
-                "values": [],
-                "id": 0
-            };
-            tmp.name = device;
-            //console.log(type);
-            tmp.values = await Product.find({
-                type: type,
-                device: device
-            }).distinct("producer");
-            tmp.id = id++;
-            console.log(tmp.values)
-            return tmp;
-        }));
-
-        return {
-            type: type,
-            brand: device,
-            idBrand: id++
-        };
-    }))
 
 
 
@@ -70,8 +36,7 @@ exports.index = async (req, res, next) => {
         .then(product => {
 
             res.render('pages/home', {
-                product,
-                allType
+                product
             })
         })
 

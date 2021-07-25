@@ -31,6 +31,7 @@ const Cart = require('./models/cart.model');
 const User = require('./models/user.model');
 
 const { initCart } = require('./services/cart.service');
+const { getResource } = require('./services/Product.service');
 
 const helper = require('./helpers/hbsHelper');
 
@@ -91,12 +92,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   var cart = new Cart(req.session.cart ? req.session.cart : initCart);
 
   req.session.cart = cart;
 
+
   res.locals.session = req.session;
+
+
+  (req.app.locals.allType === undefined) && (req.app.locals.allType = await getResource());
+
   req.app.locals.user = req.user || null;
 
   next();

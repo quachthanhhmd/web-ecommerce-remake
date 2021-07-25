@@ -1,11 +1,11 @@
 const { findOneAndDelete } = require("../models/cart.model");
 const ProdMongoose = require("../models/product.model");
 
-module.exports.listAllProduct = async() => {
+module.exports.listAllProduct = async () => {
     return await ProdMongoose.find({});
 }
 
-module.exports.listProdPagination = async(filter, pageNumber, itemPerPage) => {
+module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
     let listProd = await ProdMongoose.paginate(filter, {
         page: pageNumber,
         limit: itemPerPage,
@@ -13,28 +13,69 @@ module.exports.listProdPagination = async(filter, pageNumber, itemPerPage) => {
     return listProd;
 };
 
-module.exports.findbySlugname = async(sl) =>{
+module.exports.findbySlugname = async (sl) => {
 
-    return  await ProdMongoose.findOne({slugName: sl});
+    return await ProdMongoose.findOne({ slugName: sl });
 }
 
-module.exports.countProducts =  async (_id) =>{
+module.exports.countProducts = async (_id) => {
 
     ProdMongoose.findById(_id)
-    .then(product =>{
+        .then(product => {
 
-        product.soldQuantity += 1;
+            product.soldQuantity += 1;
 
-        product.save();
-    })
+            product.save();
+        })
 }
 
-module.exports.updateComments = async(slugName, comment) =>{
+module.exports.updateComments = async (slugName, comment) => {
 
-    var product =  await this.findbySlugname(slugName);
+    var product = await this.findbySlugname(slugName);
 
     product.comments.unshift(comment);
-    
+
     await product.save();
     return product;
+}
+
+module.exports.getResource = async () => {
+    const products = await ProdMongoose.find()
+        .distinct("type");
+    var id = 0;
+
+    const allType = await Promise.all(products.map(async (type) => {
+
+        const smart = await ProdMongoose.find({
+            type: type
+        }).distinct('device');
+
+        const device = await Promise.all(smart.map(async (device) => {
+
+
+            let tmp = {
+
+                "name": "",
+                "values": [],
+                "id": 0
+            };
+            tmp.name = device;
+            //console.log(type);
+            tmp.values = await ProdMongoose.find({
+                type: type,
+                device: device
+            }).distinct("producer");
+            tmp.id = id++;
+
+            return tmp;
+        }));
+
+        return {
+            type: type,
+            brand: device,
+            idBrand: id++
+        };
+    }))
+   
+    return allType;
 }
