@@ -2,8 +2,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
-                {{> slidebar}}
-            </div>
+				{{> slidebar}}
+			</div>
 
 			<div class="col-sm-9 padding-right">
 				<div class="product-details">
@@ -52,7 +52,7 @@
 					<div class="col-sm-7">
 						<div class="product-information">
 							<!--/product-information-->
-							<img src="/images/product-details/rating.png" class="newarrival" alt="" />
+
 							<h2>{{product.name}}</h2>
 							<p>Web ID: 1089772</p>
 							<img src="/images/product-details/rating.png" alt="" />
@@ -291,17 +291,45 @@
 									<a id="more-comments" value="{{product.slugName}}">Xem Thêm</a>
 									<a class="d-none" id="get-comment" value="{{start}}"> </a>
 								</div>
-								<p><b>Write Your Review</b></p>
+								<div class="comment-group">
+									<div class="comment-title">
+										<b>Nhập bình luận của bạn về sản phẩm</b>
+									</div>
 
 
+									<div>
+										<div>
+											<span class="rating-name"><b>Rating: </b></span>
+										</div>
+										<div class="stars-comment">
+											<form action="">
+												<input class="star star-5" id="star-5" type="radio" name="star" />
+												<label class="star star-5" for="star-5"></label>
+												<input class="star star-4" id="star-4" type="radio" name="star" />
+												<label class="star star-4" for="star-4"></label>
+												<input class="star star-3" id="star-3" type="radio" name="star" />
+												<label class="star star-3" for="star-3"></label>
+												<input class="star star-2" id="star-2" type="radio" name="star" />
+												<label class="star star-2" for="star-2"></label>
+												<input class="star star-1" id="star-1" type="radio" name="star" />
+												<label class="star star-1" for="star-1"></label>
+											</form>
+										</div>
+									</div>
 
-								<input name="comment" id="comment-box" placeholder="Write your comment" type="text">
-								<b>Rating: </b> <img src="/images/product-details/rating.png" alt="" />
-								<button type="button" class="btn btn-default pull-right submit-comment"
-									value="{{product.slugName}}">
-									Submit
-								</button>
 
+									<div class="form-group">
+										<label for="exampleFormControlTextarea1">Nhập bình luận</label>
+										<textarea name="comment" id="comment-box"
+											placeholder="Nhập bình luận của bạn" type="text" class="form-control"
+											id="exampleFormControlTextarea1" rows="3"></textarea>
+									</div>
+									<button type="button" class="btn btn-default pull-right submit-comment"
+										value="{{product.slugName}}">
+										Gửi bình luận
+									</button>
+
+								</div>
 							</div>
 						</div>
 
