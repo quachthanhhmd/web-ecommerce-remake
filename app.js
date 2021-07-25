@@ -31,7 +31,11 @@ const Cart = require('./models/cart.model');
 const User = require('./models/user.model');
 
 const { initCart } = require('./services/cart.service');
-const { getResource } = require('./services/Product.service');
+
+const {
+  getResource,
+  findBrandPopular
+} = require('./services/Product.service');
 
 const helper = require('./helpers/hbsHelper');
 
@@ -102,7 +106,8 @@ app.use(async (req, res, next) => {
 
 
   (req.app.locals.allType === undefined) && (req.app.locals.allType = await getResource());
-
+  (req.app.locals.popularBrand === undefined) && (req.app.locals.popularBrand = await findBrandPopular());
+ 
   req.app.locals.user = req.user || null;
 
   next();

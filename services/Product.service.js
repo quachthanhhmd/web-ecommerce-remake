@@ -76,6 +76,22 @@ module.exports.getResource = async () => {
             idBrand: id++
         };
     }))
-   
+
     return allType;
+}
+
+module.exports.findBrandPopular = async (quantity = 10) => {
+
+    var brand = await ProdMongoose.aggregate([
+        {
+            $group: {
+                _id: '$producer',
+                count: { $sum: 1 }
+            }
+        }
+    ])
+
+    brand.sort((a, b) => b.count - a.count);
+
+    return brand.slice(0, quantity);
 }
