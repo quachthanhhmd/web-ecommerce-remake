@@ -73,8 +73,28 @@
 							</span>
 							<p><b>Trạng thái:</b> Còn hàng</p>
 							<p><b>Nhãn hiệu:</b> {{product.producer}}</p>
+
+							{{#if product.promotion}}
+							<div class="product-promotion">
+								<div class="promotion-title">
+									<b>Khuyến mãi liên quan:</b>
+								</div>
+								<ul>
+									<li class="li-promotion">Nhập mã <strong>{{product.promotion.code}}</strong> để
+										giảm 3% tối đa
+										<strong>{{product.promotion.desc}}</strong> khi
+										thanh
+										toán
+										qua VNPAY-QR
+									</li>
+								</ul>
+							</div>
+							{{/if}}
+
 							<a href=""><img src="/images/product-details/share.png" class="share img-responsive"
 									alt="" /></a>
+
+
 						</div>
 
 
@@ -91,7 +111,6 @@
 					<ul class="nav nav-tabs">
 						<li><a href="#details" data-toggle="tab">Chi tiết</a></li>
 						<li><a href="#companyprofile" data-toggle="tab">Thông số kỹ thuật</a></li>
-						<li><a href="#tag" data-toggle="tab">Tag</a></li>
 						<li class="active"><a href="#reviews" data-toggle="tab">Reviews (<span
 									class="num-reviews">{{NumComments}}</span>) </a></li>
 					</ul>
@@ -120,64 +139,11 @@
 						{{/if}}
 					</div>
 
-					<div class="tab-pane fade" id="tag">
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="/images/home/gallery1.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<button type="button" class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="/images/home/gallery2.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<button type="button" class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="/images/home/gallery3.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<button type="button" class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="/images/home/gallery4.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<button type="button" class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
 					<div class="tab-pane fade active in" id="reviews">
 						<div class="col-sm-12">
+							{{#if comments}}
 							<div class="add-comment">
+
 								{{#each comments}}
 								<div class="commentMain justify-content">
 									<div class="imageUser">
@@ -205,12 +171,20 @@
 									</div>
 								</div>
 								{{/each}}
+
 							</div>
 
 							<div class="hidden-comment-main hidden-comment">
 								<a id="more-comments" value="{{product.slugName}}">Xem Thêm</a>
 								<a class="d-none" id="get-comment" value="{{start}}"> </a>
 							</div>
+							{{else}}
+							<div class="no-comment">
+								<strong>Chưa có bình luận nào</strong>
+								<p><i>Hãy là người bình luận đầu tiên</i></p>
+							</div>
+
+							{{/if}}
 							<div class="comment-group">
 								<div class="comment-title">
 									<b>Nhập bình luận của bạn về sản phẩm</b>

@@ -31,6 +31,15 @@ $(document).ready(function () {
   });
 });
 
+//slidebar hover
+$(".panel-heading").mouseenter(function () {
+  $(".panel-collapse").fadeIn();
+});
+$(".panel-collapse").mouseleave(function () {
+  $(".panel-collapse").fadeOut();
+});
+
+
 // Validator signup
 $('body>section>div.container>div.sign-up>form')
   .find('input')

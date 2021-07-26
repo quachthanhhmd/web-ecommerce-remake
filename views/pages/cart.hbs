@@ -12,7 +12,7 @@
 
 				<table class="table table-condensed">
 
-					<thead>
+					{{!-- <thead>
 						<tr class="cart_menu">
 							<td class="image">Item</td>
 							<td class="description"></td>
@@ -21,21 +21,20 @@
 							<td class="total">Total</td>
 							<td></td>
 						</tr>
-					</thead>
+					</thead> --}}
 
 					<tbody>
 
 						{{#each cart.items}}
 						<tr>
 							<td class="cart_product">
-								<a href=""><img src="{{thumbnail}}" alt="" width="90" height="100"></a>
+								<a href="/product-details/{{slugname}}"><img class="img_product" src="{{thumbnail}}"
+										alt="" width="90" height="100"></a>
 							</td>
 							<td class="cart_description" width="300">
 								<h4><a href="/product-details/{{slugname}}">{{name}}</a></h4>
 							</td>
-							<td class="cart_price">
-								<p>{{price}}</p>
-							</td>
+
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
 									{{#if checkItem}}
@@ -56,7 +55,7 @@
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price {{itemId}}">{{total}}</p>
+								<p class="cart_total_price {{itemId}}">{{price}}</p>
 							</td>
 							<td class="cart_delete">
 								<button class=" cart_quantity_delete cart_quantity_change" name="{{slugName}}"
@@ -67,7 +66,34 @@
 
 					</tbody>
 				</table>
+				<div class="checkout-all">
+					<div class="checkout-name"><strong>Thanh toán</strong></div>
+					<div class="total_area">
+						<div class="des-checkout">
+							<div class="title-checkout">
+								<div style="margin-bottom: 0.8rem">
+									Tạm tính
+								</div>
+								<div>
+									Thành tiền
+								</div>
 
+							</div>
+							<div>
+								<div class="value-checkout" style="margin-bottom: 0.5rem">
+									<span class="totalCost">{{cart.totalCost}}</span>
+								</div>
+								<div class="value-checkout checkout-final">
+									<span class="totalCost">{{cart.totalCost}}</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="float-right">
+							<a class="btn btn-default check_out " href="/checkout">Check Out</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -75,26 +101,9 @@
 
 	<section id="do_action">
 		<div class="container">
-			<div class="heading">
-				<h3>What would you like to do next?</h3>
-				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your
-					delivery cost.</p>
-			</div>
 			<div class="row">
 
-				<div class="float-right">
-					<div class="total_area">
-						<ul>
-							<li>Cart Sub Total <span class="totalCost">{{cart.totalCost}}</span></li>
-							<li>Eco Tax <span>Free</span></li>
-							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span class="totalCost">{{cart.totalCost}}</span></li>
-						</ul>
-						<div class="float-right">
-							<a class="btn btn-default check_out " href="/checkout">Check Out</a>
-						</div>
-					</div>
-				</div>
+
 			</div>
 		</div>
 		{{else}}
