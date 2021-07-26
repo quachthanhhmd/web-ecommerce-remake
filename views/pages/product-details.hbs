@@ -89,7 +89,7 @@
 				<!--category-tab-->
 				<div class="col-sm-12">
 					<ul class="nav nav-tabs">
-						<li><a href="#details" data-toggle="tab">Details</a></li>
+						<li><a href="#details" data-toggle="tab">Chi tiết</a></li>
 						<li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
 						<li><a href="#tag" data-toggle="tab">Tag</a></li>
 						<li class="active"><a href="#reviews" data-toggle="tab">Reviews (<span
@@ -98,58 +98,20 @@
 				</div>
 				<div class="tab-content">
 					<div class="tab-pane fade" id="details">
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="/images/home/gallery1.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<button type="button" class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</button>
-									</div>
-								</div>
-							</div>
+						{{#each product.descriptions}}
+						<div class="details-title">
+							<b>{{title}}</b>
 						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="/images/home/gallery2.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<button type="button" class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</button>
-									</div>
-								</div>
-							</div>
+						<div class="details-content">
+							{{content}}
 						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="/images/home/gallery3.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<button type="button" class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</button>
-									</div>
-								</div>
-							</div>
+						{{#if img}}
+						<div>
+
+							<img class="details-img" src="{{img}}" alt="" />
 						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="/images/home/gallery4.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<button type="button" class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</button>
-									</div>
-								</div>
-							</div>
-						</div>
+						{{/if}}
+						{{/each}}
 					</div>
 
 					<div class="tab-pane fade" id="companyprofile">
