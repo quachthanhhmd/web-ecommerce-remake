@@ -70,7 +70,8 @@ const hbs = exphbs.create({
     select: helper.select,
     times: helper.times,
     dateFormat: helper.dateFormat,
-    incremented: helper.incremented
+    incremented: helper.incremented,
+    renderStar: helper.renderStar
   },
 });
 
@@ -107,7 +108,7 @@ app.use(async (req, res, next) => {
 
   (req.app.locals.allType === undefined) && (req.app.locals.allType = await getResource());
   (req.app.locals.popularBrand === undefined) && (req.app.locals.popularBrand = await findBrandPopular());
- 
+
   req.app.locals.user = req.user || null;
 
   next();

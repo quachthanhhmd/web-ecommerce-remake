@@ -21,9 +21,23 @@ const incremented = (index) => {
     return index;
 }
 
+const renderStar = (rate) => {
+
+    let modelStar = '';
+
+    for (let i = 0; i < 5; i++) {
+        const checked = (--rate > 0) ? " checked" : '';
+
+        modelStar += `<span class="fa fa-star${checked}"></span>`
+    }
+
+    return modelStar;
+}
+
 module.exports = {
     incremented,
     dateFormat,
     times,
-    select
+    select,
+    renderStar
 }

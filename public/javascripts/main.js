@@ -405,3 +405,5 @@ $('#reset-password2').one('click', function (e) {
 
   $(this).submit();
 });
+
+
