@@ -304,39 +304,39 @@
 									<b>Nhập bình luận của bạn về sản phẩm</b>
 								</div>
 
-
-								<div>
+								<form action ="/pro">
 									<div>
-										<span class="rating-name"><b>Rating: </b></span>
-									</div>
-									<div class="stars-comment">
-										<form action="">
-											<input class="star star-5" id="star-5" type="radio" name="star" />
+										<div>
+											<span class="rating-name"><b>Rating: </b></span>
+										</div>
+										<div class="stars-comment">
+
+											<input class="star star-5" id="star-5" type="radio" name="rate" />
 											<label class="star star-5" for="star-5"></label>
-											<input class="star star-4" id="star-4" type="radio" name="star" />
+											<input class="star star-4" id="star-4" type="radio" name="rate" />
 											<label class="star star-4" for="star-4"></label>
-											<input class="star star-3" id="star-3" type="radio" name="star" />
+											<input class="star star-3" id="star-3" type="radio" name="rate" />
 											<label class="star star-3" for="star-3"></label>
-											<input class="star star-2" id="star-2" type="radio" name="star" />
+											<input class="star star-2" id="star-2" type="radio" name="rate" />
 											<label class="star star-2" for="star-2"></label>
-											<input class="star star-1" id="star-1" type="radio" name="star" />
+											<input class="star star-1" id="star-1" type="radio" name="rate" />
 											<label class="star star-1" for="star-1"></label>
-										</form>
+
+										</div>
 									</div>
-								</div>
 
 
-								<div class="form-group">
-									<label for="exampleFormControlTextarea1">Nhập bình luận</label>
-									<textarea name="comment" id="comment-box" placeholder="Nhập bình luận của bạn"
-										type="text" class="form-control" id="exampleFormControlTextarea1"
-										rows="3"></textarea>
-								</div>
-								<button type="button" class="btn btn-default pull-right submit-comment"
-									value="{{product.slugName}}">
-									Gửi bình luận
-								</button>
-
+									<div class="form-group">
+										<label for="exampleFormControlTextarea1">Nhập bình luận</label>
+										<textarea name="comment" id="comment-box"
+											placeholder="Nhập bình luận của bạn" type="text" class="form-control"
+											id="exampleFormControlTextarea1" rows="3"></textarea>
+									</div>
+									<button type="button" class="btn btn-default pull-right submit-comment"
+										value="{{product.slugName}}">
+										Gửi bình luận
+									</button>
+								</form>
 							</div>
 						</div>
 					</div>

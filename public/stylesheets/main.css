@@ -2976,6 +2976,7 @@ div.stars-product span.checked {
 textarea#comment-box {
   background: white;
   border: ridge;
+  color: black;
 }
 
 div.comment-title {

@@ -309,17 +309,37 @@ $(".submit-comment").click((e) => {
   e.preventDefault();
   var numReviews = +$('.num-reviews').text();
 
-  const val = $("#comment-box").val();
+  const valCommemt = $("#comment-box").val();
 
-  const key = $("#comment-box").attr('name');
+  const keyComment = $("#comment-box").attr('name');
+
+  const rating = document.querySelectorAll(".stars-comment input");
+
+  const keyRating = rating[0].name;
+
+  var res = 0;
+  for (let i = 0; i < rating.length - 1; i++) {
+
+    if (rating[i].checked) {
+      res = 5 - i;
+      break;
+    }
+  }
+
+
   const slugName = $(".submit-comment").attr("value");
 
-  if (!val) return;
+  if (!valCommemt || !rating) return;
+
 
   const url = '/product-details/commentuser/' + slugName;
   $.post({
     url,
-    data: JSON.stringify({ [key]: val }),
+    data: JSON.stringify(
+      {
+        [keyComment]: valCommemt,
+        [keyRating]: res,
+      }),
     contentType: 'application/json',
     dataType: 'json',
     success: function (data) {
