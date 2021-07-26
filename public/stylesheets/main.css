@@ -3020,3 +3020,28 @@ span.checked {
   border: 1rem;
   max-width: 70rem;
 }
+
+.spec-product-item {
+  display: flex;
+
+  border: 1px ridge;
+
+  padding: 1rem 1rem 1rem 1rem;
+
+  font-size: 1.5rem;
+}
+
+.spec-product {
+  width: 90%;
+  margin: auto;
+}
+
+.spec-product-item.detail-check {
+  background-color: #dddddd;
+}
+
+.spec-title {
+  width: 40%;
+  word-break: break-word;
+  min-width: 40%;
+}

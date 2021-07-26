@@ -71,7 +71,8 @@ const hbs = exphbs.create({
     times: helper.times,
     dateFormat: helper.dateFormat,
     incremented: helper.incremented,
-    renderStar: helper.renderStar
+    renderStar: helper.renderStar,
+    tableDetails: helper.tableDetails
   },
 });
 

@@ -34,10 +34,34 @@ const renderStar = (rate) => {
     return modelStar;
 }
 
+const tableDetails = (productDetails) => {
+
+    var result = '';
+    let i = 0;
+    for (const detail in productDetails) {
+        result += `<div class="spec-product">
+                        <div class="spec-product-item${(i % 2 === 1) ? " detail-check" : ''}">
+                            <div class="spec-title">
+                                <b>${detail}</b>
+                            </div>
+                            <div>
+                                ${productDetails[detail]}
+                            </div>
+
+                        </div>
+                    </div>`;
+        i++;
+    }
+
+    return result;
+}
+
+
 module.exports = {
     incremented,
     dateFormat,
     times,
     select,
-    renderStar
+    renderStar,
+    tableDetails
 }
