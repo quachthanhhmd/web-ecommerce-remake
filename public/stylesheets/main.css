@@ -3000,3 +3000,15 @@ span.count-rating {
   font-size: 1.5rem;
   margin-left: 1rem;
 }
+
+div.rate-comment {
+  font-size: 1.5rem;
+}
+span.checked {
+  color: yellow;
+}
+
+.rate-avt {
+  display: flex;
+  justify-content: space-between;
+}

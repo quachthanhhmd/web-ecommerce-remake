@@ -280,13 +280,12 @@
 												<p>{{createAt}}</p>
 											</div>
 										</div>
-										<div class="ratingUser">
-											<span class="fa fa-star checked check-rate"></span>
-											<span class="fa fa-star checked check-rate"></span>
-											<span class="fa fa-star checked check-rate"></span>
-											<span class="fa fa-star checked check-rate"></span>
-											<span class="fa fa-star"></span>
+										<div class="rate-comment">
+											{{#if rate}}
+											{{{renderStar rate}}}
+											{{/if}}
 										</div>
+
 										<div class="commentUser">
 											<p>{{comment}}</p>
 										</div>
@@ -304,7 +303,8 @@
 									<b>Nhập bình luận của bạn về sản phẩm</b>
 								</div>
 
-								<form action ="/pro">
+
+								<div class="rate-avt">
 									<div>
 										<div>
 											<span class="rating-name"><b>Rating: </b></span>
@@ -324,19 +324,21 @@
 
 										</div>
 									</div>
-
-
-									<div class="form-group">
-										<label for="exampleFormControlTextarea1">Nhập bình luận</label>
-										<textarea name="comment" id="comment-box"
-											placeholder="Nhập bình luận của bạn" type="text" class="form-control"
-											id="exampleFormControlTextarea1" rows="3"></textarea>
+									<div class="imageUser">
+										<img src="{{user.image}}" class="imageUserDetail">
 									</div>
-									<button type="button" class="btn btn-default pull-right submit-comment"
-										value="{{product.slugName}}">
-										Gửi bình luận
-									</button>
-								</form>
+								</div>
+								<div class="form-group">
+									<label for="exampleFormControlTextarea1">Nhập bình luận</label>
+									<textarea name="comment" id="comment-box" placeholder="Nhập bình luận của bạn"
+										type="text" class="form-control" id="exampleFormControlTextarea1"
+										rows="3"></textarea>
+								</div>
+								<button type="button" class="btn btn-default pull-right submit-comment"
+									value="{{product.slugName}}">
+									Gửi bình luận
+								</button>
+
 							</div>
 						</div>
 					</div>

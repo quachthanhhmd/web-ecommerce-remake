@@ -2,8 +2,8 @@
 //Model for checkout
 const modalCheckout = (data) => {
 
-    const bodyModal = data.data.items.map((item, index) => {
-        return `
+  const bodyModal = data.data.items.map((item, index) => {
+    return `
         <tr>
           <td>
             ${index + 1}
@@ -12,7 +12,7 @@ const modalCheckout = (data) => {
             <div class="img d-flex align-items-center">
               <a href="/products/${item.slugName}"
                 ><img style="width: 45px; height: auto;" src="${item.thumbnail
-            }" alt="Image"
+      }" alt="Image"
               /></a>
               <p class="m-0">${item.name}</p>
             </div>
@@ -24,9 +24,9 @@ const modalCheckout = (data) => {
           <td>${item.total}</td>
         </tr>
       `;
-    }).join("");
+  }).join("");
 
-    return `
+  return `
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" style="background-color: honeydew;">
@@ -97,9 +97,19 @@ const modalCheckout = (data) => {
 //model for comment
 const modelComment = (data) => {
 
+  const checked = (rate) => {
+    let modelStar = '';
 
-    var modal = data.map((items, index) => {
-        return `<div class = "commentMain justify-content">
+    for (let i = 0; i < 5; i++) {
+      const checked = (--rate > 0) ? " checked" : '';
+
+      modelStar += `<span class="fa fa-star${checked}"></span>`
+    }
+
+    return modelStar;
+  }
+  var modal = data.map((items, index) => {
+    return `<div class = "commentMain justify-content">
       <div class = "imageUser">
         <img src = "${items.imageUser}" class  = "imageUserDetail">
       </div>	
@@ -114,27 +124,23 @@ const modelComment = (data) => {
           </div>
         </div>
         <div class = "ratingUser">
-          <span class="fa fa-star checked check-rate"></span>
-          <span class="fa fa-star checked check-rate"></span>
-          <span class="fa fa-star checked check-rate"></span>
-          <span class="fa fa-star checked check-rate"></span>
-          <span class="fa fa-star"></span>
+          ${checked(items.rate)}
         </div>
         <div class = "commentUser">
           <p>${items.comment}</p>
         </div>
       </div>
     </div>`
-    });
+  });
 
 
 
-    return modal;
+  return modal;
 }
 
 /* Display wishlist empty */
 const wishlistEmpty = () => {
-    $('.table.table-bordered').html(`
+  $('.table.table-bordered').html(`
         <h3>No favorite products!</h3>
               <h6 class="pt-3">
                   <span
@@ -143,14 +149,14 @@ const wishlistEmpty = () => {
                       ></span
                   >
         </h6>`);
-    $('.table.table-bordered').addClass("center-table");
-    $('.table.table-bordered').removeClass('table table-bordered');
+  $('.table.table-bordered').addClass("center-table");
+  $('.table.table-bordered').removeClass('table table-bordered');
 };
 
 //display cart empty
 const CartEmpty = () => {
 
-    $('.main-cart').html(`
+  $('.main-cart').html(`
     <div class = "center-table" style = "text-align: center; margin-bottom: 200px;margin-top: 200px;">
                                   <h3>You have not put in your cart any products!</h3>
                                           <h6 class="pt-3">
@@ -161,5 +167,5 @@ const CartEmpty = () => {
                                               >
                                           </h6>
               </div>`)
-    $('.main-cart').removeClass('main-cart');
+  $('.main-cart').removeClass('main-cart');
 }
