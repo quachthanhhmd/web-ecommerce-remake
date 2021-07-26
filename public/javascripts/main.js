@@ -290,6 +290,7 @@ $('.hidden-comment').on('click', function (e) {
 
         $('.add-comment').append(newComment);
 
+
         if (data.data.check) {
           $("#get-comment").attr("value", 0);
           $('#more-comments').text("See less");
@@ -331,7 +332,9 @@ $(".submit-comment").click((e) => {
 
   if (!valCommemt || !rating) return;
 
+  const comment = $(".num-reviews").html();
 
+  $(".num-reviews").html(`${parseInt(comment) + 1}`);
   const url = '/product-details/commentuser/' + slugName;
   $.post({
     url,

@@ -76,7 +76,7 @@ const getDay = (date) => {
 
     var d = dateFormat.toLocaleDateString();
     var h = dateFormat.toTimeString();
-    console.log(h + ' ' + d);
+
     return h.split(':')[0] + ':' + h.split(':')[1] + ' ' + d;
 }
 
