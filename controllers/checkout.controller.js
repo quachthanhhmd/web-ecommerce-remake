@@ -4,10 +4,10 @@ const checkoutService = require("../services/checkout.service");
 
 
 
-module.exports.getCheckout = async(req, res, next) =>{
+module.exports.getCheckout = async (req, res, next) => {
 
-    const {user} = req;
-    try{
+    const { user } = req;
+    try {
 
         const userCart = await cartService.findIdbyStatus(user._id, "waiting");
 
@@ -17,40 +17,40 @@ module.exports.getCheckout = async(req, res, next) =>{
             cart: userCart,
             user: user,
         })
-    }catch(err){
+    } catch (err) {
         res.render("error", {
             message: "Checkout fail!",
             err,
-          });
-    } 
+        });
+    }
 }
 
 
-module.exports.postCheckout = async (req, res, next) =>{
+module.exports.postCheckout = async (req, res, next) => {
 
-    
-    const {user} = req;
 
-    try{
-        const {newName, newPhone, newCity, newDistrict, newAddress} = req.body;
+    const { user } = req;
+
+    try {
+        const { newName, newPhone, newCity, newDistrict, newAddress } = req.body;
         const cart = await cartService.findIdbyStatus(user._id, "waiting");
-        
-        if(cart.totalQuantity == 0){
+
+        if (cart.totalQuantity == 0) {
 
             return res.redirect("/checkout");
         }
 
         const { userId, _id, status, items, totalQuantity, totalCost } = cart;
-        const {address, city, district, phone, name} = user;
-        
-        if (address === '' && city === ''  && district === ''){
-            
+        const { address, city, district, phone, name } = user;
+
+        if (address === '' && city === '' && district === '') {
+
             await userSevice.updateAddress(user.email, newAddress, newDistrict, newCity);
-            
+
         }
-        
+
         const checkoutObj = {
-            userId : userId,
+            userId: userId,
             cartId: _id,
             status: status,
             items: items,
@@ -66,22 +66,23 @@ module.exports.postCheckout = async (req, res, next) =>{
             totalPayment: totalCost,
         };
 
-       
+
         await cartService.saveStatus(_id, "checked");
         await cartService.countProduct(_id);
         await checkoutService.saveNewCheckout(checkoutObj);
-        
+
         delete req.session.cart;
 
-        
+
         res.redirect('/');
 
-    }catch(err){
+    } catch (err) {
         res.render("error", {
             message: "Checkout fail!",
             err,
-          });
+        });
     }
 
 
 }
+

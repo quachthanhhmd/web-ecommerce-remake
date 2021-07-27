@@ -70,13 +70,16 @@
 				<div class="checkout-all">
 					<div class="checkout-promotion">
 						<div class="checkout-name"><strong>Mã khuyến mãi</strong></div>
-						<div class="checkout-imput-promotion form-group">
+						<div class="form-group">
 
-							<form action="/promotion/checkpromotion">
-								<input class="form-control" type="text" placeholder="Nhập mã khuyến mãi"
-									name="promotion" />
-							</form>
-							<button class="btn btn-default">Sử dụng</button>
+
+							<input class="form-control" type="text" placeholder="Nhập mã khuyến mãi"
+								name="promotionCode" id="form-apply-promotion" />
+							<button class="btn btn-default apply-promotion" onclick="return AnhThai(this);"
+								id="submit-promotion" value="{{cart._id}}" type="submit">Sử
+								dụng</button>
+
+
 						</div>
 					</div>
 					<div class="checkout-payment">
@@ -100,11 +103,11 @@
 									<div class="value-checkout">
 										<span class="totalCost">{{cart.totalCost}}</span>
 									</div>
-									<div class="value-checkout">
+									<div class="value-checkout promotion-code">
 										Không
 									</div>
 									<div class="value-checkout checkout-final">
-										<span class="totalCost">{{cart.totalCost}}</span>
+										<span class="totalCost totalPayment">{{cart.totalCost}}</span>
 									</div>
 								</div>
 							</div>
@@ -141,3 +144,21 @@
 	<!--/#do_action-->
 
 </div>
+
+<script>
+	function AnhThai(self) {
+
+		if ($("#form-apply-promotion").val() === "")
+			return;
+		if ($("#submit-promotion").hasClass("apply-promotion")) {
+			self.innerHTML = "Hủy sử dụng";
+			self.classList.add("remove-promotion");
+			self.classList.remove("apply-promotion");
+		} else {
+			self.innerHTML = "Sử dụng";
+			self.classList.add("apply-promotion");
+			self.classList.remove("remove-promotion");
+		}
+		return false;
+	}
+</script>

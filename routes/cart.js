@@ -8,4 +8,7 @@ router.get("/", cartController.displayCart);
 router.post("/:slugName", cartController.addToCart);
 router.put("/:slugName", cartController.putUpdate);
 
+router.put("/promotion/:Id", cartController.CheckPromotion);
+router.put("/promotion/delete/:Id", cartController.RemovePromotion);
+
 module.exports = router;

@@ -18,6 +18,12 @@ module.exports.findbySlugname = async (sl) => {
     return await ProdMongoose.findOne({ slugName: sl });
 }
 
+module.exports.findById = async (id) => {
+
+    return await ProdMongoose.findById(id);
+
+}
+
 module.exports.countProducts = async (_id) => {
 
     ProdMongoose.findById(_id)

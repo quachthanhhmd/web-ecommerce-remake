@@ -18,7 +18,7 @@ const cartSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
-  
+
   totalQuantity: {
     type: Number,
     default: 0,
@@ -27,7 +27,24 @@ const cartSchema = mongoose.Schema({
     type: String,
     default: 0,
   },
-  
+
+  payment: {
+    type: String,
+    default: 0,
+  },
+  promotionCode: {
+    type: String,
+    default: ""
+  },
+  discountPrice: {
+    type: String,
+    default: ""
+  },
+  discountRate: {
+    type: Number,
+    default: 0,
+  }
+
 });
 
 // Add plugins

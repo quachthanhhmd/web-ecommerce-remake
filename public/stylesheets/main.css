@@ -3073,7 +3073,7 @@ li.li-promotion {
 
 .checkout-promotion {
   border-bottom: 2px solid #dddddd;
-  padding-bottom: 1.5rem;
+  padding-bottom: 15%;
 }
 .checkout-payment {
   margin-top: 1.5rem;
@@ -3085,4 +3085,22 @@ li.li-promotion {
 .table-value {
   max-width: 90%;
   min-width: 98%;
+}
+
+.apply-promotion {
+  width: 25%;
+}
+
+#form-apply-promotion {
+  margin-bottom: 5%;
+}
+
+.remove-promotion {
+  width: 35%;
+}
+
+#submit-promotion {
+  float: right;
+  background: #fe980f;
+  color: #ffffff;
 }

@@ -439,3 +439,82 @@ $('#reset-password2').one('click', function (e) {
 });
 
 
+
+//update cart promotion
+// $('#submit-promotion').click(e => {
+
+//   e.preventDefault();
+
+//   if ($('#submit-promotion').hasClass("apply-promotion")) {
+//     $('#submit-promotion').html("Hủy sử dụng");
+//     $('#submit-promotion').removeClass("apply-promotion");
+//     $('#submit-promotion').addClass("remove-promotion ");
+//   } else {
+//     $('#submit-promotion').html("Sử dụng");
+//     $('#submit-promotion').removeClass("remove-promotion");
+//     $('#submit-promotion').addClass("apply-promotion");
+//   }
+
+// })
+
+
+//ajax update promotion
+$("#submit-promotion").on('click', (e) => {
+
+  e.preventDefault();
+
+  let typeDisplay = 1;
+
+  if ($("#submit-promotion").hasClass("remove-promotion")) {
+    typeDisplay = 0;
+
+  }
+
+  const Id = $("#submit-promotion").attr("value");
+  const promotionCode = $("#form-apply-promotion").val();
+  if (promotionCode === "")
+    return;
+  const url = (typeDisplay === 0) ? `/cart/promotion/${Id}` : `/cart/promotion/delete/${Id}`;
+  console.log(typeDisplay, url);
+  const key = $("#form-apply-promotion").attr("name");
+
+
+  const request = $.ajax({
+    url: url,
+    data: JSON.stringify({
+      [key]: promotionCode
+    }),
+    type: "PUT",
+    contentType: "application/json",
+    processData: false,
+    xhr: function () {
+      return window.XMLHttpRequest == null ||
+        new window.XMLHttpRequest().addEventListener == null
+        ? new window.ActiveXObject("Microsoft.XMLHTTP")
+        : $.ajaxSettings.xhr();
+    },
+  });
+
+  request.done(function (data, status) {
+    if (data.msg === "success" && status === "success") {
+
+      if (data.user === "Check promotion success") {
+        $('#form-apply-promotion').prop("disabled", true);
+
+        $('.totalPayment').html(data.data.payment);
+
+        $('.promotion-code').html(`${data.data.discount} <b>(${data.data.discountRate}%)</b>`);
+      }
+
+      if (data.user === "Remove promotion success") {
+        $('#form-apply-promotion').removeAttr('disabled');
+
+        $('.totalPayment').html(data.data.payment);
+
+        $('.promotion-code').html(`Không`);
+      }
+
+    }
+  });
+})
+
