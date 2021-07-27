@@ -9,88 +9,109 @@
 				</ol>
 			</div>
 			<div class="table-responsive cart_info">
+				<div class="table table-condensed">
+					<table class="table-value">
 
-				<table class="table table-condensed">
+						{{!-- <thead>
+							<tr class="cart_menu">
+								<td class="image">Item</td>
+								<td class="description"></td>
+								<td class="price">Price</td>
+								<td class="quantity">Quantity</td>
+								<td class="total">Total</td>
+								<td></td>
+							</tr>
+						</thead> --}}
 
-					{{!-- <thead>
-						<tr class="cart_menu">
-							<td class="image">Item</td>
-							<td class="description"></td>
-							<td class="price">Price</td>
-							<td class="quantity">Quantity</td>
-							<td class="total">Total</td>
-							<td></td>
-						</tr>
-					</thead> --}}
+						<tbody>
 
-					<tbody>
+							{{#each cart.items}}
+							<tr>
+								<td class="cart_product">
+									<a href="/product-details/{{slugname}}"><img class="img_product" src="{{thumbnail}}"
+											alt="" width="90" height="100"></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="/product-details/{{slugname}}">{{name}}</a></h4>
+								</td>
 
-						{{#each cart.items}}
-						<tr>
-							<td class="cart_product">
-								<a href="/product-details/{{slugname}}"><img class="img_product" src="{{thumbnail}}"
-										alt="" width="90" height="100"></a>
-							</td>
-							<td class="cart_description" width="300">
-								<h4><a href="/product-details/{{slugname}}">{{name}}</a></h4>
-							</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										{{#if checkItem}}
+										<button class="cart_quantity_change btn-plus" href="#" value="1"
+											name="{{slugName}}"> <i class="fa fa-plus"></i></button>
+										<input class="cart_quantity_input {{itemId}}_price" type="text" name="quantity"
+											value="{{quantity}}" size="2" readonly>
+										<button class="cart_quantity_change {{itemId}}_btn-minus" href="#" value="-1"
+											name="{{slugName}}"> <i class="fa fa-minus"></i> </button>
+										{{else}}
+										<button class="cart_quantity_change btn-plus" href="#" value="1"
+											name="{{slugName}}"> <i class="fa fa-plus"></i></button>
+										<input class="cart_quantity_input {{itemId}}_price" type="text" name="quantity"
+											value="{{quantity}}" size="2" readonly>
+										<button class="cart_quantity_change {{itemId}}_btn-minus" href="#" value="-1"
+											name="{{slugName}}" disabled> <i class="fa fa-minus"></i></button>
+										{{/if}}
+									</div>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price {{itemId}}">{{price}}</p>
+								</td>
+								<td class="cart_delete">
+									<button class=" cart_quantity_delete cart_quantity_change" name="{{slugName}}"
+										value="0"><i class="fa fa-times"></i></button>
+								</td>
+							</tr>
+							{{/each}}
 
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									{{#if checkItem}}
-									<button class="cart_quantity_change btn-plus" href="#" value="1"
-										name="{{slugName}}"> <i class="fa fa-plus"></i></button>
-									<input class="cart_quantity_input {{itemId}}_price" type="text" name="quantity"
-										value="{{quantity}}" size="2" readonly>
-									<button class="cart_quantity_change {{itemId}}_btn-minus" href="#" value="-1"
-										name="{{slugName}}"> <i class="fa fa-minus"></i> </button>
-									{{else}}
-									<button class="cart_quantity_change btn-plus" href="#" value="1"
-										name="{{slugName}}"> <i class="fa fa-plus"></i></button>
-									<input class="cart_quantity_input {{itemId}}_price" type="text" name="quantity"
-										value="{{quantity}}" size="2" readonly>
-									<button class="cart_quantity_change {{itemId}}_btn-minus" href="#" value="-1"
-										name="{{slugName}}" disabled> <i class="fa fa-minus"></i></button>
-									{{/if}}
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price {{itemId}}">{{price}}</p>
-							</td>
-							<td class="cart_delete">
-								<button class=" cart_quantity_delete cart_quantity_change" name="{{slugName}}"
-									value="0"><i class="fa fa-times"></i></button>
-							</td>
-						</tr>
-						{{/each}}
-
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
 				<div class="checkout-all">
-					<div class="checkout-name"><strong>Thanh toán</strong></div>
-					<div class="total_area">
-						<div class="des-checkout">
-							<div class="title-checkout">
-								<div style="margin-bottom: 0.8rem">
-									Tạm tính
+					<div class="checkout-promotion">
+						<div class="checkout-name"><strong>Mã khuyến mãi</strong></div>
+						<div class="checkout-imput-promotion form-group">
+
+							<form action="/promotion/checkpromotion">
+								<input class="form-control" type="text" placeholder="Nhập mã khuyến mãi"
+									name="promotion" />
+							</form>
+							<button class="btn btn-default">Sử dụng</button>
+						</div>
+					</div>
+					<div class="checkout-payment">
+
+						<div class="checkout-name"><strong>Thanh toán</strong></div>
+						<div class="total_area">
+							<div class="des-checkout">
+								<div>
+									<div class="title-checkout" style="margin-bottom: 0.8rem">
+										Tạm tính
+									</div class="title-checkout">
+									<div class="title-checkout">
+										Khuyến mãi
+									</div>
+									<div class="title-checkout">
+										Thành tiền
+									</div>
+
 								</div>
 								<div>
-									Thành tiền
+									<div class="value-checkout">
+										<span class="totalCost">{{cart.totalCost}}</span>
+									</div>
+									<div class="value-checkout">
+										Không
+									</div>
+									<div class="value-checkout checkout-final">
+										<span class="totalCost">{{cart.totalCost}}</span>
+									</div>
 								</div>
-
 							</div>
-							<div>
-								<div class="value-checkout" style="margin-bottom: 0.5rem">
-									<span class="totalCost">{{cart.totalCost}}</span>
-								</div>
-								<div class="value-checkout checkout-final">
-									<span class="totalCost">{{cart.totalCost}}</span>
-								</div>
-							</div>
-						</div>
 
-						<div class="float-right">
-							<a class="btn btn-default check_out " href="/checkout">Check Out</a>
+							<div class="float-right">
+								<a class="btn btn-default check_out" href="/checkout">Check Out</a>
+							</div>
 						</div>
 					</div>
 				</div>

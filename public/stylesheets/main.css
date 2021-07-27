@@ -1751,32 +1751,9 @@ h2.title {
 
   border: 2px ridge;
 }
-#cart_items .cart_info .table.table-condensed thead tr {
-  /* height: 51px; */
-}
-
-#cart_items .cart_info .table.table-condensed tr {
-  border-bottom: 1px solid#F7F7F0;
-}
-
-#cart_items .cart_info .table.table-condensed tr:last-child {
-  border-bottom: 0;
-}
-
-.cart_info table tr td {
-  border-top: 0 none;
-  vertical-align: inherit;
-  margin-right: 1.5rem;
-  margin-left: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-#cart_items .cart_info .image {
-  padding-left: 30px;
-}
 
 #cart_items .cart_info .cart_description h4 {
-  margin-bottom: 0;
+  text-align: inherit;
 }
 
 #cart_items .cart_info .cart_description h4 a {
@@ -1798,7 +1775,7 @@ h2.title {
 #cart_items .cart_info .cart_total_price {
   color: #fe980f;
   font-size: 2rem;
-  margin-top: 1.9rem;
+  margin-top: 1.4rem;
 }
 
 .cart_product {
@@ -1819,6 +1796,7 @@ h2.title {
   text-align: center;
   width: 35px;
   line-height: 28px;
+  margin-top: 3.4rem;
 }
 
 .cart_quantity_button {
@@ -1876,6 +1854,7 @@ h2.title {
 
 .value-checkout {
   text-align: end;
+  margin-bottom: 0.5rem;
 }
 .checkout-final {
   font-size: 2rem;
@@ -2144,6 +2123,9 @@ textarea {
   border-bottom: 1px solid #f7f7f0;
 }
 
+#cart_items .cart_info .table.table-condensed {
+  padding: 1rem 1rem 1rem 1rem;
+}
 /*************************
 *******Blog CSS******
 **************************/
@@ -3082,4 +3064,25 @@ li.li-promotion {
 .cart_info {
   display: flex;
   justify-content: space-between;
+}
+.checkout-imput-promotion {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-promotion {
+  border-bottom: 2px solid #dddddd;
+  padding-bottom: 1.5rem;
+}
+.checkout-payment {
+  margin-top: 1.5rem;
+}
+.title-checkout {
+  margin-bottom: 0.5rem;
+}
+
+.table-value {
+  max-width: 90%;
+  min-width: 98%;
 }
