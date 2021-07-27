@@ -1,13 +1,15 @@
 const ProductService = require('../services/Product.service.js');
 const Product = require("../models/product.model");
 const ITEM_PER_PAGE = 12;
-module.exports.index = async(req, res, next) => {
+
+
+module.exports.index = async (req, res, next) => {
     const products = await ProductService.listAllProduct();
 
     res.render('shop', { title: "Products", subtitle: "List product", products });
 }
 
-module.exports.listProductPagination = async(req, res) => {
+module.exports.listProductPagination = async (req, res) => {
     const page = +req.query.page || 1;
     const Category = req.query.category;
     const Name = req.query.name;
@@ -42,4 +44,53 @@ module.exports.listProductPagination = async(req, res) => {
         //Category
         Category: Category
     })
+}
+
+const listQuery = (query, brands, category, page = 1) => {
+
+    return {
+        "query": query,
+        "category": category,
+        "page": page,
+        "brand": brands
+    }
+};
+
+const queryString = (query) => {
+
+    var result = "";
+    for (let key in query) {
+        if (query.hasOwnProperty(key)) {
+
+            if (query[key] !== undefined && query[key] !== null && query[key] !== "") {
+                result += `${key}=${query[key]}&`
+            }
+        }
+
+    }
+
+    if (result.charAt(result.length - 1) === "&") {
+        result = result.substr(0, result.length - 1);
+    }
+
+    return result;
+}
+
+module.exports.getSearch = async (req, res, next) => {
+
+    try {
+
+        const { query, category, brands } = req.query;
+        const page = req.params.page || 1;
+        //const pagination = await ProductService.listProdPagination(Query, page, 12);
+
+        const stringQuery = queryString(listQuery(query, brands, category, page));
+
+        console.log(stringQuery);
+    } catch (error) {
+
+        res.status(404).json({
+            msg: "Fail!!"
+        })
+    }
 }

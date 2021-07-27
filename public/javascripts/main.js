@@ -518,3 +518,14 @@ $("#submit-promotion").on('click', (e) => {
   });
 })
 
+//Search product when enter
+$("#search-input").keypress(e => {
+
+  if (e.which == 13) {
+    const contentSearch = $("#search-input").val();
+    console.log(contentSearch);
+    $("#form-search").attr("action", "/shop/search?query=" + contentSearch.toString());
+    $("#form-search").submit();
+    return false
+  }
+})

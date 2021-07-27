@@ -6,4 +6,6 @@ const homeController = require('../controllers/home.controller');
 
 router.get('/', shopController.listProductPagination);
 
+router.get("/search", shopController.getSearch);
+
 module.exports = router;
