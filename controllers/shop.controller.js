@@ -1,5 +1,8 @@
 const ProductService = require('../services/Product.service.js');
 const Product = require("../models/product.model");
+
+const { clean } = require("../utilities/handleObject");
+
 const ITEM_PER_PAGE = 12;
 
 
@@ -56,6 +59,9 @@ const listQuery = (query, brands, category, page = 1) => {
     }
 };
 
+
+
+
 const queryString = (query) => {
 
     var result = "";
@@ -82,11 +88,15 @@ module.exports.getSearch = async (req, res, next) => {
 
         const { query, category, brands } = req.query;
         const page = req.params.page || 1;
-        //const pagination = await ProductService.listProdPagination(Query, page, 12);
+
+        const Query = clean(listQuery(query, brands, category, page));
+
+
+        const products = await ProductService.listProdPagination(Query, page, 12);
 
         const stringQuery = queryString(listQuery(query, brands, category, page));
 
-        console.log(stringQuery);
+
     } catch (error) {
 
         res.status(404).json({

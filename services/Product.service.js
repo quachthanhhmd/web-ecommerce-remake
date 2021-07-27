@@ -1,16 +1,34 @@
 const { findOneAndDelete } = require("../models/cart.model");
 const ProdMongoose = require("../models/product.model");
+const { clean } = require("../utilities/handleObject");
+
+
 
 module.exports.listAllProduct = async () => {
     return await ProdMongoose.find({});
 }
 
 module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
-    let listProd = await ProdMongoose.paginate(filter, {
-        page: pageNumber,
-        limit: itemPerPage,
-    });
-    return listProd;
+
+    var initQuery = {
+        type: filter.category,
+        brand: filter.brand
+    };
+
+    if (filter.query !== undefined) {
+        let search = { $text: { $search: filter.query } };
+        initQuery = Object.assign(initQuery, search);
+
+    }
+    const query = clean(initQuery);
+    console.log(initQuery);
+
+    // var product = await ProdMongoose.find({ $text: { $search: filter.query }, device: 'Laptop' })
+    //     .skip((pageNumber - 1) * itemPerPage)
+    //     .limit(itemPerPage)
+
+    return 1;
+    // return product;
 };
 
 module.exports.findbySlugname = async (sl) => {
