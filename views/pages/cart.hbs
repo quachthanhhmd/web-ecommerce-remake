@@ -73,11 +73,16 @@
 						<div class="form-group">
 
 
-							<input class="form-control" type="text" placeholder="Nhập mã khuyến mãi"
-								name="promotionCode" id="form-apply-promotion" />
-							<button class="btn btn-default apply-promotion" onclick="return AnhThai(this);"
-								id="submit-promotion" value="{{cart._id}}" type="submit">Sử
-								dụng</button>
+							<input class="form-control" type="text"
+								placeholder="{{#if cart.promotionCode}}{{cart.promotionCode}}{{else}}Nhập mã khuyến mãi{{/if}}"
+								value="{{#if cart.promotionCode}}{{cart.promotionCode}}{{/if}}" name="promotionCode"
+								id="form-apply-promotion" {{#if cart.promotionCode}} disabled {{/if}} />
+
+
+							<button onclick="return AnhThai(this);"
+								class="btn btn-default {{#if cart.promotionCode}}remove-promotion{{else}}apply-promotion{{/if}}"
+								id="submit-promotion" value="{{cart._id}}" type="submit">
+								{{#if cart.promotionCode}}Hủy sử dụng{{else}}Sử dụng{{/if}}</button>
 
 
 						</div>
@@ -104,10 +109,21 @@
 										<span class="totalCost">{{cart.totalCost}}</span>
 									</div>
 									<div class="value-checkout promotion-code">
+										{{#if cart.discountPrice}}
+										{{cart.discountPrice}}&nbsp;({{cart.discountRate}}%)
+										{{else}}
 										Không
+										{{/if}}
 									</div>
 									<div class="value-checkout checkout-final">
-										<span class="totalCost totalPayment">{{cart.totalCost}}</span>
+										<span class="totalCost totalPayment">
+											{{#if cart.payment}}
+
+											{{cart.payment}}
+											{{else}}
+											{{cart.totalCost}}
+											{{/if}}
+										</span>
 									</div>
 								</div>
 							</div>
@@ -150,6 +166,7 @@
 
 		if ($("#form-apply-promotion").val() === "")
 			return;
+
 		if ($("#submit-promotion").hasClass("apply-promotion")) {
 			self.innerHTML = "Hủy sử dụng";
 			self.classList.add("remove-promotion");

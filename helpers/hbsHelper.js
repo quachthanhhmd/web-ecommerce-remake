@@ -56,6 +56,11 @@ const tableDetails = (productDetails) => {
     return result;
 }
 
+const checkEmptyString = (str, content) => {
+
+    return (str === "") ? content : str;
+}
+
 
 module.exports = {
     incremented,
@@ -63,5 +68,6 @@ module.exports = {
     times,
     select,
     renderStar,
-    tableDetails
+    tableDetails,
+    checkEmptyString
 }

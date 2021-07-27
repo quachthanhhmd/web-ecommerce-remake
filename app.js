@@ -72,7 +72,8 @@ const hbs = exphbs.create({
     dateFormat: helper.dateFormat,
     incremented: helper.incremented,
     renderStar: helper.renderStar,
-    tableDetails: helper.tableDetails
+    tableDetails: helper.tableDetails,
+    checkEmptyString: helper.checkEmptyString
   },
 });
 

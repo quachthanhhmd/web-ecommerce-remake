@@ -469,7 +469,7 @@ $("#submit-promotion").on('click', (e) => {
     typeDisplay = 0;
 
   }
-
+  console.log(typeDisplay)
   const Id = $("#submit-promotion").attr("value");
   const promotionCode = $("#form-apply-promotion").val();
   if (promotionCode === "")
