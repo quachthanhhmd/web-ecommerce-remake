@@ -21,14 +21,21 @@ module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
 
     }
     const query = clean(initQuery);
-    console.log(initQuery);
 
-    // var product = await ProdMongoose.find({ $text: { $search: filter.query }, device: 'Laptop' })
-    //     .skip((pageNumber - 1) * itemPerPage)
-    //     .limit(itemPerPage)
 
-    return 1;
-    // return product;
+    var products = await ProdMongoose.find(query)
+        .skip((pageNumber - 1) * itemPerPage)
+        .limit(itemPerPage)
+
+    const count = await this.countProductByQuery(query);
+
+    console.log(count);
+
+
+    return {
+        data: products,
+        count
+    };
 };
 
 module.exports.findbySlugname = async (sl) => {
@@ -42,6 +49,12 @@ module.exports.findById = async (id) => {
 
 }
 
+
+module.exports.countProductByQuery = async (query) => {
+
+    return await ProdMongoose.find(query).countDocuments();
+
+}
 module.exports.countProducts = async (_id) => {
 
     ProdMongoose.findById(_id)

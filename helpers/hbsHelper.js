@@ -61,6 +61,26 @@ const checkEmptyString = (str, content) => {
     return (str === "") ? content : str;
 }
 
+const pagingList = (pagExist, end) => {
+
+    var result = "";
+    console.log(end);
+    for (let i = 0; i < 5; i++) {
+        if (pagExist < 3) {
+            result += `<li class="page-paging${(i + 1) === parseInt(pagExist) ? " active" : ''}" value="${i + 1}">${1 + i}</li>`
+        }
+        else
+            if (pagExist > end - 2) {
+                result += `<li class="page-paging${(end - 4 + i) === parseInt(pagExist) ? " active" : ''}" value="${end - 4 + i}">${end - 4 + i}</li>`
+            }
+            else {
+                result += `<li class="page-paging${(parseInt(pagExist) - 2 + i) === parseInt(pagExist) ? " active" : ''}" value="${parseInt(pagExist) - 2 + i}">${parseInt(pagExist) - 2 + i}</li>`
+            }
+    }
+
+    return result;
+}
+
 
 module.exports = {
     incremented,
@@ -69,5 +89,6 @@ module.exports = {
     select,
     renderStar,
     tableDetails,
-    checkEmptyString
+    checkEmptyString,
+    pagingList
 }

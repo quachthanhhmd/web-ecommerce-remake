@@ -60,61 +60,62 @@
 
 
 
-                    <div class="pagination">
-                        {{#if hasPrevPage}}
-                        {{#if Category}}
-                        <a href="/shop?category={{Category}}&page={{prevPage}}">&laquo;</a>
-                        {{else}}
-                        <a href="/shop?page={{prevPage}}">&laquo;</a>
-                        {{/if}}
-                        {{/if}}
-
-                        {{#if hasPrevPage1}}
-                        {{#if Category}}
-                        <a href="/shop?category={{Category}}&page={{prevPage1}}">{{prevPage1}}</a>
-                        {{else}}
-                        <a href="/shop?page={{prevPage1}}">{{prevPage1}}</a>
-                        {{/if}}
-                        {{/if}}
-
-                        {{#if hasPrevPage2}}
-                        {{#if Category}}
-                        <a href="/shop?category={{Category}}&page={{prevPage2}}">{{prevPage2}}</a>
-                        {{else}}
-                        <a href="/shop?page={{prevPage2}}">{{prevPage2}}</a>
-                        {{/if}}
-                        {{/if}}
-
-                        <a href="#" class="active">{{currentPage}}</a>
-
-                        {{#if hasNextPage1}}
-                        {{#if Category}}
-                        <a href="/shop?category={{Category}}&page={{nextPage1}}">{{nextPage1}}</a>
-                        {{else}}
-                        <a href="/shop?page={{nextPage1}}">{{nextPage1}}</a>
-                        {{/if}}
-                        {{/if}}
-
-                        {{#if hasNextPage2}}
-                        {{#if Category}}
-                        <a href="/shop?category={{Category}}&page={{nextPage2}}">{{nextPage2}}</a>
-                        {{else}}
-                        <a href="/shop?page={{nextPage2}}">{{nextPage2}}</a>
-                        {{/if}}
-                        {{/if}}
-
-                        {{#if hasNextPage}}
-                        {{#if Category}}
-                        <a href="/shop?category={{Category}}&page={{nextPage}}">&raquo;</a>
-                        {{else}}
-                        <a href="/shop?page={{nextPage}}">&raquo;</a>
-                        {{/if}}
-                        {{/if}}
-                    </div>
-
+                    <!--features_items-->
                 </div>
-                <!--features_items-->
+                <div class="pagination">
+                    <ul>
+                        <li href="" class="previous-paging">&laquo;</li>
+
+                        {{{pagingList page maxPage}}}
+                        <li href="#" class="next-paging">&raquo;</a>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
 </section>
+
+{{!--
+<script>
+    function ClickPaging(self) {
+
+        const pagingPage = $("div.pagination ul").children();
+
+        for (let i = 0; i < pagingPage.length; i++) {
+
+            if (pagingPage.eq(i).hasClass("active")) {
+                pagingPage.eq(i).removeClass("active");
+            }
+        }
+
+
+        $(self).addClass("active");
+    }
+
+    function ClickNext(self) {
+
+        const pagingPage = $("div.pagination ul").children();
+        //+1 if next -1 if pevious
+        var type = 1;
+        var firstIndex = +pagingPage.eq(1).html();
+        if ($(self).hasClass("previous-paging")) {
+            if (pagingPage.eq(1).html() === "1") {
+                pagingPage.eq(0).attr("disabled", true);
+                return;
+            }
+            type = -1;
+
+        }
+
+        //increase page
+
+        firstIndex += type;
+
+
+        for (let i = 1; i < pagingPage.length - 1; i++) {
+            pagingPage.eq(i).html(firstIndex.toString());
+            firstIndex += 1;
+        }
+    }
+</script> --}}

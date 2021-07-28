@@ -73,7 +73,8 @@ const hbs = exphbs.create({
     incremented: helper.incremented,
     renderStar: helper.renderStar,
     tableDetails: helper.tableDetails,
-    checkEmptyString: helper.checkEmptyString
+    checkEmptyString: helper.checkEmptyString,
+    pagingList: helper.pagingList
   },
 });
 

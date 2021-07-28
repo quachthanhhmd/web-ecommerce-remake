@@ -4,7 +4,7 @@ const shopController = require('../controllers/shop.controller');
 const productDetailsController = require('../controllers/productDetails.controller');
 const homeController = require('../controllers/home.controller');
 
-router.get('/', shopController.listProductPagination);
+//router.get('/', shopController.listProductPagination);
 
 router.get("/search", shopController.getSearch);
 

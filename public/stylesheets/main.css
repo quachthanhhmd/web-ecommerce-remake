@@ -1219,62 +1219,43 @@ h2.title {
 }
 
 .pagination {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   margin-bottom: 25px;
   margin-top: 0;
   padding-left: 15px;
 }
 
-.pagination li:first-child a,
-.pagination li:first-child span {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  margin-left: 0;
-}
-
-.pagination li:last-child a,
-.pagination li:last-child span {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.pagination .active a,
-.pagination .active span,
-.pagination .active a:hover,
-.pagination .active span:hover,
-.pagination .active a:focus,
-.pagination .active span:focus {
-  background-color: #fe980f;
-  border-color: #fe980f;
-  color: #ffffff;
-  cursor: default;
-  z-index: 2;
-}
-
-.pagination li a,
-.pagination li span {
-  background-color: #f0f0e9;
-  border: 0;
+/* pagination */
+.pagination li {
+  color: black;
   float: left;
-  line-height: 1.42857;
-  margin-left: -1px;
-  padding: 6px 12px;
-  position: relative;
+  padding: 8px 16px;
   text-decoration: none;
-  margin-right: 5px;
-  color: #000;
+
+  border: 1px rgb(252, 187, 68) solid;
+  border-radius: 5px;
+
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
 }
 
-.pagination li a:hover {
-  background: #fe980f;
-  color: #fff;
+.pagination li.active {
+  background-color: rgb(252, 182, 52);
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination li:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
 }
 
 /*************************
 *******Product Details CSS******
 **************************/
 .check-rate {
-  color: orange;
+  color: rgb(252, 182, 52);
 }
 .commentMain {
   display: flex;
@@ -1308,7 +1289,7 @@ h2.title {
 }
 
 .more-comments:hover {
-  color: rgb(255, 124, 37);
+  color: rgb(252, 182, 52);
 }
 
 .no-comment {
@@ -1374,7 +1355,7 @@ h2.title {
 }
 
 .item-control i {
-  background: #fe980f;
+  background: rgb(252, 182, 52);
   color: #ffffff;
   font-size: 20px;
   padding: 5px 10px;
@@ -1419,7 +1400,7 @@ h2.title {
 }
 
 .product-information span span {
-  color: #fe980f;
+  color: rgb(252, 182, 52);
   float: left;
   font-family: "Roboto", sans-serif;
   font-size: 30px;
@@ -1497,13 +1478,13 @@ h2.title {
 }
 
 #reviews ul li a i {
-  color: #fe980f;
+  color: rgb(252, 182, 52);
   padding-right: 8px;
 }
 
 #reviews ul li a:hover {
   background: #fff;
-  color: #fe980f;
+  color: rgb(252, 182, 52);
 }
 
 #reviews p {
@@ -1586,7 +1567,7 @@ h2.title {
 }
 
 .content-404 h2 a {
-  background: #fe980f;
+  background: rgb(252, 182, 52);
   color: #ffffff;
   font-family: "Roboto", sans-serif;
   font-size: 44px;
@@ -1659,7 +1640,7 @@ h2.title {
 
 .login-form form button,
 .signup-form form button {
-  background: #fe980f;
+  background: rgb(252, 182, 52);
   border: medium none;
   border-radius: 0;
   color: #ffffff;
@@ -1681,7 +1662,7 @@ h2.title {
 }
 
 .or {
-  background: #fe980f;
+  background: rgb(252, 182, 52);
   border-radius: 40px;
   color: #ffffff;
   font-family: "Roboto", sans-serif;
@@ -1712,7 +1693,7 @@ h2.title {
 }
 
 .breadcrumbs .breadcrumb li a {
-  background: #fe980f;
+  background: rgb(252, 182, 52);
   color: #ffffff;
   padding: 3px 7px;
 }
@@ -1723,7 +1704,7 @@ h2.title {
   width: auto;
   border-width: 8px;
   border-style: solid;
-  border-color: transparent transparent transparent #fe980f;
+  border-color: transparent transparent transparent rgb(252, 182, 52);
   position: absolute;
   top: 11px;
   left: 48px;
@@ -1738,7 +1719,7 @@ h2.title {
 }
 
 #cart_items .cart_info .cart_menu {
-  background: #fe980f;
+  background: rgb(252, 182, 52);
   color: #fff;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
