@@ -64,19 +64,24 @@ const checkEmptyString = (str, content) => {
 const pagingList = (pagExist, end) => {
 
     var result = "";
-    console.log(end);
+
+
+    (parseInt(pagExist) !== 1) && (result += `<a value=${parseInt(pagExist) - 1} class="previous-paging">&laquo;</a>`);
+
+
     for (let i = 0; i < 5; i++) {
         if (pagExist < 3) {
-            result += `<li class="page-paging${(i + 1) === parseInt(pagExist) ? " active" : ''}" value="${i + 1}">${1 + i}</li>`
+            result += `<a class="page-paging${(i + 1) === parseInt(pagExist) ? " active" : ''}" value="${i + 1}">${1 + i}</a>`
         }
         else
             if (pagExist > end - 2) {
-                result += `<li class="page-paging${(end - 4 + i) === parseInt(pagExist) ? " active" : ''}" value="${end - 4 + i}">${end - 4 + i}</li>`
+                result += `<a class="page-paging${(end - 4 + i) === parseInt(pagExist) ? " active" : ''}" value="${end - 4 + i}">${end - 4 + i}</a>`
             }
             else {
-                result += `<li class="page-paging${(parseInt(pagExist) - 2 + i) === parseInt(pagExist) ? " active" : ''}" value="${parseInt(pagExist) - 2 + i}">${parseInt(pagExist) - 2 + i}</li>`
+                result += `<a class="page-paging${(parseInt(pagExist) - 2 + i) === parseInt(pagExist) ? " active" : ''}" value="${parseInt(pagExist) - 2 + i}">${parseInt(pagExist) - 2 + i}</a>`
             }
     }
+    (parseInt(pagExist) !== end) && (result += `<a value=${parseInt(pagExist) - 1} class="previous-paging">&raquo;;</a>`);
 
     return result;
 }

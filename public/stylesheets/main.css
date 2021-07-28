@@ -1227,7 +1227,7 @@ h2.title {
 }
 
 /* pagination */
-.pagination li {
+.pagination a {
   color: black;
   float: left;
   padding: 8px 16px;
@@ -1240,13 +1240,13 @@ h2.title {
   margin-right: 0.1rem;
 }
 
-.pagination li.active {
+.pagination a.active {
   background-color: rgb(252, 182, 52);
   color: white;
   border-radius: 5px;
 }
 
-.pagination li:hover:not(.active) {
+.pagination a:hover:not(.active) {
   background-color: #ddd;
   border-radius: 5px;
 }
