@@ -66,7 +66,13 @@ const pagingList = (pagExist, end) => {
     var result = "";
 
 
-    (parseInt(pagExist) !== 1) && (result += `<a value=${parseInt(pagExist) - 1} class="previous-paging">&laquo;</a>`);
+    (parseInt(pagExist) !== 1) && (result += `<a value=${parseInt(pagExist) - 1} class="page-paging">&laquo;</a>`);
+
+    if (pagExist > 3) {
+        result += `<a class="page-paging value=1">${1}</a>`;
+
+        (pagExist != 4) && (result += `<a class="page-paging">...</a>`);
+    }
 
 
     for (let i = 0; i < 5; i++) {
@@ -81,7 +87,12 @@ const pagingList = (pagExist, end) => {
                 result += `<a class="page-paging${(parseInt(pagExist) - 2 + i) === parseInt(pagExist) ? " active" : ''}" value="${parseInt(pagExist) - 2 + i}">${parseInt(pagExist) - 2 + i}</a>`
             }
     }
-    (parseInt(pagExist) !== end) && (result += `<a value=${parseInt(pagExist) - 1} class="previous-paging">&raquo;;</a>`);
+
+    if (pagExist < end - 2) {
+        (pagExist != end - 3) && (result += `<a class="page-paging">...</a>`);;
+        result += `<a class="page-paging" value=${end}>${end}</a>`;
+    }
+    (parseInt(pagExist) !== end) && (result += `<a value=${parseInt(pagExist) + 1} class="page-paging">&raquo;;</a>`);
 
     return result;
 }
