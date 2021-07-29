@@ -96,6 +96,14 @@ const pagingList = (pagExist, end) => {
 
     return result;
 }
+
+/**
+ * Create slider in product details
+ * @param {int} productImages: array images need to use slider
+ * @param {int} productPerPage: a mount of product per slider
+ * @param {String} style: class name of iamge display
+ * @return {string} string of html slider 
+*/
 const imageSlider = (productImages, productPerPage, style) => {
 
     var result = "";
@@ -116,6 +124,48 @@ const imageSlider = (productImages, productPerPage, style) => {
     return result;
 }
 
+
+const productSellingSlider = (products, productPerPage) => {
+
+    var result = "";
+    var existPage = 0;
+    for (let i = 0; i < products.length - productPerPage + 1; i++) {
+
+
+        result += (i === 0) ? `<div class="item active">` : `<div class="item">`;
+
+        for (let j = existPage; j < productPerPage + existPage; j++) {
+            result += ` 
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="${products[j].images[0]}" alt="" width="255.48"
+                                height="255.48" />
+                            <h2>${products[j].price}</h2>
+                            <div class="product-name">
+                                <p>${products[j].name}</p>
+                            </div>
+
+                            <a href="/product-details/${products[j].slugName}"
+                                class="btn btn-default details"><i
+                                    class="fa fa-search-minus"></i>Chi tiết</a>
+
+                            <a href="#" class="btn btn-default add-to-cart"
+                                value="${products[j].slugName}"><i class="fa fa-shopping-cart"></i>Thêm
+                                vào giỏ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+        }
+        existPage++;
+        result += "</div>"
+    }
+
+    return result;
+}
+
 module.exports = {
     incremented,
     dateFormat,
@@ -125,5 +175,6 @@ module.exports = {
     tableDetails,
     checkEmptyString,
     pagingList,
-    imageSlider
+    imageSlider,
+    productSellingSlider
 }

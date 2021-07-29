@@ -86,8 +86,9 @@
                                 <div class="productinfo text-center">
                                     <img src="{{images.[0]}}" alt="" width="255.48" height="255.48" />
                                     <h2>{{price}}</h2>
-                                    <p>{{name}}</p>
-
+                                    <div class="product-name">
+                                        <p>{{name}}</p>
+                                    </div>
 
                                     <a href="/product-details/{{slugName}}" class="btn btn-default details"><i
                                             class="fa fa-search-minus"></i>Chi tiết</a>
@@ -96,20 +97,7 @@
                                             class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
 
                                 </div>
-                                <div class="product-overlay">
-                                    <div class="overlay-content">
-                                        <h2>{{price}}</h2>
-                                        <p>{{name}}</p>
-                                        <div class='d-flex justify-content-center'>
 
-                                            <a href="/product-details/{{slugName}}" class="btn btn-default details"><i
-                                                    class="fa fa-search-minus"></i>Chi tiết</a>
-
-                                            <a href="#" class="btn btn-default add-to-cart" value="{{slugName}}"><i
-                                                    class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
@@ -127,38 +115,46 @@
                 <!--features_items-->
 
                 <div class="category-tab">
+                    <h2 class="title text-center">Sản phẩm bán chạy</h2>
                     <!--category-tab-->
-                    <div class="col-sm-12">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
-                            <li><a href="#blazers" data-toggle="tab">Blazers</a></li>
-                            <li><a href="#sunglass" data-toggle="tab">Sunglass</a></li>
-                            <li><a href="#kids" data-toggle="tab">Kids</a></li>
-                            <li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
-                        </ul>
+                    <div class="features_items">
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+
+                                {{#each deviceName}}
+                                <li {{#if @first}}class="active" {{/if}}><a href="#{{slugNameDevice}}"
+                                        data-toggle="tab">{{nameDevice}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </div>
                     </div>
+
+
                     <div class="tab-content">
-                        <div class="tab-pane fade active in" id="tshirt">
-                            {{#each shop}}
-                            <div class="col-sm-3">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="{{avt}}" alt="" />
-                                            <h2>{{basePrice}}</h2>
-                                            <p>{{name}}</p>
-                                            <a href="#" class="btn btn-default add-to-cart" value="{{slugName}}"><i
-                                                    class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
-                                        </div>
+                        {{#each productsSellingDevice}}
 
-                                    </div>
+                        <div class="tab-pane fade{{#if @first}} active in{{/if}}" id="{{slugNameDevice}}">
+                            <div id="{{slugNameDevice}}-item-carousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+
+                                    {{{productSellingSlider products 3}}}
+
+
                                 </div>
+                                <a class="left recommended-item-control" href="#{{slugNameDevice}}-item-carousel"
+                                    data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                                <a class="right recommended-item-control" href="#{{slugNameDevice}}-item-carousel"
+                                    data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
                             </div>
-                            {{/each}}
-
                         </div>
 
-                        <div class="tab-pane fade" id="blazers">
+                        {{/each}}
+
+                        {{!-- <div class="tab-pane fade" id="mobile">
                             {{#each shop}}
                             <div class="col-sm-3">
                                 <div class="product-image-wrapper">
@@ -168,7 +164,8 @@
                                             <h2>{{basePrice}}</h2>
                                             <p>{{name}}</p>
                                             <a href="#" class="btn btn-default add-to-cart" value="{{slugName}}"><i
-                                                    class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+                                                    class="fa fa-shopping-cart"></i>Thêm
+                                                vào giỏ</a>
                                         </div>
 
                                     </div>
@@ -187,7 +184,8 @@
                                             <h2>{{basePrice}}</h2>
                                             <p>{{name}}</p>
                                             <a href="#" class="btn btn-default add-to-cart" value="{{slugName}}"><i
-                                                    class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+                                                    class="fa fa-shopping-cart"></i>Thêm
+                                                vào giỏ</a>
                                         </div>
 
                                     </div>
@@ -206,7 +204,8 @@
                                             <h2>{{basePrice}}</h2>
                                             <p>{{name}}</p>
                                             <a href="#" class="btn btn-default add-to-cart" value="{{slugName}}"><i
-                                                    class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+                                                    class="fa fa-shopping-cart"></i>Thêm
+                                                vào giỏ</a>
                                         </div>
 
                                     </div>
@@ -225,19 +224,20 @@
                                             <h2>{{basePrice}}</h2>
                                             <p>{{name}}</p>
                                             <a href="#" class="btn btn-default add-to-cart" value="{{slugName}}"><i
-                                                    class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+                                                    class="fa fa-shopping-cart"></i>Thêm
+                                                vào giỏ</a>
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
                             {{/each}}
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <!--/category-tab-->
 
-                <div class="recommended_items">
+                {{!-- <div class="recommended_items">
                     <!--recommended_items-->
                     <h2 class="title text-center">Sản phẩm liên quan</h2>
 
@@ -266,7 +266,8 @@
                                                 <img src="https://fptshop.com.vn/Uploads/Originals/2019/7/23/636994883263763784_acer-nitro-5-2019-den-1.png"
                                                     alt="" />
                                                 <h2>28790000 VND</h2>
-                                                <p>Laptop Acer Nitro 5 AN515 54 779S i7 9750H/8GB/512GB/15.6"FHD/Win 10
+                                                <p>Laptop Acer Nitro 5 AN515 54 779S i7
+                                                    9750H/8GB/512GB/15.6"FHD/Win 10
                                                 </p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
@@ -282,7 +283,8 @@
                                                 <img src="https://fptshop.com.vn/Uploads/Originals/2020/1/17/637148686729968160_lenovo-legion-y540-den-1.png"
                                                     alt="" />
                                                 <h2>26490000 VND</h2>
-                                                <p>Laptop Lenovo Legion Y540 15IRH i7 9750H/8GB/1TB SSD/Win10</p>
+                                                <p>Laptop Lenovo Legion Y540 15IRH i7 9750H/8GB/1TB
+                                                    SSD/Win10</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
                                             </div>
@@ -314,7 +316,8 @@
                                                 <img src="https://fptshop.com.vn/Uploads/Originals/2019/7/23/636994883263763784_acer-nitro-5-2019-den-1.png"
                                                     alt="" />
                                                 <h2>28790000 VND</h2>
-                                                <p>Laptop Acer Nitro 5 AN515 54 779S i7 9750H/8GB/512GB/15.6"FHD/Win 10
+                                                <p>Laptop Acer Nitro 5 AN515 54 779S i7
+                                                    9750H/8GB/512GB/15.6"FHD/Win 10
                                                 </p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
@@ -330,7 +333,8 @@
                                                 <img src="https://fptshop.com.vn/Uploads/Originals/2020/1/17/637148686729968160_lenovo-legion-y540-den-1.png"
                                                     alt="" />
                                                 <h2>26490000 VND</h2>
-                                                <p>Laptop Lenovo Legion Y540 15IRH i7 9750H/8GB/1TB SSD/Win10</p>
+                                                <p>Laptop Lenovo Legion Y540 15IRH i7 9750H/8GB/1TB
+                                                    SSD/Win10</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
                                             </div>
@@ -348,7 +352,7 @@
                         </a>
                     </div>
                 </div>
-                <!--/recommended_items-->
+                <!--/recommended_items--> --}}
 
             </div>
         </div>

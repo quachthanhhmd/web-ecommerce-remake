@@ -139,3 +139,29 @@ module.exports.findBrandPopular = async (quantity = 10) => {
 
     return brand.slice(0, quantity);
 }
+
+module.exports.findSelingbyFieldAndDevice = async (device, field, numProduct) => {
+
+
+
+    const products = await ProdMongoose.find({
+        device: device
+    })
+        .sort({ [field]: -1 })
+        .skip(0)
+        .limit(numProduct);
+
+    return products;
+}
+
+module.exports.findSeling = async (numProduct) => {
+
+    const products = await ProdMongoose.find({
+
+    })
+        .sort({ "countSale": -1 })
+        .skip(0)
+        .limit(numProduct);
+
+    return products;
+}

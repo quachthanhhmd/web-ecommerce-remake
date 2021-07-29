@@ -657,9 +657,7 @@ ul.sub-menu-acc {
   background: #fe980f;
 }
 
-.item {
-  padding-left: 100px;
-}
+
 
 .pricing {
   position: absolute;
@@ -937,6 +935,11 @@ h2.title {
   position: relative;
 }
 
+.single-products:hover {
+  transform: scale(1.05);
+  transition: all 0.5s;
+}
+
 .new,
 .sale {
   position: absolute;
@@ -1212,7 +1215,7 @@ h2.title {
 
 .product-name {
   width: 90%;
-
+  height: 4.5rem;
   margin: auto;
 }
 
