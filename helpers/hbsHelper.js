@@ -74,8 +74,9 @@ const pagingList = (pagExist, end) => {
         (pagExist != 4) && (result += `<a class="page-paging">...</a>`);
     }
 
+    const numPage = end < 5 ? end : 5;
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < numPage; i++) {
         if (pagExist < 3) {
             result += `<a class="page-paging${(i + 1) === parseInt(pagExist) ? " active" : ''}" value="${i + 1}">${1 + i}</a>`
         }
