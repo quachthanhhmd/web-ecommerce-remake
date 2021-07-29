@@ -69,7 +69,7 @@ const pagingList = (pagExist, end) => {
     (parseInt(pagExist) !== 1) && (result += `<a value=${parseInt(pagExist) - 1} class="page-paging">&laquo;</a>`);
 
     if (pagExist > 3) {
-        result += `<a class="page-paging value=1">${1}</a>`;
+        result += `<a class="page-paging value="1">${1}</a>`;
 
         (pagExist != 4) && (result += `<a class="page-paging">...</a>`);
     }
@@ -129,12 +129,15 @@ const productSellingSlider = (products, productPerPage) => {
 
     var result = "";
     var existPage = 0;
-    for (let i = 0; i < products.length - productPerPage + 1; i++) {
+
+    const n = Math.ceil(products.length / productPerPage);
+
+    for (let i = 0; i < n; i++) {
 
 
         result += (i === 0) ? `<div class="item active">` : `<div class="item">`;
-
-        for (let j = existPage; j < productPerPage + existPage; j++) {
+        let productAtPage = (productPerPage + existPage < products.length) ? productPerPage + existPage : products.length;
+        for (let j = existPage; j < productAtPage; j++) {
             result += ` 
             <div class="col-sm-4">
                 <div class="product-image-wrapper">
@@ -159,7 +162,7 @@ const productSellingSlider = (products, productPerPage) => {
                 </div>
             </div>`
         }
-        existPage++;
+        existPage += productPerPage;
         result += "</div>"
     }
 

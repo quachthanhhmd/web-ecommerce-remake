@@ -49,13 +49,13 @@ module.exports.index = async (req, res, next) => {
 //     })
 //}
 
-const listQuery = (query, brands, category, page = 1) => {
+const listQuery = (query, brands, category, device) => {
 
     return {
         "query": query,
         "category": category,
-        "page": page,
-        "brand": brands
+        "brand": brands,
+        "device": device
     }
 };
 
@@ -86,16 +86,14 @@ module.exports.getSearch = async (req, res, next) => {
 
     try {
 
-        const { query, category, brands } = req.query;
-        const page = req.query.page || 1;
+        const { query, category, brands, device } = req.query;
+        const page = +(req.query.page) || 1;
 
-        const Query = clean(listQuery(query, brands, category, page));
+        const Query = clean({ query, brands, category, device });
 
+        console.log(page, device);
 
         const dataProduct = await ProductService.listProdPagination(Query, page, 12);
-
-
-
 
 
         res.render('pages/shop', {

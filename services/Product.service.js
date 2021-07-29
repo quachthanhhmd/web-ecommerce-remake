@@ -16,29 +16,24 @@ module.exports.listAllProduct = async () => {
  */
 module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
 
-    var initQuery = {
-        type: filter.category,
-        brand: filter.brand
-    };
-
     if (filter.query !== undefined) {
         let search = { $text: { $search: filter.query } };
         initQuery = Object.assign(initQuery, search);
 
     }
-    const query = clean(initQuery);
 
 
-    var products = await ProdMongoose.find(query)
+    console.log(filter);
+    var products = await ProdMongoose.find(filter)
         .skip((pageNumber - 1) * itemPerPage)
         .limit(itemPerPage)
 
-    const count = await this.countProductByQuery(query);
+    const count = await this.countProductByQuery(filter);
 
     const maxPage = Math.floor(count / 12) + 1;
 
 
-    console.log(maxPage);
+    console.log(count);
     return {
         data: products,
         pages: maxPage

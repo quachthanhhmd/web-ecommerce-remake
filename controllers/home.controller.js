@@ -15,7 +15,7 @@ module.exports.index = async (req, res, next) => {
 
         const productsSellingDevice = await Promise.all(deviceQuery.map(async (device) => {
 
-            const products = await ProductService.findSelingbyFieldAndDevice(device, "countSale", 10);
+            const products = await ProductService.findSelingbyFieldAndDevice(device, "countSale", 12);
             return {
                 products,
                 slugNameDevice: ChangeToSlug(device)
@@ -31,7 +31,7 @@ module.exports.index = async (req, res, next) => {
         });
 
         console.table(productsSellingDevice);
-        
+
         const productsSelling = await ProductService.findSeling(9);
 
         res.render('pages/home', {

@@ -657,7 +657,41 @@ ul.sub-menu-acc {
   background: #fe980f;
 }
 
+.tab-content .see-all {
+  font-size: 1.6rem;
 
+  margin-right: 1.7rem;
+  margin-bottom: 0.7rem;
+  margin-top: 0.7rem;
+
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+
+  color: rgb(230, 149, 0);
+  border: 1px rgb(230, 149, 0) solid;
+  border-radius: 1rem;
+}
+
+.tab-content .see-all-flex {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.tab-content .see-all:hover {
+  color: rgb(161, 161, 161);
+  border: 1px rgb(161, 161, 161) solid;
+}
+
+.image-right {
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+}
 
 .pricing {
   position: absolute;
@@ -1127,7 +1161,6 @@ h2.title {
   background: #40403e;
   border-bottom: 1px solid #fe980f;
   list-style: none outside none;
-  margin: 0 0 30px;
   padding: 0;
   width: 100%;
 }
