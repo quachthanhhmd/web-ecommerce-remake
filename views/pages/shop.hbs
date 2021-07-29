@@ -21,11 +21,12 @@
                             <div class="single-products">
                                 <div class="productinfo text-center">
                                     <img src="{{images.[0]}}" alt=""
-                                        style="border: 1px solid #ddd;  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);" />
+                                        style="border: 1px solid #ddd;  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);"
+                                        width="255.48" height="255.48" />
                                     <h2>{{price}}</h2>
-                                    <p style="width:600px;overflow:hidden;height:50px;line-height:50px;">{{name}}</p>
-
-
+                                    <div class="product-name">
+                                        <p>{{name}}</p>
+                                    </div>
                                     <a href="/product-details" class="btn btn-default add-to-cart"><i
                                             class="fa fa-search-minus"></i>Detail</a>
 
@@ -36,7 +37,9 @@
                                 <div class="product-overlay">
                                     <div class="overlay-content">
                                         <h2>{{price}}</h2>
-                                        <p>{{name}}</p>
+                                        <div class="product-name">
+                                            <p>{{name}}</p>
+                                        </div>
                                         <div class='d-flex justify-content-center'>
 
                                             <a href="/product-details/{{_id}}" class="btn btn-default add-to-cart "><i

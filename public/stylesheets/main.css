@@ -1210,6 +1210,21 @@ h2.title {
 *******Shop CSS******
 **************************/
 
+.product-name {
+  width: 90%;
+
+  margin: auto;
+}
+
+.product-name p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #advertisement {
   padding-bottom: 45px;
 }

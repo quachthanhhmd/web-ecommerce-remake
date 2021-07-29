@@ -8,6 +8,12 @@ module.exports.listAllProduct = async () => {
     return await ProdMongoose.find({});
 }
 
+
+/**
+ * Get list product paging and a mount of pages of product 
+ * @param {string} strPrice : String price
+ * @return {int} price
+ */
 module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
 
     var initQuery = {
@@ -29,12 +35,13 @@ module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
 
     const count = await this.countProductByQuery(query);
 
-    console.log(count);
+    const maxPage = Math.floor(count / 12) + 1;
 
 
+    console.log(maxPage);
     return {
         data: products,
-        count
+        pages: maxPage
     };
 };
 

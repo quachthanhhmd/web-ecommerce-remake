@@ -94,15 +94,14 @@ module.exports.getSearch = async (req, res, next) => {
 
         const dataProduct = await ProductService.listProdPagination(Query, page, 12);
 
-        const stringQuery = queryString(listQuery(query, brands, category, page));
 
-        const maxPage = Math.floor(dataProduct.count / 12);
+
 
 
         res.render('pages/shop', {
             title: 'Shop',
             products: dataProduct.data,
-            maxPage: maxPage,
+            maxPage: dataProduct.pages,
             page: page
         })
 
