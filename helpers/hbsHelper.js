@@ -96,7 +96,25 @@ const pagingList = (pagExist, end) => {
 
     return result;
 }
+const imageSlider = (productImages, productPerPage, style) => {
 
+    var result = "";
+    var existPage = 0;
+    for (let i = 0; i < productImages.length - productPerPage + 1; i++) {
+
+
+        result += (i === 0) ? `<div class="item active">` : `<div class="item">`;
+
+        for (let j = existPage; j < productPerPage + existPage; j++) {
+            result += `<a href=""><img src=${productImages[j]} alt=""
+            class="${style}"></a>`
+        }
+        existPage++;
+        result += "</div>"
+    }
+
+    return result;
+}
 
 module.exports = {
     incremented,
@@ -106,5 +124,6 @@ module.exports = {
     renderStar,
     tableDetails,
     checkEmptyString,
-    pagingList
+    pagingList,
+    imageSlider
 }

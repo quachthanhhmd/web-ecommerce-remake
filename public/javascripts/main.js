@@ -465,22 +465,7 @@ $(document).ready(function () {
 
 
 
-  //update cart promotion
-  // $('#submit-promotion').click(e => {
 
-  //   e.preventDefault();
-
-  //   if ($('#submit-promotion').hasClass("apply-promotion")) {
-  //     $('#submit-promotion').html("Hủy sử dụng");
-  //     $('#submit-promotion').removeClass("apply-promotion");
-  //     $('#submit-promotion').addClass("remove-promotion ");
-  //   } else {
-  //     $('#submit-promotion').html("Sử dụng");
-  //     $('#submit-promotion').removeClass("remove-promotion");
-  //     $('#submit-promotion').addClass("apply-promotion");
-  //   }
-
-  // })
 
 
   //ajax update promotion

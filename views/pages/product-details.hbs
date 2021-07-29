@@ -18,25 +18,8 @@
 
 							<!-- Wrapper for slides -->
 							<div class="carousel-inner">
-								<div class="item active">
-									{{#each product.images}}
-									<a href=""><img src={{this}} alt=""
-											style=" border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 90px;"></a>
-									{{/each}}
-								</div>
-								<div class="item">
-									{{#each product.images}}
-									<a href=""><img src={{this}} alt=""
-											style=" border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 90px;"></a>
-									{{/each}}
-								</div>
-								<div class="item">
-									{{#each product.images}}
-									<a href=""><img src={{this}} alt=""
-											style=" border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 90px;"></a>
-									{{/each}}
-								</div>
 
+								{{{imageSlider product.images 3 "product-image"}}}
 							</div>
 
 							<!-- Controls -->

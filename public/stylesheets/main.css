@@ -1313,6 +1313,12 @@ h2.title {
   text-align: center;
 }
 
+.product-image {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 90px;
+}
 .product-details {
   overflow: hidden;
 }
@@ -1403,7 +1409,7 @@ h2.title {
 }
 
 .product-information p {
-  color: #696763;
+  color: #000000;
   font-family: "Roboto", sans-serif;
   margin-bottom: 5px;
 }

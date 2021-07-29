@@ -74,7 +74,8 @@ const hbs = exphbs.create({
     renderStar: helper.renderStar,
     tableDetails: helper.tableDetails,
     checkEmptyString: helper.checkEmptyString,
-    pagingList: helper.pagingList
+    pagingList: helper.pagingList,
+    imageSlider: helper.imageSlider
   },
 });
 
