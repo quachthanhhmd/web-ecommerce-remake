@@ -257,14 +257,15 @@ module.exports = function (passport) {
                 },
                 name: profile.displayName,
                 email: profile.emails[0].value,
-                isVerify: profile.emails[1].value,
+                isVerify: profile.emails[0].verified,
                 image: profile.photos[0].value
               }
-
+              console.log(initUser);
               if (user) {
-                if (user.google.id == undefined) {
+                if (user.google.id === undefined || user.google.id === "") {
 
                   user = Object.assign(user, initUser);
+                  console.log(user);
                   user.save();
                 }
 
