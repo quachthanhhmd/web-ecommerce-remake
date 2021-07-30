@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const randomstring = require("randomstring");
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // passport configuration
 var User = require('../models/user.model');
@@ -22,6 +23,9 @@ const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID
 const FACEBOOK_SECRET = process.env.FACEBOOK_SECRET
 const FACEBOOK_CALLBACK_URL = process.env.FACEBOOK_CALLBACK_URL
 
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
+const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL
 
 module.exports = function (passport) {
   passport.serializeUser(function (user, done) {
@@ -225,4 +229,64 @@ module.exports = function (passport) {
     )
   );
 
+  passport.use(
+    new GoogleStrategy({
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      callbackURL: GOOGLE_CALLBACK_URL
+    },
+      function (accessToken, refreshToken, profile, done) {
+        console.log(profile);
+        process.nextTick(function () {
+          User.findOne(
+            {
+              $or: [
+                { 'google.id': profile.id },
+                { email: profile.emails[0].value },
+              ],
+            },
+            function (err, user) {
+              if (err) {
+                return done(err);
+              }
+
+              const initUser = {
+                google: {
+                  id: profile.id,
+                  token: accessToken
+                },
+                name: profile.displayName,
+                email: profile.emails[0].value,
+                isVerify: profile.emails[1].value,
+                image: profile.photos[0].value
+              }
+
+              if (user) {
+                if (user.google.id == undefined) {
+
+                  user = Object.assign(user, initUser);
+                  user.save();
+                }
+
+                return done(null, user);
+              } else {
+                let newUser = new User();
+
+                newUser = Object.assign(newUser, initUser);
+
+
+                newUser.save((err) => {
+                  if (err) {
+                    console.log(err);
+                    throw err;
+                  }
+
+                  return done(null, newUser);
+                });
+              }
+            }
+          );
+        });
+      }
+    ));
 };

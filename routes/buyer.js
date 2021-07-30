@@ -58,6 +58,12 @@ router.get("/facebook/callback",
         controllers.getFacebookCallback
 )
 
+/* OAuth with google */
+router.get("/google", passport.authenticate('google', { scope: 'email' }));
+
+router.get("/google/callback",
+        controllers.getGoogleCallback
+);
 
 
 module.exports = router;

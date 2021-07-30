@@ -9,19 +9,13 @@ module.exports.findIdbyStatus = (id, status) => {
     });
 }
 
-module.exports.updateOne = (id, cart) => {
+module.exports.updateOne = async (id, cart) => {
 
     //delte _id of mongoose exists
 
-    let existsCart = cart;
-    delete existsCart._id;
-    console.log(existsCart);
-    return Cart.updateOne(
-        { userId: id, status: "waiting" },
-        {
-            $set: existsCart,
-        }
-    );
+    cart.userId = id;
+    cart.status = "waiting";
+    return await cart.save();
 }
 
 module.exports.findCartbyUserId = (userId) => {

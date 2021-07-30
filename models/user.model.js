@@ -74,6 +74,14 @@ const userSchema = new mongoose.Schema({
             token: '',
         },
     },
+    google: {
+        type: Object,
+        default: {
+            id: '',
+            token: '',
+        },
+    },
+
 });
 
 module.exports = mongoose.model('User', userSchema)

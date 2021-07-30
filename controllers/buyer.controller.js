@@ -353,7 +353,7 @@ module.exports.checkSingup = async (req, res, next) => {
 
 module.exports.getFacebookCallback = (req, res, next) => {
 
-    console.log(80890980);
+
     passport.authenticate('facebook', function (err, user, info) {
 
 
@@ -375,4 +375,27 @@ module.exports.getFacebookCallback = (req, res, next) => {
 
     })(req, res, next);
 
+}
+
+/* OAuth with google */
+module.exports.getGoogleCallback = (req, res, next) => {
+
+    passport.authenticate("google", function (err, user, info) {
+
+        if (err) next(err);
+
+        if (!user) res.redirect("/buyer/login");
+
+        req.logIn(user, async function (err) {
+            if (err) {
+                return next(err);
+            }
+
+            // Sync cart
+            const cart = await mergeCart(user._id, req.session.cart);
+            req.session.cart = cart;
+
+            return res.redirect(req.session.historyUrl || '/');
+        })
+    })(req, res, next);
 }
