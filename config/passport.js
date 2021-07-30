@@ -211,7 +211,7 @@ module.exports = function (passport) {
                 newUser.name = profile.displayName;
                 newUser.email = profile.emails[0].value;
                 newUser.isVerify = true;
-                newUser.avatar = profile.photos[0].value;
+                newUser.image = profile.photos[0].value;
 
                 newUser.save((err) => {
                   if (err) {
@@ -260,7 +260,7 @@ module.exports = function (passport) {
                 isVerify: profile.emails[0].verified,
                 image: profile.photos[0].value
               }
-              console.log(initUser);
+
               if (user) {
                 if (user.google.id === undefined || user.google.id === "") {
 
