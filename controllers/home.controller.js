@@ -30,7 +30,7 @@ module.exports.index = async (req, res, next) => {
             }
         });
 
-        console.table(productsSellingDevice);
+
 
         const productsSelling = await ProductService.findSeling(9);
 

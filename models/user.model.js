@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
+const { randomPassword } = require("../utilities/random");
+
 const userSchema = new mongoose.Schema({
-    
+
     name: {
         type: String,
         required: true
@@ -14,13 +16,13 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        default: randomPassword(8),
     },
-    passwordReset:{
+    passwordReset: {
         type: String,
         require: true,
     },
-    image:{
+    image: {
         type: String,
         default: ''
     },
@@ -37,13 +39,13 @@ const userSchema = new mongoose.Schema({
         required: false,
         match: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
     },
-    birthday:{
+    birthday: {
         type: String,
         required: false
     },
     sex: {
-        type: String, 
-        enum: ["Male","Female", "Other"]
+        type: String,
+        enum: ["Male", "Female", "Other"]
     },
     address: {
         type: String,
@@ -60,11 +62,18 @@ const userSchema = new mongoose.Schema({
     cloudinary_id: {
         type: String,
         default: "",
-      },
-      likes:{
+    },
+    likes: {
         type: Array,
         default: [],
-    }
-}); 
+    },
+    facebook: {
+        type: Object,
+        default: {
+            id: '',
+            token: '',
+        },
+    },
+});
 
 module.exports = mongoose.model('User', userSchema)

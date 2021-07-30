@@ -22,8 +22,6 @@ module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
 
     }
 
-
-    console.log(filter);
     var products = await ProdMongoose.find(filter)
         .skip((pageNumber - 1) * itemPerPage)
         .limit(itemPerPage)
@@ -33,7 +31,7 @@ module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
     const maxPage = Math.floor(count / 12) + 1;
 
 
-    console.log(count);
+
     return {
         data: products,
         pages: maxPage

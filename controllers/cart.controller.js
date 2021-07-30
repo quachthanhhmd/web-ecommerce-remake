@@ -6,7 +6,7 @@ const productService = require("../services/Product.service")
 const userSevice = require("../services/user.Service");
 
 const { parsePrice, parseIntToPrice } = require("../utilities/price");
-
+const { mergeCart } = require("../utilities/merge");
 
 
 module.exports.displayCart = async (req, res, next) => {
@@ -255,65 +255,6 @@ module.exports.putUpdate = async (req, res, next) => {
 
 
 
-module.exports.mergeCart = async (userId, sessionCart) => {
-  try {
-    let cart = {};
-
-    const userCart = await cartService.findIdbyStatus(userId, "waiting");
-
-    if (!userCart) {
-      sessionCart.userId = userId;
-      cart = await Cart.create(sessionCart);
-    }
-    else if (userCart.totalQuantity === 0) {
-      sessionCart.userId = userId;
-      cart = await cartService.updateOne(userId, sessionCart)
-
-    } else {
-      cart = userCart;
-      const merCartItem = [...userCart.items, ...sessionCart.items];
-      const slugName = Array.from(
-        new Set(merCartItem.map((item) => item.slugName))
-      );
-
-      const items = slugName.map((slug) => {
-        var uniSlug = merCartItem.filter((it) => it.slugName === slug);
-        const staUniSlug = uniSlug.map((uni) => parseInt(uni.quantity));
-        const quanti = staUniSlug.reduce((it1, it2) => it1 + it2, 0);
-
-        uniSlug[0].quantity = quanti;
-        uniSlug[0].total = parseIntToPrice((quanti * parsePrice(uniSlug[0].price)).toString());
-        while (uniSlug[0].total.charAt(0) === '0') {
-          uniSlug[0].total = uniSlug[0].total.substr(1);
-        }
-
-        return uniSlug[0];
-      });
-
-      cart.items = items;
-      console.log(cart.totalQuantity, sessionCart.totalQuantity)
-      cart.totalQuantity += sessionCart.totalQuantity;
-
-
-      var tmp = parsePrice(cart.totalCost);
-      var tmp2 = parsePrice(sessionCart.totalCost);
-      var sum = tmp + tmp2;
-
-      cart.totalCost = parseIntToPrice(sum.toString());
-      while (cart.totalCost.charAt(0) === '0') {
-        cart.totalCost = cart.totalCost.substr(1);
-      }
-
-      await cartService.updateOne(userId, cart);
-
-    }
-
-    return cart;
-  } catch (error) {
-    console.log(error);
-
-  }
-};
 
 //promotion product
 module.exports.CheckPromotion = async (req, res) => {

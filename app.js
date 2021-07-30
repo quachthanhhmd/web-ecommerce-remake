@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const seKey = process.env.SESSION_SECRET
+const SESSION_SECRET = process.env.SESSION_SECRET
 
 //DB
 const connectDB = require('./config/db')
@@ -55,7 +55,7 @@ app.use(express.urlencoded({ extended: true }));
 //app.use(logger('dev'));
 app.use(flash());
 
-app.use(cookieParser(seKey));
+app.use(cookieParser(SESSION_SECRET));
 app.use(express.static('public'));
 
 
@@ -86,7 +86,7 @@ app.engine('.hbs', hbs.engine);
 
 app.use(
   session({
-    secret: seKey,
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: new MongoDBStore({ uri: process.env.MONGO_URL, collection: 'sessions' }),
@@ -98,8 +98,21 @@ app.use(
   }),
 );
 
+require('./config/passport')(passport);
+
+/* Passport require */
+app.use(
+  session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 
 app.use(async (req, res, next) => {

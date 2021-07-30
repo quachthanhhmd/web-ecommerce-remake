@@ -11,12 +11,15 @@ module.exports.findIdbyStatus = (id, status) => {
 
 module.exports.updateOne = (id, cart) => {
 
+    //delte _id of mongoose exists
 
-
+    let existsCart = cart;
+    delete existsCart._id;
+    console.log(existsCart);
     return Cart.updateOne(
         { userId: id, status: "waiting" },
         {
-            $set: cart,
+            $set: existsCart,
         }
     );
 }
@@ -59,6 +62,11 @@ module.exports.createCartbyId = async (_id) => {
 module.exports.findCartbyId = async (_id) => {
 
     return await Cart.findById(_id);
+}
+
+module.exports.createCart = async (cart) => {
+
+    return await Cart.create(cart);
 }
 
 module.exports.initCart = {
