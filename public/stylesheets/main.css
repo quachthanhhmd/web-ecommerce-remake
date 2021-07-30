@@ -1652,7 +1652,34 @@ h2.title {
 .login-button {
   margin: 0px auto;
 }
-.signup-form {
+
+.login-methods {
+  width: 45rem;
+  margin: 2rem auto;
+}
+
+.login-line {
+  height: 1px;
+  width: 100%;
+  background-color: #dbdbdb;
+  -webkit-flex: 1;
+  margin-top: 1rem;
+  flex: 1;
+}
+
+.login-other-method {
+  display: flex;
+  padding-top: 0.875rem;
+}
+.login-or {
+  color: #ccc;
+  padding: 0 1rem;
+  text-transform: uppercase;
+}
+
+.login-methods-inline {
+  display: flex;
+  justify-content: space-between;
 }
 
 .login-form h2,
@@ -2538,7 +2565,7 @@ textarea {
   border: 1px solid#F7F7F0;
 }
 
-.btn.btn-primary {
+.shopper-informations .btn.btn-primary {
   background: #fe980f;
   border: 0 none;
   border-radius: 0;
