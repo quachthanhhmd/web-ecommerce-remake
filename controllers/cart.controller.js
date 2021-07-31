@@ -1,3 +1,8 @@
+const tokenLife = process.env.TOKEN_LIFE
+const jwtKey = process.env.JWT_KEY
+
+const jwt = require('jsonwebtoken');
+
 const Cart = require("../models/cart.model");
 const Product = require("../models/product.model")
 
@@ -7,6 +12,8 @@ const userSevice = require("../services/user.Service");
 
 const { parsePrice, parseIntToPrice } = require("../utilities/price");
 const { mergeCart } = require("../utilities/merge");
+const { response } = require('express');
+
 
 
 module.exports.displayCart = async (req, res, next) => {
@@ -356,5 +363,28 @@ module.exports.RemovePromotion = async (req, res) => {
       msg: "ValidatorError",
       user: error.message,
     });
+  }
+}
+
+module.exports.shareFriendCart = async (req, res, next) => {
+
+  try {
+    const { Id } = req.params;
+
+
+    const token = jwt.sign({ _id: Id }, jwtKey, {
+      expiresIn: tokenLife,
+    });
+
+    return res.status(200).json({
+      status: "Success",
+      token: token
+    })
+
+  } catch (error) {
+
+    return res.status(500).json({
+      msg: error
+    })
   }
 }

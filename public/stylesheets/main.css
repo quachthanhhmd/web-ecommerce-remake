@@ -139,9 +139,10 @@ a#scrollUp i {
   background: #ce3c2d;
 }
 
-.header-middle .container .row .font-logo {
+.font-logo {
   font-size: 2rem;
   margin-top: 0.5rem;
+  color: blue;
 }
 
 .header-middle .container .fixed-row-display {
@@ -655,6 +656,10 @@ ul.sub-menu-acc {
 
 .carousel-indicators li.active {
   background: #fe980f;
+}
+
+.carousel-left {
+  margin-left: -2rem;
 }
 
 .tab-content .see-all {
@@ -1815,6 +1820,7 @@ h2.title {
   max-width: 66%;
 
   border: 2px ridge;
+  border-radius: 1rem;
 }
 
 #cart_items .cart_info .cart_description h4 {
@@ -1926,8 +1932,11 @@ h2.title {
   color: red;
 }
 .checkout-all {
-  width: 30%;
   border: ridge;
+  border-radius: 1rem;
+
+  width: 30%;
+
   padding: 1rem 1rem 1rem 1rem;
 }
 .checkout-name {
@@ -2191,6 +2200,31 @@ textarea {
 #cart_items .cart_info .table.table-condensed {
   padding: 1rem 1rem 1rem 1rem;
 }
+
+/*Friend cart*/
+
+div.cart_info .head-cart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-line {
+  height: 1px;
+  width: 100%;
+  background-color: #dbdbdb;
+
+  -webkit-flex: 1;
+  flex: 1;
+
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.share-cart {
+  margin-top: 0.5rem;
+  font-size: 2rem;
+}
+
 /*************************
 *******Blog CSS******
 **************************/

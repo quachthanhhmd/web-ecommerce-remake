@@ -169,3 +169,6 @@ const CartEmpty = () => {
               </div>`)
   $('.main-cart').removeClass('main-cart');
 }
+
+
+

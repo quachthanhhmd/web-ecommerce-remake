@@ -154,7 +154,9 @@ $(document).ready(function () {
       });
     });
 
-
+  /**
+   * Cart
+   */
   $(".add-to-cart").click(function (e) {
     e.preventDefault();
     const slugName = $(this).attr("value");
@@ -238,7 +240,27 @@ $(document).ready(function () {
     });
   });
 
+  $(".share-cart").on("click", function (e) {
 
+    e.preventDefault();
+
+    const urlShareCart = $(".share-cart").attr("value");
+
+
+
+    $.get(urlShareCart, function (data) {
+
+      if (data.status !== 'Success') return;
+      console.log(data.token);
+      $("#share-cart-token").attr("value", data.token);
+      $("#share-cart-token").attr("placeholder", data.token);
+
+      $('#button-modal').trigger('click');
+    });
+
+
+  })
+  /**End Cart */
 
   // Upload avatar btn
   var readURL = function (input) {

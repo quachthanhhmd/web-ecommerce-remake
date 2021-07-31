@@ -11,4 +11,10 @@ router.put("/:slugName", cartController.putUpdate);
 router.put("/promotion/:Id", cartController.CheckPromotion);
 router.put("/promotion/delete/:Id", cartController.RemovePromotion);
 
+
+/**
+ * Share cart
+ */
+router.get("/share-cart/:Id", cartController.shareFriendCart);
+
 module.exports = router;
