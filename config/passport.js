@@ -98,13 +98,13 @@ module.exports = function (passport) {
       passReqToCallback: true
     },
       async (req, email, password, done) => {
-        console.log(email);
+
         User.findOne({ email: email }, async (err, user) => {
 
           if (err) {
             return done(err);
           }
-          console.log(1212);
+     
           if (user) {
             return done(null, false, {
               message: 'Tên đăng nhập đã tồn tại!'
@@ -177,7 +177,7 @@ module.exports = function (passport) {
         profileFields: ['id', 'displayName', 'link', 'name', 'photos', 'email'],
       },
       function (accessToken, refreshToken, profile, done) {
-        console.log(profile);
+    
         process.nextTick(function () {
           User.findOne(
             {

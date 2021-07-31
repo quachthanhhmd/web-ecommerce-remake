@@ -67,6 +67,18 @@ module.exports.createCart = async (cart) => {
     return await Cart.create(cart);
 }
 
+module.exports.findUserIdInArray = async (userIdList, userId) => {
+
+    const check = userIdList.filter(x => x.equals(userId))
+
+    return check.length === 0 ? 1 : 0;
+}
+
+module.exports.deleteOne = async (cart) => {
+
+    return await cart.deleteOne(cart);
+}
+
 module.exports.initCart = {
     userId: [],
     status: "waiting",

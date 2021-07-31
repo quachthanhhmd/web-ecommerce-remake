@@ -16,5 +16,6 @@ router.put("/promotion/delete/:Id", cartController.RemovePromotion);
  * Share cart
  */
 router.get("/share-cart/:Id", cartController.shareFriendCart);
+router.put("/share-cart/token/:token", cartController.getTokenShareFriendCart)
 
 module.exports = router;

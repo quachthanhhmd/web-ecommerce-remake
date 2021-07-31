@@ -9,24 +9,43 @@ const { parseIntToPrice, parsePrice } = require("./price");
  * @returns {cart}
  */
 
-const mergeCart = async (userId, sessionCart) => {
+const mergeCart = async (userId, mergedCart) => {
     try {
         let cart = {};
+
+
+        const sessionCart = mergedCart;
+
+        if (sessionCart._id != undefined) {
+            console.log(sessionCart._id);
+            sessionCart.userId.push(sessionCart.userId);
+            await cartService.deleteOne(mergedCart);
+        }
+
 
         const userCart = await cartService.findIdbyStatus(userId, "waiting");
 
         if (!userCart) {
-            sessionCart.userId = userId;
-           
+            sessionCart.userId.push(sessionCart.userId);
+
+            console.log(cart._id);
+
             cart = await cartService.createCart(sessionCart);
+
+            if (cartService.findUserIdInArray(cart.userId, userId)) {
+                cartService.updateOne(userId, cart);
+            }
+
+
         }
         else if (userCart.totalQuantity === 0) {
-            
-            sessionCart.userId = userId;
+
+            //sessionCart.userId.push(userId);
             cart = await cartService.updateOne(userId, sessionCart)
 
         } else {
             cart = userCart;
+            console.log(sessionCart);
             const merCartItem = [...userCart.items, ...sessionCart.items];
             const slugName = Array.from(
                 new Set(merCartItem.map((item) => item.slugName))
@@ -63,6 +82,15 @@ const mergeCart = async (userId, sessionCart) => {
             await cartService.updateOne(userId, cart);
 
         }
+
+        //delete promotion
+        if (cart.promotionCode !== "") {
+            cart.promotionCode = "";
+            cart.discountPrice = "";
+            cart.discountRate = 0;
+        }
+
+        cart.payment = cart.totalCost;
 
         return cart;
     } catch (error) {

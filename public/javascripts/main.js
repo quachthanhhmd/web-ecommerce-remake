@@ -181,7 +181,7 @@ $(document).ready(function () {
 
     const value = $(this).attr("value");
     const slugName = $(this).attr("name");
-    
+
 
     if (parseInt(value) === 0) {
       const re = confirm("Bạn chắc chắn muốn xóa vật phẩm khỏi giỏ hàng ?");
@@ -245,7 +245,9 @@ $(document).ready(function () {
 
     $(".body-share-cart").html("Nhập mã giỏ hàng đã được chia sẻ từ bạn bè để cùng nhau mua hàng nhé!!");
     $("#share-cart-token").attr("value", "");
-    $("#share-cart-token").attr("placeholder", "Nhập mã code nhận được từu bạn bè");
+    $("#share-cart-token").attr("placeholder", "Nhập mã code nhận được từ bạn bè");
+
+
 
     $("#accept-token").removeClass('hidden-button');
     $('#button-modal').trigger('click');
@@ -256,6 +258,29 @@ $(document).ready(function () {
 
     e.preventDefault();
 
+    const token = $("#share-cart-token").val();
+
+    console.log(token);
+
+    const request = $.ajax({
+      url: `/cart/share-cart/token/${token}`,
+      type: "PUT",
+      contentType: "application/json",
+      processData: false,
+      xhr: function () {
+        return window.XMLHttpRequest == null ||
+          new window.XMLHttpRequest().addEventListener == null
+          ? new window.ActiveXObject("Microsoft.XMLHTTP")
+          : $.ajaxSettings.xhr();
+      },
+    });
+
+    request.done(function (data, status) {
+      if (data.msg === "success" && status === "success") {
+
+        console.log(hahaha);
+      }
+    });
     $("#close-modal").trigger("click");
   })
 

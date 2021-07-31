@@ -425,12 +425,24 @@ module.exports.shareFriendCart = async (req, res, next) => {
 module.exports.getTokenShareFriendCart = async (req, res, next) => {
 
   try {
+    const { user } = req
     const { token } = req.params;
 
     const decoded = jwt.verify(token, jwtKey)
     const { _id } = decoded;
 
+    const cartOfFriend = await cartService.findCartbyId(_id);
 
+    const myCart = await cartService.findCartbyUserId(user._id);
+    if (cartOfFriend === null)
+      throw new Error("Cart of your friend not found!!");
+
+    if (myCart === null)
+      throw new Error("Your cart not found!!");
+
+    var newCart = await mergeCart(user._id, cartOfFriend);
+
+    console.log(newCart);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
