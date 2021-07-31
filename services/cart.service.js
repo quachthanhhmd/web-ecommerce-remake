@@ -13,9 +13,13 @@ module.exports.updateOne = async (id, cart) => {
 
     //delte _id of mongoose exists
 
-    cart.userId = id;
-    cart.status = "waiting";
+    const check = cart.userId.filter(x => x.equals(id))
+    if (check.length === 0)
+        cart.userId.push(id);
+
+    cart.markModified('items');
     return await cart.save();
+
 }
 
 module.exports.findCartbyUserId = (userId) => {
@@ -64,7 +68,7 @@ module.exports.createCart = async (cart) => {
 }
 
 module.exports.initCart = {
-    userId: null,
+    userId: [],
     status: "waiting",
     items: [],
     totalQuantity: 0,

@@ -29,6 +29,10 @@
 									TechShop
 								</div>
 								<div>
+									<a href="#" class="receive-share-cart" value="/cart/share-cart/{{cart._id}}">Nhập
+										giỏ
+										của bạn bè</a>
+
 									<a href="#" class="share-cart" value="/cart/share-cart/{{cart._id}}">Chia sẻ giỏ
 										hàng</a>
 								</div>
@@ -55,16 +59,18 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<div>Hãy copy đoạn mã này tới bạn bè và dán vào giỏ hàng của
+											<div class="body-share-cart">Hãy copy đoạn mã này tới bạn bè và dán
+												vào giỏ hàng của
 												bạn bè để cũng nhau mua hàng nhé.</div>
 											<br>
 											<input id="share-cart-token" type="text" placeholder="" value=""
 												style="width:50%;">
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
+											<button type="button" class="btn btn-secondary" id="close-modal"
 												data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save changes</button>
+											<button id="accept-token" type="button" class="btn btn-primary">Đồng
+												ý</button>
 										</div>
 									</div>
 								</div>

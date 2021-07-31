@@ -52,7 +52,7 @@ module.exports.displayCart = async (req, res, next) => {
 module.exports.addToCart = async (req, res, next) => {
   const { user } = req;
   let { cart } = req.session;
-  const { slugName } = req.params;
+  const { SlugName } = req.params;
 
   let flagNewItem = true;
 
@@ -61,21 +61,23 @@ module.exports.addToCart = async (req, res, next) => {
       const userCart = await cartService.findIdbyStatus(user._id, "waiting");
 
       if (!userCart) {
-        cart = await cartService.createCartbyId(user._id);
+        cart = await cartService.createCartbyId([user._id]);
+
       }
       else
         cart = userCart;
     }
 
-    const product = await productService.findbySlugname(slugName);
+    const product = await productService.findbySlugname(SlugName);
 
     if (!product)
       throw new Error("Product not found!");
 
-    const { _id, name, price, images } = product;
+    const { _id, slugName, name, price, images } = product;
 
     for (let i = 0; i < cart.items.length; i++) {
-      if (cart.items[i].name === name) {
+      if (cart.items[i].slugName === slugName) {
+
         cart.items[i].quantity++;
         var tmpTotal = parsePrice(cart.items[i].total);
 
@@ -114,6 +116,21 @@ module.exports.addToCart = async (req, res, next) => {
 
     cart.totalCost = s;
 
+    if (cart.promotionCode !== "") {
+
+      cart.discountPrice = parseIntToPrice(((0.03 * parseInt(parsePrice(cart.totalCost)) > infoProduct.promotion.desc) ? 200000 : 0.03 * parseInt(parsePrice(cart.totalCost))).toString());
+      cart.discountRate = 3;
+      cart.payment = parseIntToPrice((parseInt(parsePrice(cart.totalCost)) - parseInt(parsePrice(cart.discountPrice))).toString());
+
+
+      cart.promotionCode = promotionCode;
+
+      promotion = 1;
+
+    }
+    else {
+      cart.payment = cart.totalCost;
+    }
 
     if (user) {
 
@@ -155,7 +172,7 @@ module.exports.putUpdate = async (req, res, next) => {
       const userCart = await cartService.findIdbyStatus(user._id, "waiting")
 
       if (!userCart) {
-        cart = await cartService.createCartbyId(user._id);
+        cart = await cartService.createCartbyId([user._id]);
       }
       else cart = userCart;
     }
@@ -165,6 +182,7 @@ module.exports.putUpdate = async (req, res, next) => {
 
     cart.items = cart.items.map((item) => {
       if (item.slugName === slugName) {
+
         if (bias === 0) {
           cart.totalQuantity -= parseInt(item.quantity);
           var tmp = parsePrice(cart.totalCost);
@@ -181,7 +199,7 @@ module.exports.putUpdate = async (req, res, next) => {
         }
 
 
-        if (item.quantity === 1 && bias === -1) {
+        if (bias === 1 || bias === -1) {
 
           cart.totalQuantity += bias;
 
@@ -192,7 +210,6 @@ module.exports.putUpdate = async (req, res, next) => {
           while (cart.totalCost.charAt(0) === '0') {
             cart.totalCost = cart.totalCost.substr(1);
           }
-
 
           item.quantity += bias;
 
@@ -205,7 +222,7 @@ module.exports.putUpdate = async (req, res, next) => {
           }
 
 
-          return null;
+          return item;
         }
         else {
           cart.totalQuantity += bias;
@@ -216,6 +233,7 @@ module.exports.putUpdate = async (req, res, next) => {
           while (cart.totalCost.charAt(0) === '0') {
             cart.totalCost = cart.totalCost.substr(1);
           }
+
           item.quantity += bias;
 
           tmp = parsePrice(item.total);
@@ -227,14 +245,28 @@ module.exports.putUpdate = async (req, res, next) => {
           while (item.total.charAt(0) === '0') {
             item.total = cart.totalCost.substr(1);
           }
-
+          return item;
         }
       }
+
 
       return item;
     });
 
     cart.items = cart.items.filter((item) => item !== null);
+
+    if (cart.promotionCode !== "") {
+
+      cart.discountPrice = parseIntToPrice(((0.03 * parseInt(parsePrice(cart.totalCost)) > infoProduct.promotion.desc) ? 200000 : 0.03 * parseInt(parsePrice(cart.totalCost))).toString());
+      cart.discountRate = 3;
+      cart.payment = parseIntToPrice((parseInt(parsePrice(cart.totalCost)) - parseInt(parsePrice(cart.discountPrice))).toString());
+
+
+      cart.promotionCode = promotionCode;
+
+      promotion = 1;
+
+    }
 
     if (user) {
 
@@ -383,6 +415,24 @@ module.exports.shareFriendCart = async (req, res, next) => {
 
   } catch (error) {
 
+    return res.status(500).json({
+      msg: error
+    })
+  }
+}
+
+
+module.exports.getTokenShareFriendCart = async (req, res, next) => {
+
+  try {
+    const { token } = req.params;
+
+    const decoded = jwt.verify(token, jwtKey)
+    const { _id } = decoded;
+
+
+  } catch (error) {
+    console.log(error);
     return res.status(500).json({
       msg: error
     })

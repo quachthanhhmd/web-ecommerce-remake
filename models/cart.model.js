@@ -4,10 +4,21 @@ const enumStatus = {
   values: ['waiting', 'checked', 'paid']
 };
 
-const cartSchema = mongoose.Schema({
+
+const userSchema = mongoose.Schema({
+
   userId: {
     type: mongoose.Types.ObjectId,
-    ref: "User",
+    ref: "User"
+  },
+
+});
+
+
+const cartSchema = mongoose.Schema({
+  userId: {
+    type: Array,
+    default: []
   },
   status: {
     type: String,

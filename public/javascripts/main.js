@@ -181,7 +181,7 @@ $(document).ready(function () {
 
     const value = $(this).attr("value");
     const slugName = $(this).attr("name");
-
+    
 
     if (parseInt(value) === 0) {
       const re = confirm("Bạn chắc chắn muốn xóa vật phẩm khỏi giỏ hàng ?");
@@ -240,6 +240,25 @@ $(document).ready(function () {
     });
   });
 
+  $(".receive-share-cart").on("click", function (e) {
+    e.preventDefault();
+
+    $(".body-share-cart").html("Nhập mã giỏ hàng đã được chia sẻ từ bạn bè để cùng nhau mua hàng nhé!!");
+    $("#share-cart-token").attr("value", "");
+    $("#share-cart-token").attr("placeholder", "Nhập mã code nhận được từu bạn bè");
+
+    $("#accept-token").removeClass('hidden-button');
+    $('#button-modal').trigger('click');
+  })
+
+  $("#accept-token").on("click", function (e) {
+
+
+    e.preventDefault();
+
+    $("#close-modal").trigger("click");
+  })
+
   $(".share-cart").on("click", function (e) {
 
     e.preventDefault();
@@ -251,10 +270,11 @@ $(document).ready(function () {
     $.get(urlShareCart, function (data) {
 
       if (data.status !== 'Success') return;
-      console.log(data.token);
+
       $("#share-cart-token").attr("value", data.token);
       $("#share-cart-token").attr("placeholder", data.token);
 
+      $("#accept-token").addClass('hidden-button');
       $('#button-modal').trigger('click');
     });
 
