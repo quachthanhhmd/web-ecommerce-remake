@@ -1,12 +1,11 @@
-const { Mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const Cart = require("../models/cart.model")
 const ProductSevice = require("./Product.service");
 
-module.exports.findIdbyStatus = (id, status) => {
+module.exports.findIdbyStatus = async (id, status) => {
 
-    return Cart.findOne({
-        userId: { "$all": id },
-        status: status,
+    return await Cart.findOne({
+        userId: id,
     });
 }
 

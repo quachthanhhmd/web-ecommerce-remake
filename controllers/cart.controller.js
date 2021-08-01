@@ -59,7 +59,6 @@ module.exports.addToCart = async (req, res, next) => {
   try {
     if (user) {
       const userCart = await cartService.findIdbyStatus(user._id, "waiting");
-
       if (!userCart) {
         cart = await cartService.createCartbyId([user._id]);
 

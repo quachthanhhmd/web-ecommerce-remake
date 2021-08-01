@@ -16,6 +16,7 @@ const mergeCart = async (userId, sessionCart) => {
 
 
         const userCart = await cartService.findIdbyStatus(userId, "waiting");
+        console.log(userCart)
 
         if (!userCart) {
 
@@ -27,6 +28,7 @@ const mergeCart = async (userId, sessionCart) => {
             cart.userId.push(userId);
 
         } else {
+            cart.userId.push(userId);
             const merCartItem = [...userCart.items, ...sessionCart.items];
             const slugName = Array.from(
                 new Set(merCartItem.map((item) => item.slugName))
@@ -60,8 +62,6 @@ const mergeCart = async (userId, sessionCart) => {
                 cart.totalCost = cart.totalCost.substr(1);
             }
 
-            await cartService.updateOne(userId, cart);
-
         }
 
         //delete promotion
@@ -78,14 +78,11 @@ const mergeCart = async (userId, sessionCart) => {
 
             cartService.deleteOne(userCart);
         }
-        if (sessionCart.userId.length !== 0) {
 
-            cartService.deleteOne(sessionCart);
-        }
 
         cartService.createCart(cart);
 
-
+        console.log(cart);
         return cart;
     } catch (error) {
         console.log(error);

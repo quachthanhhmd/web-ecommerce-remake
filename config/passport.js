@@ -77,11 +77,10 @@ module.exports = function (passport) {
           }
           console.log('acc : ' + user.email + ' ' + user.password + ' ' + password, result);
 
-          await mergeCart(user._id, req.session.cart);
+          const cart = await mergeCart(user._id, req.session.cart);
 
-          const newCart = await cartService.findIdbyStatus(user._id, "waiting");
-          console.log(newCart);
-          req.session.cart = newCart;
+
+          req.session.cart = cart;
 
 
           return done(null, user);
