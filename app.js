@@ -30,7 +30,7 @@ const buyer = require('./routes/buyer');
 const Cart = require('./models/cart.model');
 const User = require('./models/user.model');
 
-const { initCart } = require('./services/cart.service');
+const { initCart } = require('./models/cart.model');
 
 const {
   getResource,

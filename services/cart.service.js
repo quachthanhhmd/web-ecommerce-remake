@@ -1,10 +1,11 @@
+const { Mongoose } = require("mongoose");
 const Cart = require("../models/cart.model")
 const ProductSevice = require("./Product.service");
 
 module.exports.findIdbyStatus = (id, status) => {
 
     return Cart.findOne({
-        userId: id,
+        userId: { "$all": id },
         status: status,
     });
 }
@@ -18,8 +19,9 @@ module.exports.updateOne = async (id, cart) => {
         cart.userId.push(id);
 
     cart.markModified('items');
-    return await cart.save();
+    await cart.save();
 
+    return cart;
 }
 
 module.exports.findCartbyUserId = (userId) => {
@@ -79,10 +81,18 @@ module.exports.deleteOne = async (cart) => {
     return await cart.deleteOne(cart);
 }
 
-module.exports.initCart = {
-    userId: [],
-    status: "waiting",
-    items: [],
-    totalQuantity: 0,
-    totalCost: 0,
-};
+module.exports.pushElementToArray = async (cart, element) => {
+
+    return await cart.updateOne(
+        { _id: cart._id },
+        { $push: { userId: element } },
+        function (error, success) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+            }
+        });
+
+}
+

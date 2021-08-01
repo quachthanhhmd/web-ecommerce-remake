@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
 const cartSchema = mongoose.Schema({
   userId: {
     type: Array,
-    default: []
+    default: [mongoose.Types.ObjectId]
   },
   status: {
     type: String,
@@ -62,3 +62,12 @@ const cartSchema = mongoose.Schema({
 cartSchema.set("timestamps", true);
 
 module.exports = mongoose.model("Cart", cartSchema);
+
+
+module.exports.initCart = {
+  userId: [mongoose.Types.ObjectId],
+  status: "waiting",
+  items: [],
+  totalQuantity: 0,
+  totalCost: 0,
+};

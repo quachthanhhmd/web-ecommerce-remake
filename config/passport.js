@@ -11,7 +11,7 @@ var User = require('../models/user.model');
 
 
 const { sendEmail } = require('../config/nodemailer');
-const cartController = require("../controllers/cart.controller");
+const { mergeCart } = require("../utilities/merge");
 const cartService = require("../services/cart.service")
 
 
@@ -77,9 +77,10 @@ module.exports = function (passport) {
           }
           console.log('acc : ' + user.email + ' ' + user.password + ' ' + password, result);
 
-          await cartController.mergeCart(user._id, req.session.cart);
+          await mergeCart(user._id, req.session.cart);
 
           const newCart = await cartService.findIdbyStatus(user._id, "waiting");
+          console.log(newCart);
           req.session.cart = newCart;
 
 
@@ -104,7 +105,7 @@ module.exports = function (passport) {
           if (err) {
             return done(err);
           }
-     
+
           if (user) {
             return done(null, false, {
               message: 'Tên đăng nhập đã tồn tại!'
@@ -177,7 +178,7 @@ module.exports = function (passport) {
         profileFields: ['id', 'displayName', 'link', 'name', 'photos', 'email'],
       },
       function (accessToken, refreshToken, profile, done) {
-    
+
         process.nextTick(function () {
           User.findOne(
             {

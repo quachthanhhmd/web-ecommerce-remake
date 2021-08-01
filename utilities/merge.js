@@ -1,4 +1,5 @@
 const cartService = require("../services/cart.service")
+const Cart = require('../models/cart.model');
 
 const { parseIntToPrice, parsePrice } = require("./price");
 
@@ -9,43 +10,23 @@ const { parseIntToPrice, parsePrice } = require("./price");
  * @returns {cart}
  */
 
-const mergeCart = async (userId, mergedCart) => {
+const mergeCart = async (userId, sessionCart) => {
     try {
-        let cart = {};
-
-
-        const sessionCart = mergedCart;
-
-        if (sessionCart._id != undefined) {
-            console.log(sessionCart._id);
-            sessionCart.userId.push(sessionCart.userId);
-            await cartService.deleteOne(mergedCart);
-        }
+        let cart = new Cart(sessionCart);
 
 
         const userCart = await cartService.findIdbyStatus(userId, "waiting");
 
         if (!userCart) {
-            sessionCart.userId.push(sessionCart.userId);
 
-            console.log(cart._id);
-
-            cart = await cartService.createCart(sessionCart);
-
-            if (cartService.findUserIdInArray(cart.userId, userId)) {
-                cartService.updateOne(userId, cart);
-            }
-
-
+            //cart = await cartService.createCart(sessionCart);
+            cart.userId.push(userId);
         }
         else if (userCart.totalQuantity === 0) {
 
-            //sessionCart.userId.push(userId);
-            cart = await cartService.updateOne(userId, sessionCart)
+            cart.userId.push(userId);
 
         } else {
-            cart = userCart;
-            console.log(sessionCart);
             const merCartItem = [...userCart.items, ...sessionCart.items];
             const slugName = Array.from(
                 new Set(merCartItem.map((item) => item.slugName))
@@ -91,6 +72,19 @@ const mergeCart = async (userId, mergedCart) => {
         }
 
         cart.payment = cart.totalCost;
+
+
+        if (userCart) {
+
+            cartService.deleteOne(userCart);
+        }
+        if (sessionCart.userId.length !== 0) {
+
+            cartService.deleteOne(sessionCart);
+        }
+
+        cartService.createCart(cart);
+
 
         return cart;
     } catch (error) {
