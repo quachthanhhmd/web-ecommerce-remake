@@ -169,6 +169,8 @@ $(document).ready(function () {
 
         $(".cart-count-add").html(`(${curCount + 1})`);
       }
+
+      sendMessage(data);
     });
   });
 
@@ -236,6 +238,7 @@ $(document).ready(function () {
         $(".cart-count-add").html(
           data.data.totalQuantity ? `(${data.data.totalQuantity})` : `(0)`
         );
+        sendMessage(data);
       }
     });
   });
@@ -246,8 +249,6 @@ $(document).ready(function () {
     $(".body-share-cart").html("Nhập mã giỏ hàng đã được chia sẻ từ bạn bè để cùng nhau mua hàng nhé!!");
     $("#share-cart-token").attr("value", "");
     $("#share-cart-token").attr("placeholder", "Nhập mã code nhận được từ bạn bè");
-
-
 
     $("#accept-token").removeClass('hidden-button');
     $('#button-modal').trigger('click');
@@ -278,7 +279,10 @@ $(document).ready(function () {
     request.done(function (data, status) {
       if (data.msg === "success" && status === "success") {
 
-        console.log(hahaha);
+
+        sendMessage(data);
+
+        location.reload();
       }
     });
     $("#close-modal").trigger("click");

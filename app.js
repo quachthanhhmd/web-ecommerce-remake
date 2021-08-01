@@ -6,6 +6,7 @@ const SESSION_SECRET = process.env.SESSION_SECRET
 const connectDB = require('./config/db')
 
 connectDB();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -13,24 +14,25 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 
-const session = require('express-session');
+
 const flash = require('express-flash');
 const exphbs = require('express-handlebars');
 const handlebars = require('handlebars');
+const ESession = require("express-session")
 
-const MongoDBStore = require('connect-mongodb-session')(session);
 const indexRouter = require('./routes/home');
 const usersRouter = require('./routes/users');
 const shopRouter = require('./routes/shop');
 const cartRouter = require('./routes/cart');
 const checkoutRouter = require('./routes/checkout');
 
-
 const buyer = require('./routes/buyer');
 const Cart = require('./models/cart.model');
 const User = require('./models/user.model');
 
 const { initCart } = require('./models/cart.model');
+const { session } = require("./middleware/session");
+
 
 const {
   getResource,
@@ -84,38 +86,23 @@ app.set('view engine', "hbs");
 app.engine('.hbs', hbs.engine);
 //--------------------------------------
 
-app.use(
-  session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: new MongoDBStore({ uri: process.env.MONGO_URL, collection: 'sessions' }),
-    cookie: {
-      maxAge: 7 * 86400 * 1000, // a session cookie will last for 7 days
 
-    },
 
-  }),
-);
+
 
 require('./config/passport')(passport);
 
 /* Passport require */
-app.use(
-  session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-  })
-);
 
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use(session);
 
 app.use(async (req, res, next) => {
+
+  var cart = cartService.
   var cart = new Cart(req.session.cart ? req.session.cart : initCart);
 
   req.session.cart = cart;

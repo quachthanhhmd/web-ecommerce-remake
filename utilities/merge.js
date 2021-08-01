@@ -16,7 +16,7 @@ const mergeCart = async (userId, sessionCart) => {
 
 
         const userCart = await cartService.findIdbyStatus(userId, "waiting");
-        console.log(userCart)
+
 
         if (!userCart) {
 
@@ -44,7 +44,8 @@ const mergeCart = async (userId, sessionCart) => {
                 while (uniSlug[0].total.charAt(0) === '0') {
                     uniSlug[0].total = uniSlug[0].total.substr(1);
                 }
-
+                if (uniSlug[0].quantity > 1)
+                    uniSlug[0].checkItem = 1;
                 return uniSlug[0];
             });
 
@@ -82,7 +83,7 @@ const mergeCart = async (userId, sessionCart) => {
 
         cartService.createCart(cart);
 
-        console.log(cart);
+
         return cart;
     } catch (error) {
         console.log(error);

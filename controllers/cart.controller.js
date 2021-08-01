@@ -281,6 +281,7 @@ module.exports.putUpdate = async (req, res, next) => {
       msg: "success",
       user: "Update cart successful!",
       data: cart,
+      path: "/cart"
     });
   } catch (error) {
     console.log(error);
@@ -439,9 +440,17 @@ module.exports.getTokenShareFriendCart = async (req, res, next) => {
     if (myCart === null)
       throw new Error("Your cart not found!!");
 
-    var newCart = await mergeCart(user._id, cartOfFriend);
+    const newCart = await mergeCart(user._id, cartOfFriend);
 
-    console.log(newCart);
+    req.session.cart = newCart;
+
+    return res.status(200).json({
+      msg: "success",
+      data: newCart,
+      path: "/cart"
+    })
+
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({

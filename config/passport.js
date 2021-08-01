@@ -236,7 +236,7 @@ module.exports = function (passport) {
       callbackURL: GOOGLE_CALLBACK_URL
     },
       function (accessToken, refreshToken, profile, done) {
-        console.log(profile);
+  
         process.nextTick(function () {
           User.findOne(
             {
