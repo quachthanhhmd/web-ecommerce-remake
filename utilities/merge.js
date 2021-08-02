@@ -18,17 +18,19 @@ const mergeCart = async (userId, sessionCart) => {
         const userCart = await cartService.findIdbyStatus(userId, "waiting");
 
 
+        const check = cart.userId.filter(x => x.equals(id))
+        if (check.length === 0)
+            cart.userId.push(id);
+
+
         if (!userCart) {
 
-            //cart = await cartService.createCart(sessionCart);
-            cart.userId.push(userId);
+
         }
         else if (userCart.totalQuantity === 0) {
 
-            cart.userId.push(userId);
-
         } else {
-            cart.userId.push(userId);
+
             const merCartItem = [...userCart.items, ...sessionCart.items];
             const slugName = Array.from(
                 new Set(merCartItem.map((item) => item.slugName))

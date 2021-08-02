@@ -1,5 +1,5 @@
 const socket = require('socket.io');
-const SESSION_SECRET = process.env.SESSION_SECRET
+
 var SessionSockets = require('session.socket.io');
 const cookieParser = require('cookie-parser');
 const cookie = require('cookie');
@@ -31,7 +31,8 @@ module.exports.socket = async (server) => {
 			if (data.path === "/cart") {
 
 				sk.handshake.session = data.data;
-				console.log(sk.handshake.session);
+
+
 			}
 
 			sk.broadcast.emit('server-send-commention', data);
@@ -40,13 +41,5 @@ module.exports.socket = async (server) => {
 
 	io.on('connection', onConnected);
 
-	io.set('authorization', function (handshake, accept) {
-		session(handshake, {}, function (err) {
-			if (err) return accept(err)
-			var session = handshake.session;
-			// check the session is valid
-			accept(null, session)
-		})
-	})
 };
 

@@ -116,7 +116,7 @@ app.use(async (req, res, next) => {
   (req.app.locals.popularBrand === undefined) && (req.app.locals.popularBrand = await findBrandPopular());
 
   req.app.locals.user = req.user || null;
- 
+
   next();
 });
 

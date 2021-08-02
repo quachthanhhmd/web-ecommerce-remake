@@ -24,7 +24,7 @@ socket.on('server-send-commention', (data) => {
   }
   else {
 
-    
+    window.sessionStorage.cart = data.data;
     location.reload();
   }
 
