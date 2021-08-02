@@ -236,7 +236,7 @@ module.exports = function (passport) {
       callbackURL: GOOGLE_CALLBACK_URL
     },
       function (accessToken, refreshToken, profile, done) {
-  
+
         process.nextTick(function () {
           User.findOne(
             {
@@ -265,10 +265,11 @@ module.exports = function (passport) {
                 if (user.google.id === undefined || user.google.id === "") {
 
                   user = Object.assign(user, initUser);
-                  console.log(user);
+
                   user.save();
                 }
 
+           
                 return done(null, user);
               } else {
                 let newUser = new User();

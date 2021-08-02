@@ -1,6 +1,14 @@
 const socket = require('socket.io');
+const SESSION_SECRET = process.env.SESSION_SECRET
+var SessionSockets = require('session.socket.io');
+const cookieParser = require('cookie-parser');
+const cookie = require('cookie');
+const { session } = require("./middleware/session")
+
+
 
 module.exports.socket = async (server) => {
+
 	const io = socket(server);
 
 	let socketsConnected = new Set();
@@ -9,7 +17,7 @@ module.exports.socket = async (server) => {
 		console.log('Socket connected', sk.id);
 		socketsConnected.add(sk.id);
 
-		console.log(sk.handshake);
+		//console.log(sk);
 
 		sk.on('disconnect', () => {
 			console.log('Socket disconnected', sk.id);
@@ -21,7 +29,9 @@ module.exports.socket = async (server) => {
 			//console.log('New comment from: ', data.data);
 
 			if (data.path === "/cart") {
-				console.log(sk);
+
+				sk.handshake.session = data.data;
+				console.log(sk.handshake.session);
 			}
 
 			sk.broadcast.emit('server-send-commention', data);
@@ -29,5 +39,14 @@ module.exports.socket = async (server) => {
 	}
 
 	io.on('connection', onConnected);
+
+	io.set('authorization', function (handshake, accept) {
+		session(handshake, {}, function (err) {
+			if (err) return accept(err)
+			var session = handshake.session;
+			// check the session is valid
+			accept(null, session)
+		})
+	})
 };
 

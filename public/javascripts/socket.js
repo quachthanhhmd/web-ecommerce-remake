@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io().connect();
 
 
 //server-side
@@ -23,8 +23,8 @@ socket.on('server-send-commention', (data) => {
     $('.add-comment').prepend(html);
   }
   else {
-    
 
+    
     location.reload();
   }
 

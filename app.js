@@ -58,6 +58,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(flash());
 
 app.use(cookieParser(SESSION_SECRET));
+app.use(session);
+
 app.use(express.static('public'));
 
 
@@ -98,11 +100,10 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(session);
+
 
 app.use(async (req, res, next) => {
 
-  var cart = cartService.
   var cart = new Cart(req.session.cart ? req.session.cart : initCart);
 
   req.session.cart = cart;
@@ -115,7 +116,7 @@ app.use(async (req, res, next) => {
   (req.app.locals.popularBrand === undefined) && (req.app.locals.popularBrand = await findBrandPopular());
 
   req.app.locals.user = req.user || null;
-
+ 
   next();
 });
 

@@ -266,7 +266,7 @@ exports.getCheckFogot = (req, res) => {
 
     const { token } = req.params;
     const message2 = req.session.message2;
-    console.log(message2)
+ 
     delete req.session.message2;
     res.render('checkforgot', {
         title: "Check code",
@@ -390,9 +390,10 @@ module.exports.getGoogleCallback = (req, res, next) => {
             if (err) {
                 return next(err);
             }
-
+          
             // Sync cart
             const cart = await mergeCart(user._id, req.session.cart);
+
             req.session.cart = cart;
 
             return res.redirect(req.session.historyUrl || '/');

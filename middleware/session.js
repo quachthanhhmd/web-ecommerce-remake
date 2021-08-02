@@ -7,7 +7,7 @@ const MongoDBStore = require('connect-mongodb-session')(ExpressSession);
 
 const session = ExpressSession({
     secret: SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     store: new MongoDBStore({ uri: process.env.MONGO_URL, collection: 'sessions' }),
     cookie: {
