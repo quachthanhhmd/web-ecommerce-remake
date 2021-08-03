@@ -1,321 +1,323 @@
-<section>
+<section class="background-container">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
 				{{> slidebar}}
 			</div>
+			<div style="background-color: white;">
+				<div class="col-sm-9 padding-right">
+					<div class="product-details">
+						<!--product-details-->
 
-			<div class="col-sm-9 padding-right">
-				<div class="product-details">
-					<!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src={{product.images.[0]}} alt="">
+								<h3>ZOOM</h3>
+							</div>
+							<div id="similar-product" class="carousel slide" data-ride="carousel">
 
-					<div class="col-sm-5">
-						<div class="view-product">
-							<img src={{product.images.[0]}} alt="">
-							<h3>ZOOM</h3>
-						</div>
-						<div id="similar-product" class="carousel slide" data-ride="carousel">
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner">
 
-							<!-- Wrapper for slides -->
-							<div class="carousel-inner">
+									{{{imageSlider product.images 3 "product-image"}}}
+								</div>
 
-								{{{imageSlider product.images 3 "product-image"}}}
+								<!-- Controls -->
+								<a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								</a>
+								<a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								</a>
 							</div>
 
-							<!-- Controls -->
-							<a class="left item-control" href="#similar-product" data-slide="prev">
-								<i class="fa fa-angle-left"></i>
-							</a>
-							<a class="right item-control" href="#similar-product" data-slide="next">
-								<i class="fa fa-angle-right"></i>
-							</a>
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information">
+								<!--/product-information-->
+
+								<h2>{{product.name}}</h2>
+								<div class="stars-product">
+
+									{{#if product.rating}}
+									{{{renderStar product.rating}}}
+
+									{{/if}}
+									<span class="count-rating"><b>{{product.countRating}}</b> lượt đánh giá</span>
+								</div>
+								<span>
+									<span>{{product.price}}</span>
+									<label>Số lượng:</label>
+									<input type="text" value="3" />
+									<a href="#" class="btn btn-fefault cart btn add-to-cart"
+										value="{{product.slugName}}">
+										<i class="fa fa-shopping-cart"></i>
+										Thêm vào giỏ hàng
+									</a>
+								</span>
+								<p><b>Trạng thái:</b> Còn hàng</p>
+								<p><b>Nhãn hiệu:</b> {{product.producer}}</p>
+
+								{{#if product.promotion}}
+								<div class="product-promotion">
+									<div class="promotion-title">
+										<b>Khuyến mãi liên quan:</b>
+									</div>
+									<ul>
+										<li class="li-promotion">Nhập mã <strong>{{product.promotion.code}}</strong>
+											để
+											giảm 3% tối đa
+											<strong>{{product.promotion.desc}}</strong> khi
+											thanh
+											toán
+											qua VNPAY-QR
+										</li>
+									</ul>
+								</div>
+								{{/if}}
+
+								<a href=""><img src="/images/product-details/share.png" class="share img-responsive"
+										alt="" /></a>
+
+
+							</div>
+
+
+						</div>
+						<!--/product-information-->
+					</div>
+
+				</div>
+				<!--/product-details-->
+
+				<div class="category-tab shop-details-tab">
+					<!--category-tab-->
+					<div class="col-sm-12">
+						<ul class="nav nav-tabs">
+							<li><a href="#details" data-toggle="tab">Chi tiết</a></li>
+							<li><a href="#companyprofile" data-toggle="tab">Thông số kỹ thuật</a></li>
+							<li class="active"><a href="#reviews" data-toggle="tab">Reviews (<span
+										class="num-reviews">{{NumComments}}</span>) </a></li>
+						</ul>
+					</div>
+					<div class="tab-content">
+						<div class="tab-pane fade" id="details">
+							{{#each product.descriptions}}
+							<div class="details-title">
+								<b>{{title}}</b>
+							</div>
+							<div class="details-content">
+								{{content}}
+							</div>
+							{{#if img}}
+							<div>
+
+								<img class="details-img" src="{{img}}" alt="" />
+							</div>
+							{{/if}}
+							{{/each}}
 						</div>
 
-					</div>
-					<div class="col-sm-7">
-						<div class="product-information">
-							<!--/product-information-->
+						<div class="tab-pane fade" id="companyprofile">
+							{{#if product.details}}
+							{{{tableDetails product.details}}}
+							{{/if}}
+						</div>
 
-							<h2>{{product.name}}</h2>
-							<div class="stars-product">
+						<div class="tab-pane fade active in" id="reviews">
+							<div class="col-sm-12">
+								{{#if comments}}
+								<div class="add-comment">
 
-								{{#if product.rating}}
-								{{{renderStar product.rating}}}
+									{{#each comments}}
+									<div class="commentMain justify-content">
+										<div class="imageUser">
+											<img src="{{imageUser}}" class="imageUserDetail">
+										</div>
+										<div class="content-comment">
+											<div class="content-name-time">
+												<div class="name-comment">
+													<p><b>{{username}}</b></p>
+												</div>
+
+												<div class="time-comment">
+													<p>{{createAt}}</p>
+												</div>
+											</div>
+											<div class="rate-comment">
+												{{#if rate}}
+												{{{renderStar rate}}}
+												{{/if}}
+											</div>
+
+											<div class="commentUser">
+												<p>{{comment}}</p>
+											</div>
+										</div>
+									</div>
+									{{/each}}
+
+								</div>
+
+								<div class="hidden-comment-main hidden-comment">
+									<a id="more-comments" value="{{product.slugName}}">Xem Thêm</a>
+									<a class="d-none" id="get-comment" value="{{start}}"> </a>
+								</div>
+								{{else}}
+								<div class="no-comment">
+									<strong>Chưa có bình luận nào</strong>
+									<p><i>Hãy là người bình luận đầu tiên</i></p>
+								</div>
 
 								{{/if}}
-								<span class="count-rating"><b>{{product.countRating}}</b> lượt đánh giá</span>
-							</div>
-							<span>
-								<span>{{product.price}}</span>
-								<label>Số lượng:</label>
-								<input type="text" value="3" />
-								<a href="#" class="btn btn-fefault cart btn add-to-cart" value="{{product.slugName}}">
-									<i class="fa fa-shopping-cart"></i>
-									Thêm vào giỏ hàng
-								</a>
-							</span>
-							<p><b>Trạng thái:</b> Còn hàng</p>
-							<p><b>Nhãn hiệu:</b> {{product.producer}}</p>
-
-							{{#if product.promotion}}
-							<div class="product-promotion">
-								<div class="promotion-title">
-									<b>Khuyến mãi liên quan:</b>
-								</div>
-								<ul>
-									<li class="li-promotion">Nhập mã <strong>{{product.promotion.code}}</strong> để
-										giảm 3% tối đa
-										<strong>{{product.promotion.desc}}</strong> khi
-										thanh
-										toán
-										qua VNPAY-QR
-									</li>
-								</ul>
-							</div>
-							{{/if}}
-
-							<a href=""><img src="/images/product-details/share.png" class="share img-responsive"
-									alt="" /></a>
-
-
-						</div>
-
-
-					</div>
-					<!--/product-information-->
-				</div>
-
-			</div>
-			<!--/product-details-->
-
-			<div class="category-tab shop-details-tab">
-				<!--category-tab-->
-				<div class="col-sm-12">
-					<ul class="nav nav-tabs">
-						<li><a href="#details" data-toggle="tab">Chi tiết</a></li>
-						<li><a href="#companyprofile" data-toggle="tab">Thông số kỹ thuật</a></li>
-						<li class="active"><a href="#reviews" data-toggle="tab">Reviews (<span
-									class="num-reviews">{{NumComments}}</span>) </a></li>
-					</ul>
-				</div>
-				<div class="tab-content">
-					<div class="tab-pane fade" id="details">
-						{{#each product.descriptions}}
-						<div class="details-title">
-							<b>{{title}}</b>
-						</div>
-						<div class="details-content">
-							{{content}}
-						</div>
-						{{#if img}}
-						<div>
-
-							<img class="details-img" src="{{img}}" alt="" />
-						</div>
-						{{/if}}
-						{{/each}}
-					</div>
-
-					<div class="tab-pane fade" id="companyprofile">
-						{{#if product.details}}
-						{{{tableDetails product.details}}}
-						{{/if}}
-					</div>
-
-					<div class="tab-pane fade active in" id="reviews">
-						<div class="col-sm-12">
-							{{#if comments}}
-							<div class="add-comment">
-
-								{{#each comments}}
-								<div class="commentMain justify-content">
-									<div class="imageUser">
-										<img src="{{imageUser}}" class="imageUserDetail">
+								<div class="comment-group">
+									<div class="comment-title">
+										<b>Nhập bình luận của bạn về sản phẩm</b>
 									</div>
-									<div class="content-comment">
-										<div class="content-name-time">
-											<div class="name-comment">
-												<p><b>{{username}}</b></p>
-											</div>
-
-											<div class="time-comment">
-												<p>{{createAt}}</p>
-											</div>
-										</div>
-										<div class="rate-comment">
-											{{#if rate}}
-											{{{renderStar rate}}}
-											{{/if}}
-										</div>
-
-										<div class="commentUser">
-											<p>{{comment}}</p>
-										</div>
-									</div>
-								</div>
-								{{/each}}
-
-							</div>
-
-							<div class="hidden-comment-main hidden-comment">
-								<a id="more-comments" value="{{product.slugName}}">Xem Thêm</a>
-								<a class="d-none" id="get-comment" value="{{start}}"> </a>
-							</div>
-							{{else}}
-							<div class="no-comment">
-								<strong>Chưa có bình luận nào</strong>
-								<p><i>Hãy là người bình luận đầu tiên</i></p>
-							</div>
-
-							{{/if}}
-							<div class="comment-group">
-								<div class="comment-title">
-									<b>Nhập bình luận của bạn về sản phẩm</b>
-								</div>
 
 
-								<div class="rate-avt">
-									<div>
+									<div class="rate-avt">
 										<div>
-											<span class="rating-name"><b>Rating: </b></span>
+											<div>
+												<span class="rating-name"><b>Rating: </b></span>
+											</div>
+											<div class="stars-comment">
+
+												<input class="star star-5" id="star-5" type="radio" name="rate" />
+												<label class="star star-5" for="star-5"></label>
+												<input class="star star-4" id="star-4" type="radio" name="rate" />
+												<label class="star star-4" for="star-4"></label>
+												<input class="star star-3" id="star-3" type="radio" name="rate" />
+												<label class="star star-3" for="star-3"></label>
+												<input class="star star-2" id="star-2" type="radio" name="rate" />
+												<label class="star star-2" for="star-2"></label>
+												<input class="star star-1" id="star-1" type="radio" name="rate" />
+												<label class="star star-1" for="star-1"></label>
+
+											</div>
 										</div>
-										<div class="stars-comment">
-
-											<input class="star star-5" id="star-5" type="radio" name="rate" />
-											<label class="star star-5" for="star-5"></label>
-											<input class="star star-4" id="star-4" type="radio" name="rate" />
-											<label class="star star-4" for="star-4"></label>
-											<input class="star star-3" id="star-3" type="radio" name="rate" />
-											<label class="star star-3" for="star-3"></label>
-											<input class="star star-2" id="star-2" type="radio" name="rate" />
-											<label class="star star-2" for="star-2"></label>
-											<input class="star star-1" id="star-1" type="radio" name="rate" />
-											<label class="star star-1" for="star-1"></label>
-
+										<div class="imageUser">
+											<img src="{{user.image}}" class="imageUserDetail">
 										</div>
 									</div>
-									<div class="imageUser">
-										<img src="{{user.image}}" class="imageUserDetail">
+									<div class="form-group">
+										<label for="exampleFormControlTextarea1">Nhập bình luận</label>
+										<textarea name="comment" id="comment-box"
+											placeholder="Nhập bình luận của bạn" type="text" class="form-control"
+											id="exampleFormControlTextarea1" rows="3"></textarea>
 									</div>
-								</div>
-								<div class="form-group">
-									<label for="exampleFormControlTextarea1">Nhập bình luận</label>
-									<textarea name="comment" id="comment-box" placeholder="Nhập bình luận của bạn"
-										type="text" class="form-control" id="exampleFormControlTextarea1"
-										rows="3"></textarea>
-								</div>
-								<button type="button" class="btn btn-default pull-right submit-comment"
-									value="{{product.slugName}}">
-									Gửi bình luận
-								</button>
+									<button type="button" class="btn btn-default pull-right submit-comment"
+										value="{{product.slugName}}">
+										Gửi bình luận
+									</button>
 
+								</div>
 							</div>
 						</div>
+
 					</div>
-
 				</div>
-			</div>
-			<!--/category-tab-->
+				<!--/category-tab-->
 
-			<div class="recommended_items">
-				<!--recommended_items-->
-				<h2 class="title text-center">recommended items</h2>
+				<div class="recommended_items">
+					<!--recommended_items-->
+					<h2 class="title text-center">recommended items</h2>
 
-				<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-					<div class="carousel-inner">
-						<div class="item active">
-							<div class="col-sm-4">
-								<div class="product-image-wrapper">
-									<div class="single-products">
-										<div class="productinfo text-center">
-											<img src="/images/home/recommend1.jpg" alt="" />
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<button type="button" class="btn btn-default add-to-cart"><i
-													class="fa fa-shopping-cart"></i>Add to cart</button>
+					<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="/images/home/recommend1.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i
+														class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="/images/home/recommend2.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i
+														class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="/images/home/recommend3.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i
+														class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4">
-								<div class="product-image-wrapper">
-									<div class="single-products">
-										<div class="productinfo text-center">
-											<img src="/images/home/recommend2.jpg" alt="" />
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<button type="button" class="btn btn-default add-to-cart"><i
-													class="fa fa-shopping-cart"></i>Add to cart</button>
+							<div class="item">
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="/images/home/recommend1.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i
+														class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="product-image-wrapper">
-									<div class="single-products">
-										<div class="productinfo text-center">
-											<img src="/images/home/recommend3.jpg" alt="" />
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<button type="button" class="btn btn-default add-to-cart"><i
-													class="fa fa-shopping-cart"></i>Add to cart</button>
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="/images/home/recommend2.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i
+														class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="/images/home/recommend3.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<button type="button" class="btn btn-default add-to-cart"><i
+														class="fa fa-shopping-cart"></i>Add to cart</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="item">
-							<div class="col-sm-4">
-								<div class="product-image-wrapper">
-									<div class="single-products">
-										<div class="productinfo text-center">
-											<img src="/images/home/recommend1.jpg" alt="" />
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<button type="button" class="btn btn-default add-to-cart"><i
-													class="fa fa-shopping-cart"></i>Add to cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="product-image-wrapper">
-									<div class="single-products">
-										<div class="productinfo text-center">
-											<img src="/images/home/recommend2.jpg" alt="" />
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<button type="button" class="btn btn-default add-to-cart"><i
-													class="fa fa-shopping-cart"></i>Add to cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="product-image-wrapper">
-									<div class="single-products">
-										<div class="productinfo text-center">
-											<img src="/images/home/recommend3.jpg" alt="" />
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<button type="button" class="btn btn-default add-to-cart"><i
-													class="fa fa-shopping-cart"></i>Add to cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
 					</div>
-					<a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-						<i class="fa fa-angle-left"></i>
-					</a>
-					<a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-						<i class="fa fa-angle-right"></i>
-					</a>
 				</div>
+				<!--/recommended_items-->
 			</div>
-			<!--/recommended_items-->
-
 		</div>
 	</div>
 	</div>

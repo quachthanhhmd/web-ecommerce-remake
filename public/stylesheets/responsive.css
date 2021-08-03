@@ -247,7 +247,7 @@
     font-family: "Roboto", sans-serif;
   }
 
-  .nav.navbar-nav .dropdown-acc {
+  /* .nav.navbar-nav .dropdown-acc {
     position: relative;
     display: inline-block;
   }
@@ -264,8 +264,13 @@
 
   .dropdown-acc:hover .sub-menu-acc {
     display: block;
-  }
+  } */
 
+  .nav.navbar-nav > li:hover > ul.sub-menu-acc {
+    display: block;
+    -webkit-animation: fadeInUp 400ms;
+    animation: fadeInUp 400ms;
+  }
   .navbar-collapse.in {
     overflow: inherit;
   }
