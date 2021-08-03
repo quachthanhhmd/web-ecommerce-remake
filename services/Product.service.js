@@ -16,10 +16,14 @@ module.exports.listAllProduct = async () => {
  */
 module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
 
+
     if (filter.query !== undefined) {
         let search = { $text: { $search: filter.query } };
-        initQuery = Object.assign(initQuery, search);
+        delete filter.query;
+        filter = Object.assign(filter, search);
 
+
+        console.log(filter);
     }
 
     var products = await ProdMongoose.find(filter)

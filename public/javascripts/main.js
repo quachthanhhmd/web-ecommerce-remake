@@ -63,10 +63,28 @@ $(document).ready(function () {
   'use strict';
   //slidebar hover
   $(".panel-heading").mouseenter(function () {
-    $(".panel-collapse").fadeIn();
+
+    const hrefSlider = $(this).children().children().attr("href");
+    console.log(hrefSlider);
+    $(hrefSlider).collapse('show');
   });
+
+  $(".panel-dropdown-heading").mouseenter(function () {
+
+    const hrefSlider = $(this).children().children().attr("href");
+    console.log(hrefSlider);
+    $(hrefSlider).collapse('show');
+  });
+
+
   $(".panel-collapse").mouseleave(function () {
-    $(".panel-collapse").fadeOut();
+
+    $(".panel-collapse").collapse('hide');
+  });
+
+  $(".panel-dropdown-collapse").mouseleave(function () {
+
+    $(".panel-dropdown-collapse").collapse('hide');
   });
 
 

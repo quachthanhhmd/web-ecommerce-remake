@@ -91,7 +91,7 @@ module.exports.getSearch = async (req, res, next) => {
 
         const Query = clean({ query, brands, category, device });
 
-  
+
 
         const dataProduct = await ProductService.listProdPagination(Query, page, 12);
 
