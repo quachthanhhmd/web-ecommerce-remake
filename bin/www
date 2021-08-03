@@ -29,11 +29,6 @@ const io = require("socket.io")(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
-
-
-
-
 io.use(
   sharedsession(session, {
     autoSave: true

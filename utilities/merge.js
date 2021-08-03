@@ -20,7 +20,7 @@ const mergeCart = async (userId, sessionCart) => {
 
         const check = cart.userId.filter(x => x.equals(id))
         if (check.length === 0)
-            cart.userId.push(id);
+            cart.userId.push(userId);
 
 
         if (!userCart) {

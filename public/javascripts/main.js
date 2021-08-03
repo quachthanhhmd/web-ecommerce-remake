@@ -28,27 +28,32 @@ $(document).ready(function () {
       activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
       zIndex: 2147483647 // Z-Index for the overlay
     });
+
+    $('#province', function (e) {
+
+      $.ajax({
+        url: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province",
+        headers: {
+          "token": "9b8adbe4-f439-11eb-92c9-be99c16f09d3",
+          "Content-Type": "application/json"
+        },
+        method: "GET",
+        dataType: "json",
+        success: function (res) {
+
+          var str = `<option>Tỉnh / Thành phố</option>`;
+          for (let i = 0; i < res.data.length; i++) {
+            str += `<option data-province=${res.data[i].ProvinceID}> ${res.data[i].ProvinceName} </option>`
+          }
+
+          $('#province').html(str);
+        }
+      })
+
+    })
   });
 
-  // $('.pagination', e => {
-  //   const pagingList = $(".pagination > ul").children();
-  //   for (let i = 1; i < pagingList.length - 1; i++) {
 
-  //     let pagingExist = pagingList.eq(i).attr("value");
-
-  //     if (pagingExist.indexOf("page=") && pagingExist[pagingExist.length] !== "=") {
-  //       const index = pagingExist.lastIndexOf("page=");
-
-  //       pagingExist = pagingExist.substr(0, index + 5);
-
-  //     }
-
-
-  //     const query = pagingExist + pagingList.eq(i).html();
-  //     pagingList.eq(i).attr("value", query);
-  //   }
-
-  // })
 
 
 });
@@ -626,6 +631,65 @@ $(document).ready(function () {
     urlParams.set('page', val);
     window.location.search = urlParams;
 
+  })
+
+  //dropdown choose district
+
+
+  $("#province").change(function (e) {
+
+
+    const province = $("#province").find(":selected").attr("data-province");
+    console.log(province);
+    if (province === null) return;
+
+    $.ajax({
+      url: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district",
+      headers: {
+        "token": "9b8adbe4-f439-11eb-92c9-be99c16f09d3",
+        "Content-Type": "application/json"
+      },
+      method: "GET",
+      dataType: "json",
+      success: function (res) {
+        console.log(res.data);
+        var str = `<option>Quận / Huyện</option>`;
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].ProvinceID == province)
+            str += `<option data-district=${res.data[i].DistrictID}> ${res.data[i].DistrictName}</option>`
+        }
+
+        $('#district').html(str);
+        $('#ward').html(`<option>Phường / Xã</option>`);
+      }
+    })
+  })
+
+  $("#district").change(function (e) {
+
+    const district = $("#district").find(":selected").attr("data-district");
+    console.log(district);
+    if (district === null) return;
+
+    $.ajax({
+      url: `https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=${district}`,
+      headers: {
+        "token": "9b8adbe4-f439-11eb-92c9-be99c16f09d3",
+        "Content-Type": "application/json"
+      },
+      method: "GET",
+      dataType: "json",
+      success: function (res) {
+        console.log(res.data);
+        var str = `<option>Phường / Xã</option>`;
+        for (let i = 0; i < res.data.length; i++) {
+
+          str += `<option data-ward=${res.data[i].WardCode}> ${res.data[i].WardName}</option>`
+        }
+
+        $('#ward').html(str);
+      }
+    })
   })
 
 })(jQuery);
