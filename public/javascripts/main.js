@@ -41,6 +41,9 @@ $(document).ready(function () {
         dataType: "json",
         success: function (res) {
 
+
+          res.data.sort((a, b) => a.ProvinceName > b.ProvinceName ? 1 : -1);
+
           var str = `<option>Tỉnh / Thành phố</option>`;
           for (let i = 0; i < res.data.length; i++) {
             str += `<option data-province=${res.data[i].ProvinceID}> ${res.data[i].ProvinceName} </option>`
@@ -670,6 +673,9 @@ $(document).ready(function () {
       method: "GET",
       dataType: "json",
       success: function (res) {
+
+        res.data.sort((a, b) => a.DistrictName > b.DistrictName ? 1 : -1);
+
         console.log(res.data);
         var str = `<option>Quận / Huyện</option>`;
         for (let i = 0; i < res.data.length; i++) {
@@ -686,7 +692,7 @@ $(document).ready(function () {
   $("#district").change(function (e) {
 
     const district = $("#district").find(":selected").attr("data-district");
-    console.log(district);
+
     if (district === null) return;
 
     $.ajax({
@@ -698,7 +704,8 @@ $(document).ready(function () {
       method: "GET",
       dataType: "json",
       success: function (res) {
-        console.log(res.data);
+
+        res.data.sort((a, b) => a.WardName > b.WardName ? 1 : -1);
         var str = `<option>Phường / Xã</option>`;
         for (let i = 0; i < res.data.length; i++) {
 

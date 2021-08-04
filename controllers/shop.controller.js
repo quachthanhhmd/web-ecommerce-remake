@@ -86,10 +86,15 @@ module.exports.getSearch = async (req, res, next) => {
 
     try {
 
-        const { query, category, brands, device } = req.query;
+        let { query, producer, device, type } = req.query;
+
+        if (type === "Laptop ")
+            type = "Laptop & Macbook";
+
         const page = +(req.query.page) || 1;
 
-        const Query = clean({ query, brands, category, device });
+        console.log(type);
+        const Query = clean({ query, producer, type, device });
 
 
 

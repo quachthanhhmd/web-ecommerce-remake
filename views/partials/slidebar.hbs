@@ -8,8 +8,9 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordian" href="#type-{{idBrand}}" id="parent-{{idBrand}}">
+                        <a href="/shop/search?type={{type}}">{{type}}</a>
                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                        {{type}}
+
                     </a>
                 </h4>
             </div>
@@ -25,7 +26,7 @@
                                 <h4 class="panel-title drop-color">
                                     <a data-toggle="collapse" data-parent="parent-{{../idBrand}}" href="#brand-{{id}}">
 
-                                        {{name}}
+                                        <a href="/shop/search?type={{../type}}&device={{name}}">{{name}}</a>
                                         <span class="badge-brand"><i class="fa fa-plus"></i></span>
 
                                     </a>
@@ -60,7 +61,7 @@
         <div class="brands-name">
             <ul class="nav nav-pills nav-stacked">
                 {{#each popularBrand}}
-                <li><a href="#"> <span class="pull-right">({{count}})</span>{{_id}}</a></li>
+                <li><a href="/shop/search?producer={{_id}}"> <span class="pull-right">({{count}})</span>{{_id}}</a></li>
                 {{/each}}
             </ul>
         </div>

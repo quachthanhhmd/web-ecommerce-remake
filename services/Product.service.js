@@ -23,9 +23,9 @@ module.exports.listProdPagination = async (filter, pageNumber, itemPerPage) => {
         filter = Object.assign(filter, search);
 
 
-        console.log(filter);
-    }
 
+    }
+    console.log(filter);
     var products = await ProdMongoose.find(filter)
         .skip((pageNumber - 1) * itemPerPage)
         .limit(itemPerPage)
