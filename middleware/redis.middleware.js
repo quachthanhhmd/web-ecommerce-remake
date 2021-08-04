@@ -1,32 +1,54 @@
 const RedisClient = require("../config/redis");
 
 
-const homeCache = (req, res, next) => {
+/**
+ * Global search cache middleware
+ */
+const searchCache = (req, res, next) => {
+    // Query string
+    const { producer, type, query, device } = req.query;
+    var page = parseInt(req.query.page) || 1;
 
-    console.log("Key: /");
 
-    RedisClient.get("/", (err, data) => {
+    if (page < 1) page = 1;
 
-        if (err) {
-            throw new Error(err);
+    // Cache key
+    const key =
+        (producer ? producer : '') +
+        (type ? type : '') +
+        (query ? query : '') +
+        (device ? device : '') + page;
+    console.log('Cache key:' + key);
+
+    RedisClient.get(key, (error, data) => {
+        if (error) {
+            console.log(error);
+            return res.render('error', {
+                message: error.message,
+                error,
+            });
         }
 
-        if (data !== null) {
+
+        if (data != null) {
+
             console.log('Cache hit!');
-            res.render('pages/home', {
-                product: JSON.parse(data) || [],
+            data = JSON.parse(data);
+            res.render('pages/shop', {
+                title: 'Shop',
+                products: data.data,
+                maxPage: data.maxPage,
+                page: data.page
             });
         } else {
             console.log('Cache miss!');
             next();
         }
-    })
-
-
-}
+    });
+};
 
 
 
 module.exports = {
-    homeCache
+    searchCache
 }

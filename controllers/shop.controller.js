@@ -3,6 +3,8 @@ const Product = require("../models/product.model");
 
 const { clean } = require("../utilities/handleObject");
 
+const RedisClient = require("../config/redis");
+
 const ITEM_PER_PAGE = 12;
 
 
@@ -93,13 +95,31 @@ module.exports.getSearch = async (req, res, next) => {
 
         const page = +(req.query.page) || 1;
 
-        console.log(type);
+
         const Query = clean({ query, producer, type, device });
 
 
 
         const dataProduct = await ProductService.listProdPagination(Query, page, 12);
 
+
+        //cache
+        const key =
+            (producer ? producer : '') +
+            (type ? type : '') +
+            (query ? query : '') +
+            (device ? device : '') + page;
+
+        console.log(key);
+        RedisClient.setex(
+            key,
+            7 * 86400,
+            JSON.stringify({
+                data: dataProduct.data || null,
+                maxPage: dataProduct.pages || null,
+                page: page,
+            })
+        );
 
         res.render('pages/shop', {
             title: 'Shop',
