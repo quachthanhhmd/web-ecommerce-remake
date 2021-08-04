@@ -34,6 +34,8 @@ const { initCart } = require('./models/cart.model');
 const { session } = require("./middleware/session");
 
 
+
+
 const {
   getResource,
   findBrandPopular
