@@ -18,7 +18,6 @@ const passport = require('passport');
 const flash = require('express-flash');
 const exphbs = require('express-handlebars');
 const handlebars = require('handlebars');
-const ESession = require("express-session")
 
 const indexRouter = require('./routes/home');
 const usersRouter = require('./routes/users');
@@ -33,7 +32,8 @@ const User = require('./models/user.model');
 const { initCart } = require('./models/cart.model');
 const { session } = require("./middleware/session");
 
-
+const { getResourceMiddleware } = require('./middleware/redis.middleware')
+const { setResource } = require("./utilities/SetRedis");
 
 
 const {
@@ -114,8 +114,23 @@ app.use(async (req, res, next) => {
   res.locals.session = req.session;
 
 
-  (req.app.locals.allType === undefined) && (req.app.locals.allType = await getResource());
-  (req.app.locals.popularBrand === undefined) && (req.app.locals.popularBrand = await findBrandPopular());
+  if (req.app.locals.allType === undefined || req.app.locals.popularBrand === undefined) {
+
+    const data = getResourceMiddleware();
+    if (data != undefined) {
+
+      console.log(Object.keys(data))
+      req.app.locals.allType = data.resource;
+      req.app.locals.popularBrand = data.brands;
+    } else {
+
+      req.app.locals.allType = await getResource();
+      req.app.locals.popularBrand = await findBrandPopular();
+      setResource(req.app.locals.allType, req.app.locals.popularBrand);
+    }
+  }
+
+
 
   req.app.locals.user = req.user || null;
 

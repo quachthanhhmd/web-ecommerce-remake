@@ -65,7 +65,7 @@ module.exports = mongoose.model("Cart", cartSchema);
 
 
 module.exports.initCart = {
-  userId: [mongoose.Types.ObjectId],
+  userId: [],
   status: "waiting",
   items: [],
   totalQuantity: 0,

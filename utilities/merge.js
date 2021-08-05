@@ -17,8 +17,8 @@ const mergeCart = async (userId, sessionCart) => {
 
         const userCart = await cartService.findIdbyStatus(userId, "waiting");
 
-
-        const check = cart.userId.filter(x => x.equals(id))
+        console.log(cart.userId);
+        const check = cart.userId.filter(x => x.equals(userId))
         if (check.length === 0)
             cart.userId.push(userId);
 

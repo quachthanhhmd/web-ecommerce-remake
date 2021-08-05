@@ -48,7 +48,34 @@ const searchCache = (req, res, next) => {
 };
 
 
+const getResourceMiddleware = () => {
+
+    const key = "ResourcesAndBrands";
+
+    RedisClient.get(key, (error, data) => {
+        if (error) {
+            console.log(error);
+            return error;
+        }
+
+
+        if (data != null) {
+
+            console.log('Cache hit!');
+            data = JSON.parse(data);
+
+            return data;
+
+        } else {
+            console.log('Cache miss!');
+
+            return data;
+        }
+    });
+}
+
 
 module.exports = {
-    searchCache
+    searchCache,
+    getResourceMiddleware
 }
