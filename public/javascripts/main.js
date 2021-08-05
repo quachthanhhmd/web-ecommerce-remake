@@ -480,10 +480,14 @@ $(document).ready(function () {
         console.log(data);
         if (data.msg === 'success') {
 
-          var commentuser = modelComment([data.data]);
+          const commentuser = modelComment([data.data]);
 
           // Emit socket
           sendMessage(data);
+
+
+          $('.add-comment').prepend(commentuser);
+
 
           $("#comment-box").val("");
           $('.num-reviews').html(numReviews + 1);

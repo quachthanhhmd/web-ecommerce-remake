@@ -4,7 +4,7 @@ exports.detail = async (req, res, next) => {
     // Get books from model
 
     try {
-        const id = req.user._id;
+
         const product = await Product.findbySlugname(req.params.slugName);
 
 

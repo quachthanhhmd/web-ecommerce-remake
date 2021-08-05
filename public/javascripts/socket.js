@@ -19,7 +19,7 @@ socket.on('server-send-commention', (data) => {
   // Update view comment
   if (url !== "/cart") {
     const html = modelComment([data.data]);
-    console.log(html);
+    
     $('.add-comment').prepend(html);
   }
   else {
