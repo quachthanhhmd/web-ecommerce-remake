@@ -2,17 +2,17 @@ const express = require('express');
 const { get } = require('mongoose');
 const passport = require('passport');
 
-var controllers = require('../controllers/buyer.controller');
+const controllers = require('../controllers/buyer.controller');
 
-var authorize = require("../middleware/auth");
+const authorize = require("../middleware/auth");
 
 
 const router = express.Router();
 
 
-router.get('/login', controllers.getLogin);
+router.get('/login', authorize.CheckNotAuth, controllers.getLogin);
 
-router.post('/login', controllers.postLogin);
+router.post('/login', authorize.CheckNotAuth, controllers.postLogin);
 
 router.post('/signup', passport.authenticate('localSignup', {
         successRedirect: '/buyer/login',
@@ -22,42 +22,42 @@ router.post('/signup', passport.authenticate('localSignup', {
 }));
 
 
-router.get('/signup', controllers.getRegister);
+router.get('/signup', authorize.CheckNotAuth, controllers.getRegister);
 
 
-router.get('/confirm/:token', controllers.confirm);
+router.get('/confirm/:token', authorize.CheckNotAuth, controllers.confirm);
 
 
 router.route('/forgot')
-        .get(controllers.getForgot)
-        .post(controllers.postForgot);
+        .get(authorize.CheckNotAuth, controllers.getForgot)
+        .post(authorize.CheckNotAuth, controllers.postForgot);
 
 router.route('/resetPassword/:token')
-        .get(controllers.getResetPassword)
-        .post(controllers.postResetPassword);
+        .get(authorize.CheckNotAuth, controllers.getResetPassword)
+        .post(authorize.CheckNotAuth, controllers.postResetPassword);
 
 
 
 router.route('/checkforgot/:token')
-        .get(controllers.getCheckFogot)
-        .post(controllers.forgot);
+        .get(authorize.CheckNotAuth, controllers.getCheckFogot)
+        .post(authorize.CheckNotAuth, controllers.forgot);
 
 
-router.post('/checkSignup', controllers.checkSingup);
+router.post('/checkSignup', authorize.CheckNotAuth, controllers.checkSingup);
 
 
 /* OAuth with passport */
 
-router.get("/facebook", passport.authenticate('facebook', { scope: 'email' }));
+router.get("/facebook", authorize.CheckNotAuth, passport.authenticate('facebook', { scope: 'email' }));
 
-router.get("/facebook/callback",
+router.get("/facebook/callback", authorize.CheckNotAuth,
         controllers.getFacebookCallback
 )
 
 /* OAuth with google */
-router.get("/google", passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get("/google", authorize.CheckNotAuth, passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get("/google/callback",
+router.get("/google/callback", authorize.CheckNotAuth,
         controllers.getGoogleCallback
 );
 

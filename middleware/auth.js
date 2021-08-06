@@ -6,7 +6,7 @@ module.exports.auth = async (req, res, next) => {
 
     if (!req.isAuthenticated()) {
         req.session.historyUrl = req.originalUrl;
-     
+
 
         res.redirect('/buyer/login');
         return;
@@ -15,7 +15,7 @@ module.exports.auth = async (req, res, next) => {
 
     User.findById(id, (err, result) => {
 
-  
+
         if (!result) {
             req.session.historyUrl = req.originalUrl;
             console.log(req.originalUrl);
@@ -37,4 +37,16 @@ module.exports.auth = async (req, res, next) => {
     })
 
 
+}
+
+
+module.exports.CheckNotAuth = async (req, res, next) => {
+
+
+    if (req.isAuthenticated()) {
+        res.redirect('/');
+        return;
+    }
+
+    next();
 }
