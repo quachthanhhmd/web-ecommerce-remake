@@ -13,7 +13,7 @@ const { mergeCart } = require("../utilities/merge");
 
 
 
-exports.getLogin = (req, res, next) => {
+module.exports.getLogin = (req, res, next) => {
     const message = req.flash("error")[0];
 
 
@@ -26,6 +26,35 @@ exports.getLogin = (req, res, next) => {
         message2: message2,
     });
 
+}
+
+module.exports.postLogin = async (req, res, next) => {
+
+    try {
+        passport.authenticate("localSignin", function (err, user, info) {
+
+            if (err)
+                return next(err);
+
+            if (!user)
+                return redirect("/buyer/login");
+
+            req.logIn(user, async function (err) {
+
+                if (err)
+                    return next(err);
+
+                return redirect(req.session.historyUrl || "/");
+            })
+        })
+
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            msg: error
+        })
+    }
 }
 
 exports.getRegister = (req, res, next) => {
@@ -266,7 +295,7 @@ exports.getCheckFogot = (req, res) => {
 
     const { token } = req.params;
     const message2 = req.session.message2;
- 
+
     delete req.session.message2;
     res.render('checkforgot', {
         title: "Check code",
@@ -390,7 +419,7 @@ module.exports.getGoogleCallback = (req, res, next) => {
             if (err) {
                 return next(err);
             }
-          
+
             // Sync cart
             const cart = await mergeCart(user._id, req.session.cart);
 

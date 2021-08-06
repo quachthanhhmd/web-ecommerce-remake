@@ -1,36 +1,40 @@
 const User = require('../models/user.model');
 var cookieParser = require('cookie-parser')
 
-module.exports.auth = async (req, res, next) =>{
+module.exports.auth = async (req, res, next) => {
 
 
-    if (!req.isAuthenticated()){
+    if (!req.isAuthenticated()) {
+        req.session.historyUrl = req.originalUrl;
+     
 
         res.redirect('/buyer/login');
         return;
     }
     let id = req.session.passport.user;
-    
+
     User.findById(id, (err, result) => {
 
-        //console.log(result);
-        if (!result){
+  
+        if (!result) {
+            req.session.historyUrl = req.originalUrl;
+            console.log(req.originalUrl);
             res.redirect('/buyer/login');
-            return;   
+            return;
         }
-        else{
-            if (!result.isVerify){
+        else {
+            if (!result.isVerify) {
                 res.send("Please Verify");
                 return;
             }
-            else{
+            else {
                 //req.userData = result;
-                
+
                 return next();
             }
         }
-        
+
     })
-    
-    
+
+
 }

@@ -12,11 +12,7 @@ const router = express.Router();
 
 router.get('/login', controllers.getLogin);
 
-router.post('/login', passport.authenticate("localSignin", {
-        successRedirect: "/",
-        failureRedirect: "/buyer/login",
-        failureFlash: true
-}));
+router.post('/login', controllers.postLogin);
 
 router.post('/signup', passport.authenticate('localSignup', {
         successRedirect: '/buyer/login',
