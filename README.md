@@ -6,7 +6,7 @@ In this project, I'm using restAPI, ajax as well as redis helps my customers are
 
 - [Node.js](https://nodejs.org/en/download/) 14.15.2 (LTS) which includes [Node Package Manager](https://www.npmjs.com/get-npm).
 - [MongoDB](https://www.mongodb.com/download-center/community).
-- [Redis] 3.0.504 (https://redis.io/)
+- [Redis](https://redis.io/) 3.0.504 
 
 ## Installation
 
@@ -30,7 +30,7 @@ npm run dev
 ## Project Structure
 
 ```
-qlsv\
+ecommerce\
  |--bin\            # Save file executed.
  |--config\         # Connect and setting for library in packages.
  |--controllers\    # Controllers (controller layer).
@@ -43,6 +43,7 @@ qlsv\
  |--views\          # Display for client 
  |--public\         # Contains all things to display for client like images, js,...
  |--app.js          # Config of my website.
+ |--.env.local      # Enviroment variable of website.
  |--socket.js       # Socket server.
 ```
 
